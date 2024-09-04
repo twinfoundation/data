@@ -31,7 +31,8 @@
 		"sgln",
 		"sgtin",
 		"Stiftung",
-		"Unece"
+		"Unece",
+		"VOCAB"
 	],
 	"ignoreRegExpList": ["/from\\s+(['\"]).*\\1/", "/eslint-disable.*/"]
 }

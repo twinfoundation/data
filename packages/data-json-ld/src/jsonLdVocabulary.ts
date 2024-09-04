@@ -18,5 +18,10 @@ export abstract class JsonLdVocabulary {
 	/**
 	 * Activity Streams Context URL.
 	 */
-	public static ACTIVITY_STREAMS_CONTEXT_URI = "https://www.w3.org/ns/activitystreams";
+	public static ACTIVITY_STREAMS_CONTEXT_URI = "https://www.w3.org/ns/activitystreams#";
+
+	/**
+	 * Activity Streams URL Stem.
+	 */
+	public static ACTIVITY_STREAMS_VOCAB_URI_STEM = "https://www.w3.org/ns/activitystreams#";
 }

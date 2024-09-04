@@ -2,8 +2,10 @@
 // SPDX-License-Identifier: Apache-2.0.
 import { Coerce, Is, Url, Validation, type IValidationFailure } from "@gtsc/core";
 import { DataTypeHandlerFactory } from "@gtsc/data-core";
+import { JsonLdHelper } from "@gtsc/data-json-ld";
 import { nameof } from "@gtsc/nameof";
 import type { GeoCoordinates } from "schema-dts";
+import { SchemaOrgVocabulary } from "../schemaOrgVocabulary";
 
 /**
  * Handle all the data types for schema.org.
@@ -68,6 +70,8 @@ export class SchemaOrgDataTypes {
 	 * Register all the data types.
 	 */
 	public static registerTypes(): void {
+		JsonLdHelper.registerStem(SchemaOrgVocabulary.SCHEMA_ORG_VOCAB_URI_STEM);
+
 		DataTypeHandlerFactory.register(SchemaOrgDataTypes.TYPE_TEXT, () => ({
 			type: SchemaOrgDataTypes.TYPE_TEXT,
 			defaultValue: "",

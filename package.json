@@ -1,7 +1,7 @@
 {
 	"name": "@gtsc/data",
-	"version": "0.0.5-next.3",
-	"description": "data",
+	"version": "0.0.5-next.4",
+	"description": "Data",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/gtscio/data.git"

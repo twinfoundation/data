@@ -32,6 +32,14 @@ LD @type.
 
 ### ACTIVITY\_STREAMS\_CONTEXT\_URI
 
-> `static` **ACTIVITY\_STREAMS\_CONTEXT\_URI**: `string` = `"https://www.w3.org/ns/activitystreams"`
+> `static` **ACTIVITY\_STREAMS\_CONTEXT\_URI**: `string` = `"https://www.w3.org/ns/activitystreams#"`
 
 Activity Streams Context URL.
+
+***
+
+### ACTIVITY\_STREAMS\_VOCAB\_URI\_STEM
+
+> `static` **ACTIVITY\_STREAMS\_VOCAB\_URI\_STEM**: `string` = `"https://www.w3.org/ns/activitystreams#"`
+
+Activity Streams URL Stem.

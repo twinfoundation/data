@@ -3,6 +3,7 @@
 ## Classes
 
 - [JsonLdVocabulary](classes/JsonLdVocabulary.md)
+- [JsonLdHelper](classes/JsonLdHelper.md)
 
 ## Type Aliases
 

@@ -10,8 +10,8 @@ on:
         options:
           - data-core
           - data-framework
-          - data-gs1
           - data-json-ld
+          - data-gs1
           - data-schema-org
           - data-unece
           - data-vda

@@ -14,7 +14,7 @@ jobs:
       max-parallel: 1
       matrix:
         package:
-          [data-core, data-framework, data-gs1, data-json-ld, data-schema-org, data-unece, data-vda]
+          [data-core, data-framework, data-json-ld, data-gs1, data-schema-org, data-unece, data-vda]
 
     steps:
       - name: Checkout

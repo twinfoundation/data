@@ -39,7 +39,13 @@
 		"prettier": "3.3.2"
 	},
 	"workspaces": [
-		"packages/data-gs1"
+		"packages/data-core",
+		"packages/data-framework",
+		"packages/data-json-ld",
+		"packages/data-schema-org",
+		"packages/data-gs1",
+		"packages/data-unece",
+		"packages/data-vda"
 	],
 	"type": "module"
 }

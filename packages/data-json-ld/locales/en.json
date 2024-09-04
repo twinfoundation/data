@@ -1,0 +1,5 @@
+{
+	"json-ld": {
+		"invalidType": "The JSON-LD @type must be a string or an array"
+	}
+}

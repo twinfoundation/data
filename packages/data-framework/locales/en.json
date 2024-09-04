@@ -1,0 +1,7 @@
+{
+	"data-type-names": {
+		"http://schema.gtsc.io/URN": "Urn",
+		"http://schema.gtsc.io/TimestampMilliseconds": "Milliseconds since 1970",
+		"http://schema.gtsc.io/TimestampSeconds": "Seconds since 1970"
+	}
+}

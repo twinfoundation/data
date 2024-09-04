@@ -8,7 +8,13 @@ on:
         required: true
         type: choice
         options:
+          - data-core
+          - data-framework
           - data-gs1
+          - data-json-ld
+          - data-schema-org
+          - data-unece
+          - data-vda
 
 jobs:
   publish:

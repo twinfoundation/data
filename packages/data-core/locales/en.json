@@ -1,0 +1,12 @@
+{
+	"error": {
+		"validation": {
+			"properties": {
+				"keyAlreadyExists": "The key already exists"
+			},
+			"schema": {
+				"failedValidation": "The JSON schema failed validation, {message}"
+			}
+		}
+	}
+}

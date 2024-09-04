@@ -17,6 +17,21 @@
 		".eslintrc.cjs",
 		"**/wordlists/**"
 	],
-	"words": ["gtsc", "Multibase", "nameof", "Stiftung"],
+	"words": [
+		"CEFACT",
+		"EPC",
+		"EPCIS",
+		"gtsc",
+		"IEPC",
+		"JAIF",
+		"lgtin",
+		"masterdata",
+		"Multibase",
+		"nameof",
+		"sgln",
+		"sgtin",
+		"Stiftung",
+		"Unece"
+	],
 	"ignoreRegExpList": ["/from\\s+(['\"]).*\\1/", "/eslint-disable.*/"]
 }

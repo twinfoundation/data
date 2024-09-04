@@ -27,7 +27,13 @@
 		"docs": "npm run docs:clean && npm run docs:generate && npm run docs:remove-header",
 		"dist": "npm run clean && npm run build && npm run test && npm run bundle && npm run docs"
 	},
-	"dependencies": {},
+	"dependencies": {
+		"@gtsc/core": "next",
+		"@gtsc/data-core": "0.0.5-next.1",
+		"@gtsc/data-json-ld": "0.0.5-next.1",
+		"@gtsc/entity": "next",
+		"@gtsc/nameof": "next"
+	},
 	"devDependencies": {
 		"@gtsc/nameof-transformer": "next",
 		"@vitest/coverage-v8": "1.6.0",

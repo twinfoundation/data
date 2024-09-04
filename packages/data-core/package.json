@@ -4,7 +4,7 @@
 	"description": "Definitions and helpers for using with data and schemas",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/gtscio/framework.git",
+		"url": "git+https://github.com/gtscio/data.git",
 		"directory": "packages/data-core"
 	},
 	"author": "martyn.janes@iota.org",

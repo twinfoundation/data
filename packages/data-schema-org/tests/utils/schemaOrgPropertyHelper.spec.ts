@@ -1,7 +1,7 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
 import type { IProperty } from "@gtsc/data-core";
-import { SchemaOrgPropertyHelper } from "../../src/utils/SchemaOrgPropertyHelper";
+import { SchemaOrgPropertyHelper } from "../../src/utils/schemaOrgPropertyHelper";
 
 describe("SchemaOrgPropertyHelper", () => {
 	test("Can set and get a text property", () => {

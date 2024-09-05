@@ -16,7 +16,7 @@ Handle all the data types for schema.org.
 
 ### TYPE\_TEXT
 
-> `static` **TYPE\_TEXT**: `string` = `"https://schema.org/Text"`
+> `static` **TYPE\_TEXT**: `string`
 
 Represents text storage.
 
@@ -24,7 +24,7 @@ Represents text storage.
 
 ### TYPE\_INTEGER
 
-> `static` **TYPE\_INTEGER**: `string` = `"https://schema.org/Integer"`
+> `static` **TYPE\_INTEGER**: `string`
 
 Represents integer number values.
 
@@ -32,7 +32,7 @@ Represents integer number values.
 
 ### TYPE\_FLOAT
 
-> `static` **TYPE\_FLOAT**: `string` = `"https://schema.org/Float"`
+> `static` **TYPE\_FLOAT**: `string`
 
 Represents floating point numbers.
 
@@ -40,7 +40,7 @@ Represents floating point numbers.
 
 ### TYPE\_BOOLEAN
 
-> `static` **TYPE\_BOOLEAN**: `string` = `"https://schema.org/Boolean"`
+> `static` **TYPE\_BOOLEAN**: `string`
 
 Represents a boolean.
 
@@ -48,7 +48,7 @@ Represents a boolean.
 
 ### TYPE\_URL
 
-> `static` **TYPE\_URL**: `string` = `"https://schema.org/URL"`
+> `static` **TYPE\_URL**: `string`
 
 Represents a url.
 
@@ -56,7 +56,7 @@ Represents a url.
 
 ### TYPE\_DATE
 
-> `static` **TYPE\_DATE**: `string` = `"https://schema.org/Date"`
+> `static` **TYPE\_DATE**: `string`
 
 Represents a date as an ISO format string.
 
@@ -64,7 +64,7 @@ Represents a date as an ISO format string.
 
 ### TYPE\_DATE\_TIME
 
-> `static` **TYPE\_DATE\_TIME**: `string` = `"https://schema.org/DateTime"`
+> `static` **TYPE\_DATE\_TIME**: `string`
 
 Represents a date time as an ISO format string.
 
@@ -72,7 +72,7 @@ Represents a date time as an ISO format string.
 
 ### TYPE\_TIME
 
-> `static` **TYPE\_TIME**: `string` = `"https://schema.org/Time"`
+> `static` **TYPE\_TIME**: `string`
 
 Represents a time as an ISO format string.
 
@@ -80,7 +80,7 @@ Represents a time as an ISO format string.
 
 ### TYPE\_IMAGE
 
-> `static` **TYPE\_IMAGE**: `string` = `"https://schema.org/image"`
+> `static` **TYPE\_IMAGE**: `string`
 
 Represents a url which points to an image.
 
@@ -88,7 +88,7 @@ Represents a url which points to an image.
 
 ### TYPE\_GEO\_COORDINATES
 
-> `static` **TYPE\_GEO\_COORDINATES**: `string` = `"https://schema.org/GeoCoordinates"`
+> `static` **TYPE\_GEO\_COORDINATES**: `string`
 
 Represents a location.
 
@@ -96,7 +96,7 @@ Represents a location.
 
 ### TYPE\_STRUCTURED\_VALUE
 
-> `static` **TYPE\_STRUCTURED\_VALUE**: `string` = `"https://schema.org/StructuredValue"`
+> `static` **TYPE\_STRUCTURED\_VALUE**: `string`
 
 Represents a structured value.
 

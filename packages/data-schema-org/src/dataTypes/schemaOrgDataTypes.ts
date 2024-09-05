@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0.
 import { Coerce, Is, Url, Validation, type IValidationFailure } from "@gtsc/core";
 import { DataTypeHandlerFactory } from "@gtsc/data-core";
-import { JsonLdHelper } from "@gtsc/data-json-ld";
+import { JsonLdProcessor } from "@gtsc/data-json-ld";
 import { nameof } from "@gtsc/nameof";
 import type { GeoCoordinates } from "schema-dts";
 import { SchemaOrgVocabulary } from "../schemaOrgVocabulary";
@@ -14,63 +14,66 @@ export class SchemaOrgDataTypes {
 	/**
 	 * Represents text storage.
 	 */
-	public static TYPE_TEXT = "https://schema.org/Text";
+	public static TYPE_TEXT = `${SchemaOrgVocabulary.SCHEMA_ORG_CONTEXT_URI}/Text`;
 
 	/**
 	 * Represents integer number values.
 	 */
-	public static TYPE_INTEGER = "https://schema.org/Integer";
+	public static TYPE_INTEGER = `${SchemaOrgVocabulary.SCHEMA_ORG_CONTEXT_URI}/Integer`;
 
 	/**
 	 * Represents floating point numbers.
 	 */
-	public static TYPE_FLOAT = "https://schema.org/Float";
+	public static TYPE_FLOAT = `${SchemaOrgVocabulary.SCHEMA_ORG_CONTEXT_URI}/Float`;
 
 	/**
 	 * Represents a boolean.
 	 */
-	public static TYPE_BOOLEAN = "https://schema.org/Boolean";
+	public static TYPE_BOOLEAN = `${SchemaOrgVocabulary.SCHEMA_ORG_CONTEXT_URI}/Boolean`;
 
 	/**
 	 * Represents a url.
 	 */
-	public static TYPE_URL = "https://schema.org/URL";
+	public static TYPE_URL = `${SchemaOrgVocabulary.SCHEMA_ORG_CONTEXT_URI}/URL`;
 
 	/**
 	 * Represents a date as an ISO format string.
 	 */
-	public static TYPE_DATE = "https://schema.org/Date";
+	public static TYPE_DATE = `${SchemaOrgVocabulary.SCHEMA_ORG_CONTEXT_URI}/Date`;
 
 	/**
 	 * Represents a date time as an ISO format string.
 	 */
-	public static TYPE_DATE_TIME = "https://schema.org/DateTime";
+	public static TYPE_DATE_TIME = `${SchemaOrgVocabulary.SCHEMA_ORG_CONTEXT_URI}/DateTime`;
 
 	/**
 	 * Represents a time as an ISO format string.
 	 */
-	public static TYPE_TIME = "https://schema.org/Time";
+	public static TYPE_TIME = `${SchemaOrgVocabulary.SCHEMA_ORG_CONTEXT_URI}/Time`;
 
 	/**
 	 * Represents a url which points to an image.
 	 */
-	public static TYPE_IMAGE = "https://schema.org/image";
+	public static TYPE_IMAGE = `${SchemaOrgVocabulary.SCHEMA_ORG_CONTEXT_URI}/image`;
 
 	/**
 	 * Represents a location.
 	 */
-	public static TYPE_GEO_COORDINATES = "https://schema.org/GeoCoordinates";
+	public static TYPE_GEO_COORDINATES = `${SchemaOrgVocabulary.SCHEMA_ORG_CONTEXT_URI}/GeoCoordinates`;
 
 	/**
 	 * Represents a structured value.
 	 */
-	public static TYPE_STRUCTURED_VALUE = "https://schema.org/StructuredValue";
+	public static TYPE_STRUCTURED_VALUE = `${SchemaOrgVocabulary.SCHEMA_ORG_CONTEXT_URI}/StructuredValue`;
 
 	/**
 	 * Register all the data types.
 	 */
 	public static registerTypes(): void {
-		JsonLdHelper.registerStem(SchemaOrgVocabulary.SCHEMA_ORG_VOCAB_URI_STEM);
+		JsonLdProcessor.addRedirect(
+			SchemaOrgVocabulary.SCHEMA_ORG_JSON_LD_REDIRECT,
+			SchemaOrgVocabulary.SCHEMA_ORG_JSON_LD_CONTEXT
+		);
 
 		DataTypeHandlerFactory.register(SchemaOrgDataTypes.TYPE_TEXT, () => ({
 			type: SchemaOrgDataTypes.TYPE_TEXT,

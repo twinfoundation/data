@@ -1,5 +1,6 @@
 {
-	"json-ld": {
-		"invalidType": "The JSON-LD @type must be a string or an array"
+	"jsonLdHelper": {
+		"compact": "The JSON-LD compaction failed",
+		"expand": "The JSON-LD expansion failed"
 	}
 }

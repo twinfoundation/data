@@ -1,6 +1,6 @@
 {
 	"name": "@gtsc/data-unece",
-	"version": "0.0.5-next.5",
+	"version": "0.0.5-next.6",
 	"description": "Models which define the structure of UN/CEFACT Standard",
 	"repository": {
 		"type": "git",
@@ -29,8 +29,7 @@
 	},
 	"dependencies": {
 		"@gtsc/core": "next",
-		"@gtsc/data-core": "0.0.5-next.5",
-		"@gtsc/data-json-ld": "0.0.5-next.5",
+		"@gtsc/data-core": "0.0.5-next.6",
 		"@gtsc/entity": "next",
 		"@gtsc/nameof": "next"
 	},

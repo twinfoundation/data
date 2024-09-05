@@ -22,8 +22,16 @@ Schema.org LD Context URL.
 
 ***
 
-### SCHEMA\_ORG\_VOCAB\_URI\_STEM
+### SCHEMA\_ORG\_JSON\_LD\_REDIRECT
 
-> `static` **SCHEMA\_ORG\_VOCAB\_URI\_STEM**: `string` = `"http://schema.org/"`
+> `static` **SCHEMA\_ORG\_JSON\_LD\_REDIRECT**: `RegExp`
 
-Schema.org LD URL Stem.
+Schema.org JSON-LD redirect.
+
+***
+
+### SCHEMA\_ORG\_JSON\_LD\_CONTEXT
+
+> `static` **SCHEMA\_ORG\_JSON\_LD\_CONTEXT**: `string` = `"https://schema.org/jsonldcontext.jsonld"`
+
+Schema.org JSON LD Context.

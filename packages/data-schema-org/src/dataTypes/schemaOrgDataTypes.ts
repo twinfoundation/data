@@ -75,102 +75,102 @@ export class SchemaOrgDataTypes {
 		DataTypeHandlerFactory.register(SchemaOrgDataTypes.TYPE_TEXT, () => ({
 			type: SchemaOrgDataTypes.TYPE_TEXT,
 			defaultValue: "",
-			schema: {
+			jsonSchema: async () => ({
 				type: "string"
-			},
-			validate: (propertyName, value, failures, container): boolean =>
+			}),
+			validate: async (propertyName, value, failures, container) =>
 				Validation.string(propertyName, value, failures)
 		}));
 
 		DataTypeHandlerFactory.register(SchemaOrgDataTypes.TYPE_INTEGER, () => ({
 			type: SchemaOrgDataTypes.TYPE_INTEGER,
 			defaultValue: 0,
-			schema: {
+			jsonSchema: async () => ({
 				type: "integer"
-			},
-			validate: (propertyName, value, failures, container): boolean =>
+			}),
+			validate: async (propertyName, value, failures, container) =>
 				Validation.integer(propertyName, value, failures)
 		}));
 
 		DataTypeHandlerFactory.register(SchemaOrgDataTypes.TYPE_FLOAT, () => ({
 			type: SchemaOrgDataTypes.TYPE_FLOAT,
 			defaultValue: 0,
-			schema: {
+			jsonSchema: async () => ({
 				type: "number"
-			},
-			validate: (propertyName, value, failures, container): boolean =>
+			}),
+			validate: async (propertyName, value, failures, container) =>
 				Validation.number(propertyName, value, failures)
 		}));
 
 		DataTypeHandlerFactory.register(SchemaOrgDataTypes.TYPE_BOOLEAN, () => ({
 			type: SchemaOrgDataTypes.TYPE_BOOLEAN,
 			defaultValue: true,
-			schema: {
+			jsonSchema: async () => ({
 				type: "boolean"
-			},
-			validate: (propertyName, value, failures, container): boolean =>
+			}),
+			validate: async (propertyName, value, failures, container) =>
 				Validation.boolean(propertyName, value, failures)
 		}));
 
 		DataTypeHandlerFactory.register(SchemaOrgDataTypes.TYPE_URL, () => ({
 			type: SchemaOrgDataTypes.TYPE_URL,
 			defaultValue: "",
-			schema: {
+			jsonSchema: async () => ({
 				type: "string",
 				format: "uri"
-			},
-			validate: (propertyName, value, failures, container): boolean =>
+			}),
+			validate: async (propertyName, value, failures, container) =>
 				Url.validate(propertyName, value, failures)
 		}));
 
 		DataTypeHandlerFactory.register(SchemaOrgDataTypes.TYPE_DATE, () => ({
 			type: SchemaOrgDataTypes.TYPE_DATE,
 			defaultValue: new Date(),
-			schema: {
+			jsonSchema: async () => ({
 				type: "string",
 				format: "date"
-			},
-			validate: (propertyName, value, failures, container): boolean =>
+			}),
+			validate: async (propertyName, value, failures, container) =>
 				Validation.dateString(propertyName, value, failures)
 		}));
 
 		DataTypeHandlerFactory.register(SchemaOrgDataTypes.TYPE_DATE_TIME, () => ({
 			type: SchemaOrgDataTypes.TYPE_DATE_TIME,
 			defaultValue: new Date(),
-			schema: {
+			jsonSchema: async () => ({
 				type: "string",
 				format: "date-time"
-			},
-			validate: (propertyName, value, failures, container): boolean =>
+			}),
+			validate: async (propertyName, value, failures, container) =>
 				Validation.dateTimeString(propertyName, value, failures)
 		}));
 
 		DataTypeHandlerFactory.register(SchemaOrgDataTypes.TYPE_TIME, () => ({
 			type: SchemaOrgDataTypes.TYPE_TIME,
 			defaultValue: new Date(),
-			schema: {
+			jsonSchema: async () => ({
 				type: "string",
 				format: "time"
-			},
-			validate: (propertyName, value, failures, container): boolean =>
+			}),
+			validate: async (propertyName, value, failures, container) =>
 				Validation.timeString(propertyName, value, failures)
 		}));
 
 		DataTypeHandlerFactory.register(SchemaOrgDataTypes.TYPE_IMAGE, () => ({
 			type: SchemaOrgDataTypes.TYPE_IMAGE,
 			defaultValue: "",
-			schema: {
+			jsonSchema: async () => ({
 				type: "string",
 				format: "uri"
-			},
-			validate: (propertyName, value, failures, container): boolean =>
+			}),
+			validate: async (propertyName, value, failures, container) =>
 				Url.validate(propertyName, value, failures)
 		}));
 
 		DataTypeHandlerFactory.register(SchemaOrgDataTypes.TYPE_GEO_COORDINATES, () => ({
 			type: SchemaOrgDataTypes.TYPE_GEO_COORDINATES,
 			defaultValue: { longitude: 0, latitude: 0 },
-			schema: {
+			jsonSchema: async () => ({
 				type: "object",
 				required: ["latitude", "longitude"],
 				properties: {
@@ -185,8 +185,8 @@ export class SchemaOrgDataTypes {
 						maximum: 180
 					}
 				}
-			},
-			validate: (propertyName, value, failures, container): boolean =>
+			}),
+			validate: async (propertyName, value, failures, container) =>
 				SchemaOrgDataTypes.validateGeoCoordinates(propertyName, value, failures)
 		}));
 	}

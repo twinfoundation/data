@@ -18,19 +18,25 @@ The type for the item.
 
 The default value for the item.
 
-***
+## Methods
 
-### schema?
+### jsonSchema()?
 
-> `optional` **schema**: `JSONSchema7`
+> `optional` **jsonSchema**(): `Promise`\<`undefined` \| `JSONSchema7`\>
+
+Get the JSON schema for the data type.
+
+#### Returns
+
+`Promise`\<`undefined` \| `JSONSchema7`\>
 
 The JSON schema for the data type.
 
-## Methods
+***
 
 ### validate()?
 
-> `optional` **validate**(`propertyName`, `value`, `failures`, `container`?): `boolean`
+> `optional` **validate**(`propertyName`, `value`, `failures`, `container`?): `Promise`\<`boolean`\>
 
 A method for validating the data type.
 
@@ -54,6 +60,6 @@ The object which contains this one.
 
 #### Returns
 
-`boolean`
+`Promise`\<`boolean`\>
 
 True if the item is valid.

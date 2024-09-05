@@ -11,10 +11,10 @@ describe("DataTypeHelper", () => {
 		DataTypeHandlerFactory.register("test", () => ({
 			type: "test",
 			defaultValue: "",
-			schema: {
+			jsonSchema: async () => ({
 				type: "string"
-			},
-			validate: (propertyName, value, failures, container): boolean =>
+			}),
+			validate: async (propertyName, value, failures, container) =>
 				Validation.string(propertyName, value, failures)
 		}));
 	});
@@ -64,7 +64,7 @@ describe("DataTypeHelper", () => {
 	test("Can validate an object that has a validate method and no schema", async () => {
 		DataTypeHandlerFactory.register("test", () => ({
 			type: "test",
-			validate: (): boolean => false
+			validate: async () => false
 		}));
 		const validationFailures: IValidationFailure[] = [];
 		const validation = await DataTypeHelper.validate("value", "test", "", validationFailures);
@@ -76,9 +76,9 @@ describe("DataTypeHelper", () => {
 	test("Can validate an object that has no validate method and a schema", async () => {
 		DataTypeHandlerFactory.register("test", () => ({
 			type: "test",
-			schema: {
+			jsonSchema: async () => ({
 				type: "string"
-			}
+			})
 		}));
 		const validationFailures: IValidationFailure[] = [];
 		const validation = await DataTypeHelper.validate("value", "test", "", validationFailures);
@@ -90,9 +90,9 @@ describe("DataTypeHelper", () => {
 	test("Can fail to validate an object that has no validate method and a schema", async () => {
 		DataTypeHandlerFactory.register("test", () => ({
 			type: "test",
-			schema: {
+			jsonSchema: async () => ({
 				type: "string"
-			}
+			})
 		}));
 		const validationFailures: IValidationFailure[] = [];
 		const validation = await DataTypeHelper.validate("value", "test", 123, validationFailures);

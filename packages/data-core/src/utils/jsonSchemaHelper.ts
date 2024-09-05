@@ -38,8 +38,11 @@ export class JsonSchemaHelper {
 
 		for (const subType of subTypes) {
 			const subTypeHandler = DataTypeHandlerFactory.getIfExists(subType);
-			if (Is.object(subTypeHandler?.schema)) {
-				validator.addSchema(subTypeHandler.schema, subType);
+			if (Is.function(subTypeHandler?.jsonSchema)) {
+				const subSchema = await subTypeHandler.jsonSchema();
+				if (Is.object<JSONSchema7>(subSchema)) {
+					validator.addSchema(subSchema, subType);
+				}
 			}
 		}
 

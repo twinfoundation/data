@@ -3,6 +3,7 @@
 import { Is, Url, Urn, Validation, type IValidationFailure } from "@gtsc/core";
 import { DataTypeHandlerFactory, type IProperty } from "@gtsc/data-core";
 import { nameof } from "@gtsc/nameof";
+import { FrameworkVocabulary } from "../frameworkVocabulary";
 
 /**
  * Handle all the framework data types.
@@ -11,27 +12,27 @@ export class FrameworkDataTypes {
 	/**
 	 * Represents a urn.
 	 */
-	public static TYPE_URN = "https://schema.gtsc.io/URN";
+	public static TYPE_URN = `${FrameworkVocabulary.SCHEMA_URI}URN`;
 
 	/**
 	 * Represents a timestamp as an integer, milliseconds since 1 Jan 1970.
 	 */
-	public static TYPE_TIMESTAMP_MILLISECONDS = "https://schema.gtsc.io/TimestampMilliseconds";
+	public static TYPE_TIMESTAMP_MILLISECONDS = `${FrameworkVocabulary.SCHEMA_URI}TimestampMilliseconds`;
 
 	/**
 	 * Represents a timestamp as an integer, seconds since 1 Jan 1970.
 	 */
-	public static TYPE_TIMESTAMP_SECONDS = "https://schema.gtsc.io/TimestampSeconds";
+	public static TYPE_TIMESTAMP_SECONDS = `${FrameworkVocabulary.SCHEMA_URI}TimestampSeconds`;
 
 	/**
 	 * Represents a property.
 	 */
-	public static TYPE_PROPERTY = "https://schema.gtsc.io/Property";
+	public static TYPE_PROPERTY = `${FrameworkVocabulary.SCHEMA_URI}Property`;
 
 	/**
 	 * Represents a property list.
 	 */
-	public static TYPE_PROPERTY_LIST = "https://schema.gtsc.io/PropertyList";
+	public static TYPE_PROPERTY_LIST = `${FrameworkVocabulary.SCHEMA_URI}PropertyList`;
 
 	/**
 	 * Register all the data types.
@@ -40,44 +41,44 @@ export class FrameworkDataTypes {
 		DataTypeHandlerFactory.register(FrameworkDataTypes.TYPE_URN, () => ({
 			type: FrameworkDataTypes.TYPE_URN,
 			defaultValue: "",
-			schema: {
+			jsonSchema: async () => ({
 				type: "string",
 				format: "uri"
-			},
-			validate: (propertyName, value, failures, container): boolean =>
+			}),
+			validate: async (propertyName, value, failures, container) =>
 				Urn.validate(propertyName, value, failures)
 		}));
 
 		DataTypeHandlerFactory.register(FrameworkDataTypes.TYPE_TIMESTAMP_MILLISECONDS, () => ({
 			type: FrameworkDataTypes.TYPE_TIMESTAMP_MILLISECONDS,
 			defaultValue: Date.now(),
-			schema: {
+			jsonSchema: async () => ({
 				type: "integer"
-			},
-			validate: (propertyName, value, failures, container): boolean =>
+			}),
+			validate: async (propertyName, value, failures, container) =>
 				Validation.timestampMilliseconds(propertyName, value, failures)
 		}));
 
 		DataTypeHandlerFactory.register(FrameworkDataTypes.TYPE_TIMESTAMP_SECONDS, () => ({
 			type: FrameworkDataTypes.TYPE_TIMESTAMP_SECONDS,
 			defaultValue: Math.floor(Date.now() / 1000),
-			schema: {
+			jsonSchema: async () => ({
 				type: "integer"
-			},
-			validate: (propertyName, value, failures, container): boolean =>
+			}),
+			validate: async (propertyName, value, failures, container) =>
 				Validation.timestampSeconds(propertyName, value, failures)
 		}));
 
 		DataTypeHandlerFactory.register(FrameworkDataTypes.TYPE_PROPERTY_LIST, () => ({
 			type: FrameworkDataTypes.TYPE_PROPERTY_LIST,
 			defaultValue: [],
-			schema: {
+			jsonSchema: async () => ({
 				type: "array",
 				items: {
 					$ref: FrameworkDataTypes.TYPE_PROPERTY
 				}
-			},
-			validate: (propertyName, value, failures, container): boolean =>
+			}),
+			validate: async (propertyName, value, failures, container) =>
 				FrameworkDataTypes.validateIPropertyList(
 					propertyName,
 					value as IProperty[],
@@ -89,7 +90,7 @@ export class FrameworkDataTypes {
 		DataTypeHandlerFactory.register(FrameworkDataTypes.TYPE_PROPERTY, () => ({
 			type: FrameworkDataTypes.TYPE_PROPERTY,
 			defaultValue: {},
-			schema: {
+			jsonSchema: async () => ({
 				type: "object",
 				properties: {
 					key: {
@@ -101,8 +102,8 @@ export class FrameworkDataTypes {
 					value: {}
 				},
 				required: ["key", "type", "value"]
-			},
-			validate: (propertyName, value, failures, container): boolean =>
+			}),
+			validate: async (propertyName, value, failures, container) =>
 				FrameworkDataTypes.validateIProperty(propertyName, value as IProperty, failures, container)
 		}));
 	}

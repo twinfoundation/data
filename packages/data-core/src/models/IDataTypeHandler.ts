@@ -18,9 +18,10 @@ export interface IDataTypeHandler {
 	defaultValue?: unknown;
 
 	/**
-	 * The JSON schema for the data type.
+	 * Get the JSON schema for the data type.
+	 * @returns The JSON schema for the data type.
 	 */
-	schema?: JSONSchema7;
+	jsonSchema?(): Promise<JSONSchema7 | undefined>;
 
 	/**
 	 * A method for validating the data type.
@@ -35,5 +36,5 @@ export interface IDataTypeHandler {
 		value: unknown,
 		failures: IValidationFailure[],
 		container?: unknown
-	): boolean;
+	): Promise<boolean>;
 }

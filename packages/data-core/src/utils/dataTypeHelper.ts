@@ -1,6 +1,7 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
 import { Is, type IValidationFailure } from "@gtsc/core";
+import type { JSONSchema7 } from "json-schema";
 import { JsonSchemaHelper } from "./jsonSchemaHelper";
 import { DataTypeHandlerFactory } from "../factories/dataTypeHandlerFactory";
 
@@ -26,6 +27,7 @@ export class DataTypeHelper {
 	): Promise<boolean> {
 		if (Is.stringValue(dataType)) {
 			const handler = DataTypeHandlerFactory.getIfExists(dataType);
+
 			if (handler) {
 				validationMode = validationMode ?? "either";
 
@@ -38,25 +40,31 @@ export class DataTypeHelper {
 					return handler.validate(propertyName, data, validationFailures);
 				} else if (
 					(validationMode === "schema" || validationMode === "either") &&
-					Is.object(handler.schema)
+					Is.function(handler.jsonSchema)
 				) {
 					// Otherwise use the JSON schema if there is one
-					const validationResult = await JsonSchemaHelper.validate(handler.schema, data);
-					if (Is.arrayValue(validationResult.error)) {
-						validationFailures.push({
-							property: propertyName,
-							reason: "validation.schema.failedValidation",
-							properties: {
-								value: data,
-								schemaErrors: validationResult.error,
-								message: validationResult.error.map(e => e.message).join(", ")
-							}
-						});
+					const schema = await handler.jsonSchema();
+
+					if (Is.object<JSONSchema7>(schema)) {
+						const validationResult = await JsonSchemaHelper.validate(schema, data);
+						if (Is.arrayValue(validationResult.error)) {
+							validationFailures.push({
+								property: propertyName,
+								reason: "validation.schema.failedValidation",
+								properties: {
+									value: data,
+									schemaErrors: validationResult.error,
+									message: validationResult.error.map(e => e.message).join(", ")
+								}
+							});
+						}
+						return validationResult.result;
 					}
-					return validationResult.result;
 				}
 			}
 		}
+
+		// Return true by default if no other mechanism for validation is available
 		return true;
 	}
 }

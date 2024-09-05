@@ -27,7 +27,7 @@ export class Gs1DataTypes {
 			isInternal: true,
 			type: Gs1DataTypes.TYPE_MASTER_DATA_LOCATION,
 			defaultValue: {},
-			validate: (propertyName, value, failures, container): boolean =>
+			validate: async (propertyName, value, failures, container) =>
 				Gs1DataTypes.validateMasterDataLocation(
 					propertyName,
 					value as Gs1Location,

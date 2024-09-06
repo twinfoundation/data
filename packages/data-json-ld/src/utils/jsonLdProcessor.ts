@@ -3,7 +3,7 @@
 import { GeneralError } from "@gtsc/core";
 import { nameof } from "@gtsc/nameof";
 import { FetchHelper, HttpMethod } from "@gtsc/web";
-import { compact, expand, type ContextDefinition, type JsonLdDocument } from "jsonld";
+import jsonLd from "jsonld";
 import type { JsonLd, RemoteDocument, Url } from "jsonld/jsonld-spec";
 
 /**
@@ -37,11 +37,11 @@ export class JsonLdProcessor {
 	 * @returns The compacted JSON-LD document.
 	 */
 	public static async compact(
-		document: JsonLdDocument,
-		context?: ContextDefinition
-	): Promise<JsonLdDocument> {
+		document: jsonLd.JsonLdDocument,
+		context?: jsonLd.ContextDefinition
+	): Promise<jsonLd.JsonLdDocument> {
 		try {
-			return await compact(document, context ?? {}, {
+			return jsonLd.compact(document, context ?? {}, {
 				documentLoader: JsonLdProcessor.DOCUMENT_LOADER
 			});
 		} catch (err) {
@@ -54,9 +54,9 @@ export class JsonLdProcessor {
 	 * @param compacted The compacted JSON-LD document to expand.
 	 * @returns The expanded JSON-LD document.
 	 */
-	public static async expand(compacted: JsonLdDocument): Promise<JsonLdDocument> {
+	public static async expand(compacted: jsonLd.JsonLdDocument): Promise<jsonLd.JsonLdDocument> {
 		try {
-			return await expand(compacted, {
+			return jsonLd.expand(compacted, {
 				documentLoader: JsonLdProcessor.DOCUMENT_LOADER
 			});
 		} catch (err) {

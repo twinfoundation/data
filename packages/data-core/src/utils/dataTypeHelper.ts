@@ -11,7 +11,7 @@ import { DataTypeHandlerFactory } from "../factories/dataTypeHandlerFactory";
 export class DataTypeHelper {
 	/**
 	 * Validate a data type.
-	 * @param propertyName The property name to validate.
+	 * @param propertyName The name of the property being validated to use in error messages.
 	 * @param dataType The data type to validate.
 	 * @param data The data to validate.
 	 * @param validationFailures The list of validation failures to add to.

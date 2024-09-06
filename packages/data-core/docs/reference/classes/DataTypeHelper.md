@@ -24,7 +24,7 @@ Validate a data type.
 
 • **propertyName**: `string`
 
-The property name to validate.
+The name of the property being validated to use in error messages.
 
 • **dataType**: `undefined` \| `string`
 

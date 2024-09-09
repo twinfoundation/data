@@ -16,33 +16,31 @@ export class JsonLdHelper {
 	 * @returns True if the document was valid.
 	 */
 	public static async validate<T extends IJsonLdDocument = IJsonLdDocument>(
-		document: T | undefined,
+		document: T,
 		validationFailures: IValidationFailure[],
 		validationMode?: ValidationMode
 	): Promise<boolean> {
-		if (!Is.empty(document)) {
-			if (Is.array<INodeObject>(document)) {
-				// If the document is an array of nodes, validate each node
-				for (const node of document) {
-					await JsonLdHelper.validate(node, validationFailures, validationMode);
-				}
-			} else if (Is.array<INodeObject>(document["@graph"])) {
-				// If the graph is an array of nodes, validate each node
-				for (const node of document["@graph"]) {
-					await JsonLdHelper.validate(node, validationFailures, validationMode);
-				}
-			} else if (Is.object<INodeObject>(document)) {
-				// If the graph is a single node, then use the validate the node schema
-				const dataType = document["@type"];
-				if (Is.stringValue(dataType)) {
-					await DataTypeHelper.validate(
-						"document",
-						dataType,
-						document,
-						validationFailures,
-						validationMode
-					);
-				}
+		if (Is.array<INodeObject>(document)) {
+			// If the document is an array of nodes, validate each node
+			for (const node of document) {
+				await JsonLdHelper.validate(node, validationFailures, validationMode);
+			}
+		} else if (Is.array<INodeObject>(document["@graph"])) {
+			// If the graph is an array of nodes, validate each node
+			for (const node of document["@graph"]) {
+				await JsonLdHelper.validate(node, validationFailures, validationMode);
+			}
+		} else if (Is.object<INodeObject>(document)) {
+			// If the graph is a single node, then use the validate the node schema
+			const dataType = document["@type"];
+			if (Is.stringValue(dataType)) {
+				await DataTypeHelper.validate(
+					"document",
+					dataType,
+					document,
+					validationFailures,
+					validationMode
+				);
 			}
 		}
 

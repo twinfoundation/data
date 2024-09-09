@@ -1,6 +1,6 @@
 # Type alias: IJsonLdDocument
 
-> **IJsonLdDocument**: `JsonLdDocument`
+> **IJsonLdDocument**: [`INodeObject`](../interfaces/INodeObject.md) \| [`INodeObject`](../interfaces/INodeObject.md)[] \| `object`
 
 A JSON-LD document MUST be valid JSON text as described in [RFC8259],
 or some format that can be represented in the JSON-LD internal representation

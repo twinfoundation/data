@@ -6,7 +6,7 @@ EPCIS Query Document.
 
 ### @context
 
-> **@context**: `ContextDefinition`
+> **@context**: `IContextDefinition`
 
 The @context.
 

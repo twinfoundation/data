@@ -22,7 +22,7 @@ Validate a JSON-LD document.
 
 #### Type parameters
 
-• **T** *extends* `JsonLdDocument` = `JsonLdDocument`
+• **T** *extends* [`IJsonLdDocument`](../type-aliases/IJsonLdDocument.md) = [`IJsonLdDocument`](../type-aliases/IJsonLdDocument.md)
 
 #### Parameters
 

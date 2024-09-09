@@ -1,6 +1,6 @@
-# Type alias: IdMap
+# Type alias: IJsonLdIdMap
 
-> **IdMap**: `jsonLd.IdMap`
+> **IJsonLdIdMap**: `IdMap`
 
 An id map is used to associate an IRI with a value that allows easy programmatic access.
 

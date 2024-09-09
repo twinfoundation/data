@@ -1,6 +1,6 @@
-# Type alias: TypeMap
+# Type alias: IJsonLdTypeMap
 
-> **TypeMap**: `jsonLd.TypeMap`
+> **IJsonLdTypeMap**: `TypeMap`
 
 A type map is used to associate an IRI with a value that allows easy programmatic access.
 

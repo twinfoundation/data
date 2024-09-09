@@ -1,6 +1,6 @@
-# Type alias: ContextDefinition
+# Type alias: IJsonLdContextDefinition
 
-> **ContextDefinition**: `jsonLd.ContextDefinition`
+> **IJsonLdContextDefinition**: `ContextDefinition`
 
 A context definition defines a local context in a node object.
 

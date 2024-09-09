@@ -1,6 +1,6 @@
-# Type alias: IndexMap
+# Type alias: IJsonLdIndexMap
 
-> **IndexMap**: `jsonLd.IndexMap`
+> **IJsonLdIndexMap**: `IndexMap`
 
 An index map allows keys that have no semantic meaning, but should be preserved regardless,
 to be used in JSON-LD documents.

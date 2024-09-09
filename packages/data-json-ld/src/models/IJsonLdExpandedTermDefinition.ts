@@ -1,6 +1,6 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
-import type jsonLd from "jsonld";
+import type { ExpandedTermDefinition } from "jsonld";
 
 /**
  * An expanded term definition is used to describe the mapping between a term
@@ -8,4 +8,4 @@ import type jsonLd from "jsonld";
  * associated with the term when it is used as key in a node object.
  * @see https://www.w3.org/TR/json-ld11/#expanded-term-definition
  */
-export type ExpandedTermDefinition = jsonLd.ExpandedTermDefinition;
+export type IJsonLdExpandedTermDefinition = ExpandedTermDefinition;

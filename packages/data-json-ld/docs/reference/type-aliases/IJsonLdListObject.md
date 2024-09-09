@@ -1,6 +1,6 @@
-# Type alias: ListObject
+# Type alias: IJsonLdListObject
 
-> **ListObject**: `jsonLd.ListObject`
+> **IJsonLdListObject**: `ListObject`
 
 A list represents an ordered set of values.
 

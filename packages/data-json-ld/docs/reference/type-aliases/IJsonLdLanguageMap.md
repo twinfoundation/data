@@ -1,6 +1,6 @@
-# Type alias: LanguageMap
+# Type alias: IJsonLdLanguageMap
 
-> **LanguageMap**: `jsonLd.LanguageMap`
+> **IJsonLdLanguageMap**: `LanguageMap`
 
 A language map is used to associate a language with a value in a way that allows easy programmatic access.
 

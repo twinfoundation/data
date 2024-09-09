@@ -1,6 +1,6 @@
-# Type alias: ExpandedTermDefinition
+# Type alias: IJsonLdExpandedTermDefinition
 
-> **ExpandedTermDefinition**: `jsonLd.ExpandedTermDefinition`
+> **IJsonLdExpandedTermDefinition**: `ExpandedTermDefinition`
 
 An expanded term definition is used to describe the mapping between a term
 and its expanded identifier, as well as other properties of the value

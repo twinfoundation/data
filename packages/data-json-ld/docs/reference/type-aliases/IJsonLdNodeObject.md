@@ -1,6 +1,6 @@
-# Type alias: NodeObject
+# Type alias: IJsonLdNodeObject
 
-> **NodeObject**: `jsonLd.NodeObject`
+> **IJsonLdNodeObject**: `NodeObject`
 
 A node object represents zero or more properties of a node
 in the graph serialized by the JSON-LD document.

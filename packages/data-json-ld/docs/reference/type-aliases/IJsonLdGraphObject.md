@@ -1,6 +1,6 @@
-# Type alias: GraphObject
+# Type alias: IJsonLdGraphObject
 
-> **GraphObject**: `jsonLd.GraphObject`
+> **IJsonLdGraphObject**: `GraphObject`
 
 A graph object represents a named graph, which MAY include an explicit graph name.
 

@@ -1,6 +1,6 @@
-# Type alias: IncludedBlock
+# Type alias: IJsonLdIncludedBlock
 
-> **IncludedBlock**: `jsonLd.IncludedBlock`
+> **IJsonLdIncludedBlock**: `IncludedBlock`
 
 An included block is used to provide a set of node objects.
 

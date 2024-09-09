@@ -1,6 +1,6 @@
-# Type alias: SetObject
+# Type alias: IJsonLdSetObject
 
-> **SetObject**: `jsonLd.SetObject`
+> **IJsonLdSetObject**: `SetObject`
 
 A set represents an unordered set of values.
 

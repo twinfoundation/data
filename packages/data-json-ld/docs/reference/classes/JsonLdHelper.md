@@ -26,7 +26,7 @@ Validate a JSON-LD document.
 
 #### Parameters
 
-• **document**: `T`
+• **document**: `undefined` \| `T`
 
 The JSON-LD document to validate.
 

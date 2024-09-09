@@ -16,9 +16,9 @@ Class to help with JSON LD.
 
 ### validate()
 
-> `static` **validate**\<`T`\>(`propertyName`, `document`, `validationFailures`, `validationMode`?): `Promise`\<`boolean`\>
+> `static` **validate**\<`T`\>(`document`, `validationFailures`, `validationMode`?): `Promise`\<`boolean`\>
 
-Validate a JSON LD document.
+Validate a JSON-LD document.
 
 #### Type parameters
 
@@ -26,19 +26,15 @@ Validate a JSON LD document.
 
 #### Parameters
 
-• **propertyName**: `string`
-
-The name of the property being validated to use in error messages.
-
 • **document**: `T`
 
-The data to validate.
+The JSON-LD document to validate.
 
 • **validationFailures**: `IValidationFailure`[]
 
 The list of validation failures to add to.
 
-• **validationMode?**: `"schema"` \| `"validate"` \| `"either"`
+• **validationMode?**: `ValidationMode`
 
 The validation mode to use, defaults to either.
 
@@ -46,4 +42,4 @@ The validation mode to use, defaults to either.
 
 `Promise`\<`boolean`\>
 
-True if the data was valid.
+True if the document was valid.

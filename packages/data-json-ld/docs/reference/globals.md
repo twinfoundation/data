@@ -8,13 +8,13 @@
 
 ## Type Aliases
 
+- [IJsonLdDocument](type-aliases/IJsonLdDocument.md)
 - [ContextDefinition](type-aliases/ContextDefinition.md)
 - [ExpandedTermDefinition](type-aliases/ExpandedTermDefinition.md)
 - [GraphObject](type-aliases/GraphObject.md)
 - [IdMap](type-aliases/IdMap.md)
 - [IncludedBlock](type-aliases/IncludedBlock.md)
 - [IndexMap](type-aliases/IndexMap.md)
-- [JsonLdDocument](type-aliases/JsonLdDocument.md)
 - [LanguageMap](type-aliases/LanguageMap.md)
 - [ListObject](type-aliases/ListObject.md)
 - [NodeObject](type-aliases/NodeObject.md)

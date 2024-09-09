@@ -4,6 +4,7 @@ import { Is, type IValidationFailure } from "@gtsc/core";
 import type { JSONSchema7 } from "json-schema";
 import { JsonSchemaHelper } from "./jsonSchemaHelper";
 import { DataTypeHandlerFactory } from "../factories/dataTypeHandlerFactory";
+import { ValidationMode } from "../models/validationMode";
 
 /**
  * Class to help with data types.
@@ -23,23 +24,25 @@ export class DataTypeHelper {
 		dataType: string | undefined,
 		data: unknown,
 		validationFailures: IValidationFailure[],
-		validationMode?: "validate" | "schema" | "either"
+		validationMode?: ValidationMode
 	): Promise<boolean> {
 		if (Is.stringValue(dataType)) {
 			const handler = DataTypeHandlerFactory.getIfExists(dataType);
 
 			if (handler) {
-				validationMode = validationMode ?? "either";
+				validationMode = validationMode ?? ValidationMode.Either;
 
 				// If we have a validate function use that as it is more specific
 				// and will produce better error messages
 				if (
-					(validationMode === "validate" || validationMode === "either") &&
+					(validationMode === ValidationMode.Validate ||
+						validationMode === ValidationMode.Either) &&
 					Is.function(handler.validate)
 				) {
 					return handler.validate(propertyName, data, validationFailures);
 				} else if (
-					(validationMode === "schema" || validationMode === "either") &&
+					(validationMode === ValidationMode.JsonSchema ||
+						validationMode === ValidationMode.Either) &&
 					Is.function(handler.jsonSchema)
 				) {
 					// Otherwise use the JSON schema if there is one

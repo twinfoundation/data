@@ -16,8 +16,10 @@
 ## Type Aliases
 
 - [ISchemaValidationError](type-aliases/ISchemaValidationError.md)
+- [ValidationMode](type-aliases/ValidationMode.md)
 
 ## Variables
 
 - [DataTypeHandlerFactory](variables/DataTypeHandlerFactory.md)
 - [IdentifierHandlerFactory](variables/IdentifierHandlerFactory.md)
+- [ValidationMode](variables/ValidationMode.md)

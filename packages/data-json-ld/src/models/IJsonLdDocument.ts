@@ -8,4 +8,4 @@ import type jsonLd from "jsonld";
  * that is equivalent to valid JSON text.
  * @see https://www.w3.org/TR/json-ld11/#json-ld-grammar
  */
-export type JsonLdDocument = jsonLd.JsonLdDocument;
+export type IJsonLdDocument = jsonLd.JsonLdDocument;

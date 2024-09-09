@@ -6,7 +6,7 @@ import { FetchHelper, HttpMethod } from "@gtsc/web";
 import jsonLd from "jsonld";
 import type { JsonLd, RemoteDocument, Url } from "jsonld/jsonld-spec";
 import type { ContextDefinition } from "../models/contextDefinition";
-import type { JsonLdDocument } from "../models/jsonLdDocument";
+import type { IJsonLdDocument } from "../models/IJsonLdDocument";
 
 /**
  * JSON-LD Processor.
@@ -39,9 +39,9 @@ export class JsonLdProcessor {
 	 * @returns The compacted JSON-LD document.
 	 */
 	public static async compact(
-		document: JsonLdDocument,
+		document: IJsonLdDocument,
 		context?: ContextDefinition
-	): Promise<JsonLdDocument> {
+	): Promise<IJsonLdDocument> {
 		try {
 			return jsonLd.compact(document, context ?? {}, {
 				documentLoader: JsonLdProcessor.DOCUMENT_LOADER
@@ -56,7 +56,7 @@ export class JsonLdProcessor {
 	 * @param compacted The compacted JSON-LD document to expand.
 	 * @returns The expanded JSON-LD document.
 	 */
-	public static async expand(compacted: JsonLdDocument): Promise<JsonLdDocument> {
+	public static async expand(compacted: IJsonLdDocument): Promise<IJsonLdDocument> {
 		try {
 			return jsonLd.expand(compacted, {
 				documentLoader: JsonLdProcessor.DOCUMENT_LOADER

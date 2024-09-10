@@ -7,9 +7,10 @@ import { VdaIdentifiersValidation } from "../../src/utils/vdaIdentifiersValidati
 
 describe("VdaIdentifiersValidation", () => {
 	test("Test should successfully extract VDA Object Identifier", async () => {
-		const vdaIdentifiers: IVdaObjectIdentifier | undefined = VdaIdentifiersValidation.extractIdentifier(
-			"urn:jaif:id:obj:37SUN321456789A111222333AB+123456789012"
-		);
+		const vdaIdentifiers: IVdaObjectIdentifier | undefined =
+			VdaIdentifiersValidation.extractIdentifier(
+				"urn:jaif:id:obj:37SUN321456789A111222333AB+123456789012"
+			);
 		expect(vdaIdentifiers).toBeDefined();
 		expect(vdaIdentifiers?.dataIdentifier).toEqual("37S");
 		expect(vdaIdentifiers?.issuingAgencyCode).toEqual("UN");
@@ -19,9 +20,10 @@ describe("VdaIdentifiersValidation", () => {
 	});
 
 	test("Test should successfully extract VDA A1 Identifier", async () => {
-		const vdaIdentifiers: IVdaObjectIdentifier | undefined = VdaIdentifiersValidation.extractIdentifier(
-			"urn:jaif:id:A1:37SUN321456789A111222333AB+123456789012"
-		);
+		const vdaIdentifiers: IVdaObjectIdentifier | undefined =
+			VdaIdentifiersValidation.extractIdentifier(
+				"urn:jaif:id:A1:37SUN321456789A111222333AB+123456789012"
+			);
 		expect(vdaIdentifiers).toBeDefined();
 		expect(vdaIdentifiers?.dataIdentifier).toEqual("37S");
 		expect(vdaIdentifiers?.issuingAgencyCode).toEqual("UN");
@@ -69,9 +71,10 @@ describe("VdaIdentifiersValidation", () => {
 	});
 
 	test("Test should fail if vda object identifier is invalid", async () => {
-		const vdaIdentifiers: IVdaObjectIdentifier | undefined = VdaIdentifiersValidation.extractIdentifier(
-			"urn:jaif:id:obj:37SUN321456789A111222333AB123456789012"
-		);
+		const vdaIdentifiers: IVdaObjectIdentifier | undefined =
+			VdaIdentifiersValidation.extractIdentifier(
+				"urn:jaif:id:obj:37SUN321456789A111222333AB123456789012"
+			);
 		expect(vdaIdentifiers).toBeUndefined();
 	});
 

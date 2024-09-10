@@ -256,58 +256,6 @@ describe("JsonSchemaHelper", () => {
 		expect(validation.error).toBeUndefined();
 	});
 
-	test("Can extract the types from a schema when type is part of array", async () => {
-		const types: string[] = [];
-		JsonSchemaHelper.extractTypes(
-			{
-				type: "array",
-				items: {
-					$ref: "https://example.com/foo"
-				}
-			},
-			types
-		);
-
-		expect(types).toEqual(["https://example.com/foo"]);
-	});
-
-	test("Can extract the types from a schema when type is part of array sub type", async () => {
-		const types: string[] = [];
-		JsonSchemaHelper.extractTypes(
-			{
-				type: "array",
-				items: {
-					type: "object",
-					properties: {
-						foo: {
-							$ref: "https://example.com/foo"
-						}
-					}
-				}
-			},
-			types
-		);
-
-		expect(types).toEqual(["https://example.com/foo"]);
-	});
-
-	test("Can extract the types from a schema when type is an object", async () => {
-		const types: string[] = [];
-		JsonSchemaHelper.extractTypes(
-			{
-				type: "object",
-				properties: {
-					foo: {
-						$ref: "https://example.com/foo"
-					}
-				}
-			},
-			types
-		);
-
-		expect(types).toEqual(["https://example.com/foo"]);
-	});
-
 	test("Can fail to get the type for a property when the property does not exist", async () => {
 		const type = JsonSchemaHelper.getPropertyType(
 			{

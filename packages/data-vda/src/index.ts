@@ -11,4 +11,3 @@ export * from "./models/vdaIdTypes";
 export * from "./models/vdaUriIdentifiers";
 export * from "./models/vdaUriPackages";
 export * from "./utils/vdaIdentifiersValidation";
-

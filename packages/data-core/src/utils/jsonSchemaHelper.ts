@@ -2,6 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0.
 import { Is, StringHelper } from "@gtsc/core";
 import type { IEntitySchema } from "@gtsc/entity";
+import { nameof } from "@gtsc/nameof";
+import { FetchHelper, HttpMethod } from "@gtsc/web";
 import Ajv from "ajv";
 import addFormats from "ajv-formats";
 import type { JSONSchema7 } from "json-schema";
@@ -19,6 +21,12 @@ export class JsonSchemaHelper {
 	public static readonly SCHEMA_VERSION = "https://json-schema.org/draft/2020-12/schema";
 
 	/**
+	 * The class name.
+	 * @internal
+	 */
+	private static readonly _CLASS_NAME = nameof<JsonSchemaHelper>();
+
+	/**
 	 * Validates data against the schema.
 	 * @param schema The schema to validate the data with.
 	 * @param data The data to be validated.
@@ -30,57 +38,58 @@ export class JsonSchemaHelper {
 		data: T,
 		additionalTypes?: { [id: string]: JSONSchema7 }
 	): Promise<ISchemaValidationResult> {
-		const validator = new Ajv();
-		addFormats(validator);
+		const ajv = new Ajv({
+			allowUnionTypes: true,
+			loadSchema: async uri => {
+				const subTypeHandler = DataTypeHandlerFactory.getIfExists(uri);
+				if (Is.function(subTypeHandler?.jsonSchema)) {
+					const subSchema = await subTypeHandler.jsonSchema();
+					if (Is.object<JSONSchema7>(subSchema)) {
+						return subSchema;
+					}
+				}
 
-		const subTypes: string[] = [];
-		JsonSchemaHelper.extractTypes(schema, subTypes);
-
-		for (const subType of subTypes) {
-			const subTypeHandler = DataTypeHandlerFactory.getIfExists(subType);
-			if (Is.function(subTypeHandler?.jsonSchema)) {
-				const subSchema = await subTypeHandler.jsonSchema();
-				if (Is.object<JSONSchema7>(subSchema)) {
-					validator.addSchema(subSchema, subType);
+				try {
+					// We don't have the type in our local data types, so we try to fetch it from the web
+					return FetchHelper.fetchJson<never, JSONSchema7>(
+						JsonSchemaHelper._CLASS_NAME,
+						uri,
+						HttpMethod.GET,
+						undefined,
+						{
+							// Cache for an hour
+							cacheTtlMs: 3600000
+						}
+					);
+				} catch {
+					// Failed to load remotely so return an empty object
+					// so the schema validation doesn't completely fail
+					return {};
 				}
 			}
-		}
+		});
 
+		addFormats(ajv);
+
+		// Add the additional types provided by the user
 		if (Is.objectValue(additionalTypes)) {
 			for (const key in additionalTypes) {
-				validator.addSchema(additionalTypes[key], key);
+				ajv.addSchema(additionalTypes[key], key);
 			}
 		}
 
+		const compiled = await ajv.compileAsync(schema);
+		const result = await compiled(data);
+
 		const output: ISchemaValidationResult = {
-			result: validator.validate(schema, data) as boolean
+			result
 		};
 
 		if (!output.result) {
-			output.error = validator.errors as ISchemaValidationError;
+			output.error = compiled.errors as ISchemaValidationError;
 		}
 
 		return output;
-	}
-
-	/**
-	 * Extracts the types from the schema.
-	 * @param schema The schema to extract the types from.
-	 * @param types The types to add to.
-	 */
-	public static extractTypes(schema: JSONSchema7, types: string[]): void {
-		if (Is.stringValue(schema.$ref)) {
-			types.push(schema.$ref);
-		} else if (schema.type === "array" && Is.object(schema.items)) {
-			JsonSchemaHelper.extractTypes(schema.items, types);
-		} else if (schema.type === "object" && Is.objectValue(schema.properties)) {
-			for (const key in schema.properties) {
-				const childSchema = schema.properties[key];
-				if (Is.object<JSONSchema7>(childSchema)) {
-					JsonSchemaHelper.extractTypes(childSchema, types);
-				}
-			}
-		}
 	}
 
 	/**

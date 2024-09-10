@@ -12,23 +12,19 @@ Handle all the data types for UN/CEFACT.
 
 [`UneceDataTypes`](UneceDataTypes.md)
 
-## Properties
+## Methods
 
-### TYPE\_DOCUMENT
+### registerJsonLdRedirects()
 
-> `static` **TYPE\_DOCUMENT**: `string` = `"https://vocabulary.uncefact.org/Document"`
+> `static` **registerJsonLdRedirects**(): `void`
 
-Represents a UN/CEFACT document.
+Register the JSON-LD Redirects.
+
+#### Returns
+
+`void`
 
 ***
-
-### TYPE\_CONSIGNMENT
-
-> `static` **TYPE\_CONSIGNMENT**: `string` = `"https://vocabulary.uncefact.org/Consignment"`
-
-Represents a UN/CEFACT consignment.
-
-## Methods
 
 ### registerTypes()
 

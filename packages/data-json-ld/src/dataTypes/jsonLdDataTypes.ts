@@ -26,22 +26,11 @@ import JsonLdNodePrimitiveSchema from "../schemas/JsonLdNodePrimitive.json";
 import JsonLdSetObjectSchema from "../schemas/JsonLdSetObject.json";
 import JsonLdTypeMapSchema from "../schemas/JsonLdTypeMap.json";
 import JsonLdValueObjectSchema from "../schemas/JsonLdValueObject.json";
-import { JsonLdProcessor } from "../utils/jsonLdProcessor";
 
 /**
  * Handle all the data types for JSON-LD.
  */
 export class JsonLdDataTypes {
-	/**
-	 * Register the JSON-LD Redirects.
-	 */
-	public static registerJsonLdRedirects(): void {
-		JsonLdProcessor.addRedirect(
-			/https?:\/\/schema.gtsc.io\/v2\/?/,
-			"https://schema.gtsc.io/v2/types.jsonld"
-		);
-	}
-
 	/**
 	 * Register all the data types.
 	 */

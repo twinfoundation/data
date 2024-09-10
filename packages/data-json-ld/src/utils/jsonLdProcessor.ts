@@ -85,7 +85,7 @@ export class JsonLdProcessor {
 	private static async documentLoader(url: Url): Promise<RemoteDocument> {
 		for (const redirect of JsonLdProcessor._redirects) {
 			if (redirect.from.test(url)) {
-				url = url.replace(redirect.from, redirect.to);
+				url = redirect.to;
 				break;
 			}
 		}
@@ -99,7 +99,7 @@ export class JsonLdProcessor {
 			{
 				cacheTtlMs: 3600000,
 				headers: {
-					"Accept": `${MimeTypes.JsonLd}, ${MimeTypes.Json}`
+					Accept: `${MimeTypes.JsonLd},${MimeTypes.Json}`
 				}
 			}
 		);

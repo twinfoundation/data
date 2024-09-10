@@ -14,18 +14,6 @@ Handle all the data types for UN/CEFACT.
 
 ## Methods
 
-### registerJsonLdRedirects()
-
-> `static` **registerJsonLdRedirects**(): `void`
-
-Register the JSON-LD Redirects.
-
-#### Returns
-
-`void`
-
-***
-
 ### registerTypes()
 
 > `static` **registerTypes**(): `void`

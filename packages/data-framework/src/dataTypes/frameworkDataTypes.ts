@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0.
 import { Urn, Validation } from "@gtsc/core";
 import { DataTypeHandlerFactory } from "@gtsc/data-core";
-import { JsonLdProcessor } from "@gtsc/data-json-ld";
 import type { JSONSchema7 } from "json-schema";
 import { FrameworkTypes } from "../models/frameworkTypes";
 import TimestampMillisecondsSchema from "../schemas/TimestampMilliseconds.json";
@@ -13,16 +12,6 @@ import URNSchema from "../schemas/URN.json";
  * Handle all the framework data types.
  */
 export class FrameworkDataTypes {
-	/**
-	 * Register the JSON-LD Redirects.
-	 */
-	public static registerJsonLdRedirects(): void {
-		JsonLdProcessor.addRedirect(
-			/https?:\/\/schema.gtsc.io\/v2\/?/,
-			"https://schema.gtsc.io/v2/types.jsonld"
-		);
-	}
-
 	/**
 	 * Register all the data types.
 	 */

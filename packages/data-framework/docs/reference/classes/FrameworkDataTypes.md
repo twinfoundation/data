@@ -14,18 +14,6 @@ Handle all the framework data types.
 
 ## Methods
 
-### registerJsonLdRedirects()
-
-> `static` **registerJsonLdRedirects**(): `void`
-
-Register the JSON-LD Redirects.
-
-#### Returns
-
-`void`
-
-***
-
 ### registerTypes()
 
 > `static` **registerTypes**(): `void`

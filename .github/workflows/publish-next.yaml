@@ -9,8 +9,8 @@ on:
         type: choice
         options:
           - data-core
-          - data-framework
           - data-json-ld
+          - data-framework
           - data-gs1
           - data-schema-org
           - data-unece

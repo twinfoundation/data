@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0.
 import { GeneralError } from "@gtsc/core";
 import { nameof } from "@gtsc/nameof";
-import { FetchHelper, HttpMethod } from "@gtsc/web";
+import { FetchHelper, HttpMethod, MimeTypes } from "@gtsc/web";
 import jsonLd from "jsonld";
 import type { JsonLd, RemoteDocument, Url } from "jsonld/jsonld-spec";
 import type { IJsonLdContextDefinition, IJsonLdDocument } from "../models/IJsonLdDocument";
@@ -96,7 +96,12 @@ export class JsonLdProcessor {
 			url,
 			HttpMethod.GET,
 			undefined,
-			{ cacheTtlMs: 3600000 }
+			{
+				cacheTtlMs: 3600000,
+				headers: {
+					"Accept": `${MimeTypes.JsonLd}, ${MimeTypes.Json}`
+				}
+			}
 		);
 
 		return {

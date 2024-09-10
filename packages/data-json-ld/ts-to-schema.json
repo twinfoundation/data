@@ -1,0 +1,29 @@
+{
+	"baseUrl": "https://schema.gtsc.io/v2/",
+	"sources": ["./src/models/**/*.ts"],
+	"types": [
+		"IJsonLdDocument",
+		"IJsonLdNodeObject",
+		"IJsonLdNodePrimitive",
+		"IJsonLdGraphObject",
+		"IJsonLdValueObject",
+		"IJsonLdListObject",
+		"IJsonLdSetObject",
+		"IJsonLdLanguageMap",
+		"IJsonLdIndexMap",
+		"IJsonLdIndexMapItem",
+		"IJsonLdIdMap",
+		"IJsonLdTypeMap",
+		"IJsonLdIncludedBlock",
+		"IJsonLdContextDefinition",
+		"IJsonLdExpandedTermDefinition",
+		"IJsonLdKeyword",
+		"IJsonLdListOrSetItem",
+		"IJsonLdContainerType",
+		"IJsonLdContainerTypeArray",
+		"IJsonLdJsonPrimitive",
+		"IJsonLdJsonArray",
+		"IJsonLdJsonObject",
+		"IJsonLdJsonValue"
+	]
+}

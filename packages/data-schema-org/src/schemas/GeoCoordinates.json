@@ -1,0 +1,16 @@
+{
+	"type": "object",
+	"required": ["latitude", "longitude"],
+	"properties": {
+		"latitude": {
+			"type": ["number", "string"],
+			"minimum": -90,
+			"maximum": 90
+		},
+		"longitude": {
+			"type": ["number", "string"],
+			"minimum": -180,
+			"maximum": 180
+		}
+	}
+}

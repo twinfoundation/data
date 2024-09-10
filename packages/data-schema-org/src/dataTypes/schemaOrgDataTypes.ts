@@ -1,82 +1,33 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
-import { Coerce, Is, Url, Validation, type IValidationFailure } from "@gtsc/core";
+import { Url, Validation } from "@gtsc/core";
 import { DataTypeHandlerFactory } from "@gtsc/data-core";
 import { JsonLdProcessor } from "@gtsc/data-json-ld";
-import { nameof } from "@gtsc/nameof";
-import type { GeoCoordinates } from "schema-dts";
-import { SchemaOrgVocabulary } from "../schemaOrgVocabulary";
+import type { JSONSchema7 } from "json-schema";
+import { SchemaOrgTypes } from "../models/schemaOrgTypes";
+import GeoCoordinatesSchema from "../schemas/GeoCoordinates.json";
+import { SchemaOrgValidation } from "../utils/schemaOrgValidation";
 
 /**
  * Handle all the data types for schema.org.
  */
 export class SchemaOrgDataTypes {
 	/**
-	 * Represents text storage.
+	 * Register the JSON-LD Redirects.
 	 */
-	public static TYPE_TEXT = `${SchemaOrgVocabulary.SCHEMA_ORG_CONTEXT_URI}/Text`;
-
-	/**
-	 * Represents integer number values.
-	 */
-	public static TYPE_INTEGER = `${SchemaOrgVocabulary.SCHEMA_ORG_CONTEXT_URI}/Integer`;
-
-	/**
-	 * Represents floating point numbers.
-	 */
-	public static TYPE_FLOAT = `${SchemaOrgVocabulary.SCHEMA_ORG_CONTEXT_URI}/Float`;
-
-	/**
-	 * Represents a boolean.
-	 */
-	public static TYPE_BOOLEAN = `${SchemaOrgVocabulary.SCHEMA_ORG_CONTEXT_URI}/Boolean`;
-
-	/**
-	 * Represents a url.
-	 */
-	public static TYPE_URL = `${SchemaOrgVocabulary.SCHEMA_ORG_CONTEXT_URI}/URL`;
-
-	/**
-	 * Represents a date as an ISO format string.
-	 */
-	public static TYPE_DATE = `${SchemaOrgVocabulary.SCHEMA_ORG_CONTEXT_URI}/Date`;
-
-	/**
-	 * Represents a date time as an ISO format string.
-	 */
-	public static TYPE_DATE_TIME = `${SchemaOrgVocabulary.SCHEMA_ORG_CONTEXT_URI}/DateTime`;
-
-	/**
-	 * Represents a time as an ISO format string.
-	 */
-	public static TYPE_TIME = `${SchemaOrgVocabulary.SCHEMA_ORG_CONTEXT_URI}/Time`;
-
-	/**
-	 * Represents a url which points to an image.
-	 */
-	public static TYPE_IMAGE = `${SchemaOrgVocabulary.SCHEMA_ORG_CONTEXT_URI}/image`;
-
-	/**
-	 * Represents a location.
-	 */
-	public static TYPE_GEO_COORDINATES = `${SchemaOrgVocabulary.SCHEMA_ORG_CONTEXT_URI}/GeoCoordinates`;
-
-	/**
-	 * Represents a structured value.
-	 */
-	public static TYPE_STRUCTURED_VALUE = `${SchemaOrgVocabulary.SCHEMA_ORG_CONTEXT_URI}/StructuredValue`;
+	public static registerJsonLdRedirects(): void {
+		JsonLdProcessor.addRedirect(
+			/https?:\/\/schema.org\/?/,
+			"https://schema.org/docs/jsonldcontext.jsonld"
+		);
+	}
 
 	/**
 	 * Register all the data types.
 	 */
 	public static registerTypes(): void {
-		JsonLdProcessor.addRedirect(
-			SchemaOrgVocabulary.SCHEMA_ORG_JSON_LD_REDIRECT,
-			SchemaOrgVocabulary.SCHEMA_ORG_JSON_LD_CONTEXT
-		);
-
-		DataTypeHandlerFactory.register(SchemaOrgDataTypes.TYPE_TEXT, () => ({
-			type: SchemaOrgDataTypes.TYPE_TEXT,
+		DataTypeHandlerFactory.register(SchemaOrgTypes.Text, () => ({
+			type: SchemaOrgTypes.Text,
 			defaultValue: "",
 			jsonSchema: async () => ({
 				type: "string"
@@ -85,8 +36,8 @@ export class SchemaOrgDataTypes {
 				Validation.string(propertyName, value, failures)
 		}));
 
-		DataTypeHandlerFactory.register(SchemaOrgDataTypes.TYPE_INTEGER, () => ({
-			type: SchemaOrgDataTypes.TYPE_INTEGER,
+		DataTypeHandlerFactory.register(SchemaOrgTypes.Integer, () => ({
+			type: SchemaOrgTypes.Integer,
 			defaultValue: 0,
 			jsonSchema: async () => ({
 				type: "integer"
@@ -95,8 +46,8 @@ export class SchemaOrgDataTypes {
 				Validation.integer(propertyName, value, failures)
 		}));
 
-		DataTypeHandlerFactory.register(SchemaOrgDataTypes.TYPE_FLOAT, () => ({
-			type: SchemaOrgDataTypes.TYPE_FLOAT,
+		DataTypeHandlerFactory.register(SchemaOrgTypes.Float, () => ({
+			type: SchemaOrgTypes.Float,
 			defaultValue: 0,
 			jsonSchema: async () => ({
 				type: "number"
@@ -105,8 +56,8 @@ export class SchemaOrgDataTypes {
 				Validation.number(propertyName, value, failures)
 		}));
 
-		DataTypeHandlerFactory.register(SchemaOrgDataTypes.TYPE_BOOLEAN, () => ({
-			type: SchemaOrgDataTypes.TYPE_BOOLEAN,
+		DataTypeHandlerFactory.register(SchemaOrgTypes.Boolean, () => ({
+			type: SchemaOrgTypes.Boolean,
 			defaultValue: true,
 			jsonSchema: async () => ({
 				type: "boolean"
@@ -115,8 +66,8 @@ export class SchemaOrgDataTypes {
 				Validation.boolean(propertyName, value, failures)
 		}));
 
-		DataTypeHandlerFactory.register(SchemaOrgDataTypes.TYPE_URL, () => ({
-			type: SchemaOrgDataTypes.TYPE_URL,
+		DataTypeHandlerFactory.register(SchemaOrgTypes.URL, () => ({
+			type: SchemaOrgTypes.URL,
 			defaultValue: "",
 			jsonSchema: async () => ({
 				type: "string",
@@ -126,8 +77,8 @@ export class SchemaOrgDataTypes {
 				Url.validate(propertyName, value, failures)
 		}));
 
-		DataTypeHandlerFactory.register(SchemaOrgDataTypes.TYPE_DATE, () => ({
-			type: SchemaOrgDataTypes.TYPE_DATE,
+		DataTypeHandlerFactory.register(SchemaOrgTypes.Date, () => ({
+			type: SchemaOrgTypes.Date,
 			defaultValue: new Date(),
 			jsonSchema: async () => ({
 				type: "string",
@@ -137,8 +88,8 @@ export class SchemaOrgDataTypes {
 				Validation.dateString(propertyName, value, failures)
 		}));
 
-		DataTypeHandlerFactory.register(SchemaOrgDataTypes.TYPE_DATE_TIME, () => ({
-			type: SchemaOrgDataTypes.TYPE_DATE_TIME,
+		DataTypeHandlerFactory.register(SchemaOrgTypes.DateTime, () => ({
+			type: SchemaOrgTypes.DateTime,
 			defaultValue: new Date(),
 			jsonSchema: async () => ({
 				type: "string",
@@ -148,8 +99,8 @@ export class SchemaOrgDataTypes {
 				Validation.dateTimeString(propertyName, value, failures)
 		}));
 
-		DataTypeHandlerFactory.register(SchemaOrgDataTypes.TYPE_TIME, () => ({
-			type: SchemaOrgDataTypes.TYPE_TIME,
+		DataTypeHandlerFactory.register(SchemaOrgTypes.Time, () => ({
+			type: SchemaOrgTypes.Time,
 			defaultValue: new Date(),
 			jsonSchema: async () => ({
 				type: "string",
@@ -159,8 +110,8 @@ export class SchemaOrgDataTypes {
 				Validation.timeString(propertyName, value, failures)
 		}));
 
-		DataTypeHandlerFactory.register(SchemaOrgDataTypes.TYPE_IMAGE, () => ({
-			type: SchemaOrgDataTypes.TYPE_IMAGE,
+		DataTypeHandlerFactory.register(SchemaOrgTypes.Image, () => ({
+			type: SchemaOrgTypes.Image,
 			defaultValue: "",
 			jsonSchema: async () => ({
 				type: "string",
@@ -170,91 +121,12 @@ export class SchemaOrgDataTypes {
 				Url.validate(propertyName, value, failures)
 		}));
 
-		DataTypeHandlerFactory.register(SchemaOrgDataTypes.TYPE_GEO_COORDINATES, () => ({
-			type: SchemaOrgDataTypes.TYPE_GEO_COORDINATES,
+		DataTypeHandlerFactory.register(SchemaOrgTypes.GeoCoordinates, () => ({
+			type: SchemaOrgTypes.GeoCoordinates,
 			defaultValue: { longitude: 0, latitude: 0 },
-			jsonSchema: async () => ({
-				type: "object",
-				required: ["latitude", "longitude"],
-				properties: {
-					latitude: {
-						type: ["number", "string"],
-						minimum: -90,
-						maximum: 90
-					},
-					longitude: {
-						type: ["number", "string"],
-						minimum: -180,
-						maximum: 180
-					}
-				}
-			}),
+			jsonSchema: async () => GeoCoordinatesSchema as JSONSchema7,
 			validate: async (propertyName, value, failures, container) =>
-				SchemaOrgDataTypes.validateGeoCoordinates(propertyName, value, failures)
+				SchemaOrgValidation.geoCoordinates(propertyName, value, failures)
 		}));
-	}
-
-	/**
-	 * Validate if the property is valid geo-coordinates.
-	 * @param propertyName The name of the property being validated.
-	 * @param value The value to test.
-	 * @param failures The list of failures to add to.
-	 * @returns True if the value is geo-coordinates.
-	 */
-	public static validateGeoCoordinates(
-		propertyName: string,
-		value: unknown,
-		failures: IValidationFailure[]
-	): value is GeoCoordinates {
-		const is = Validation.object<GeoCoordinates>(propertyName, value, failures);
-
-		if (is) {
-			// This is only a partial validation at the moment we should also support
-			// address, addressCountry, elevation, postalCode as alternative
-			// to gps coords
-			let lat: number | undefined;
-			if (Is.number(value.latitude)) {
-				lat = value.latitude;
-			} else if (Is.stringValue(value.latitude)) {
-				lat = Coerce.number(value.latitude);
-			}
-
-			if (Is.number(lat)) {
-				if (lat < -90 || lat > 90) {
-					failures.push({
-						property: nameof(value.latitude, propertyName),
-						reason: "validation.geo.coordinatesLatitudeRange"
-					});
-				}
-			} else {
-				failures.push({
-					property: nameof(value.latitude, propertyName),
-					reason: "validation.geo.coordinatesLatitudeNumber"
-				});
-			}
-
-			let lng: number | undefined;
-			if (Is.number(value.longitude)) {
-				lng = value.longitude;
-			} else if (Is.stringValue(value.longitude)) {
-				lng = Coerce.number(value.longitude);
-			}
-
-			if (Is.number(lng)) {
-				if (lng < -180 || lng > 180) {
-					failures.push({
-						property: nameof(value.longitude, propertyName),
-						reason: "validation.geo.coordinatesLongitudeRange"
-					});
-				}
-			} else {
-				failures.push({
-					property: nameof(value.longitude, propertyName),
-					reason: "validation.geo.coordinatesLongitudeNumber"
-				});
-			}
-		}
-
-		return is;
 	}
 }

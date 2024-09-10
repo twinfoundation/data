@@ -50,7 +50,7 @@ Compact a document according to a particular context.
 
 The JSON-LD document to compact.
 
-• **context?**: [`IContextDefinition`](../interfaces/IContextDefinition.md)
+• **context?**: [`IJsonLdContextDefinition`](../interfaces/IJsonLdContextDefinition.md)
 
 The context to compact the document to.
 

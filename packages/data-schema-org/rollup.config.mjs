@@ -1,10 +1,11 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
 import packageDetails from './package.json' with { type: 'json' };
+import json from '@rollup/plugin-json';
 
 const isEsm = process.env.MODULE === 'esm';
 
-const plugins = [];
+const plugins = [json()];
 
 const globs = {};
 if (packageDetails.dependencies) {
@@ -37,7 +38,7 @@ export default {
 		globals: globs,
 		exports: 'named'
 	},
-	external: [/^node:.*/].concat(Object.keys(globs).map(g => new RegExp(`^${g}`))),
+	external: [/^node:.*/].concat(Object.keys(globs)),
 	onwarn: message => {
 		if (!['EMPTY_BUNDLE', 'CIRCULAR_DEPENDENCY'].includes(message.code)) {
 			process.stderr.write(`${message}\n`);

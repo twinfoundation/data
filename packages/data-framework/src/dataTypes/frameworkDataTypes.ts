@@ -2,58 +2,51 @@
 // SPDX-License-Identifier: Apache-2.0.
 import { Urn, Validation } from "@gtsc/core";
 import { DataTypeHandlerFactory } from "@gtsc/data-core";
-import { FrameworkVocabulary } from "../frameworkVocabulary";
+import { JsonLdProcessor } from "@gtsc/data-json-ld";
+import type { JSONSchema7 } from "json-schema";
+import { FrameworkTypes } from "../models/frameworkTypes";
+import TimestampMillisecondsSchema from "../schemas/TimestampMilliseconds.json";
+import TimestampSecondsSchema from "../schemas/TimestampSeconds.json";
+import URNSchema from "../schemas/URN.json";
 
 /**
  * Handle all the framework data types.
  */
 export class FrameworkDataTypes {
 	/**
-	 * Represents a urn.
+	 * Register the JSON-LD Redirects.
 	 */
-	public static TYPE_URN = `${FrameworkVocabulary.SCHEMA_URI}URN`;
-
-	/**
-	 * Represents a timestamp as an integer, milliseconds since 1 Jan 1970.
-	 */
-	public static TYPE_TIMESTAMP_MILLISECONDS = `${FrameworkVocabulary.SCHEMA_URI}TimestampMilliseconds`;
-
-	/**
-	 * Represents a timestamp as an integer, seconds since 1 Jan 1970.
-	 */
-	public static TYPE_TIMESTAMP_SECONDS = `${FrameworkVocabulary.SCHEMA_URI}TimestampSeconds`;
+	public static registerJsonLdRedirects(): void {
+		JsonLdProcessor.addRedirect(
+			/https?:\/\/schema.gtsc.io\/v2\/?/,
+			"https://schema.gtsc.io/v2/types.jsonld"
+		);
+	}
 
 	/**
 	 * Register all the data types.
 	 */
 	public static registerTypes(): void {
-		DataTypeHandlerFactory.register(FrameworkDataTypes.TYPE_URN, () => ({
-			type: FrameworkDataTypes.TYPE_URN,
+		DataTypeHandlerFactory.register(FrameworkTypes.Urn, () => ({
+			type: FrameworkTypes.Urn,
 			defaultValue: "",
-			jsonSchema: async () => ({
-				type: "string",
-				format: "uri"
-			}),
+			jsonSchema: async () => URNSchema as JSONSchema7,
 			validate: async (propertyName, value, failures, container) =>
 				Urn.validate(propertyName, value, failures)
 		}));
 
-		DataTypeHandlerFactory.register(FrameworkDataTypes.TYPE_TIMESTAMP_MILLISECONDS, () => ({
-			type: FrameworkDataTypes.TYPE_TIMESTAMP_MILLISECONDS,
+		DataTypeHandlerFactory.register(FrameworkTypes.TimestampMilliseconds, () => ({
+			type: FrameworkTypes.TimestampMilliseconds,
 			defaultValue: Date.now(),
-			jsonSchema: async () => ({
-				type: "integer"
-			}),
+			jsonSchema: async () => TimestampMillisecondsSchema as JSONSchema7,
 			validate: async (propertyName, value, failures, container) =>
 				Validation.timestampMilliseconds(propertyName, value, failures)
 		}));
 
-		DataTypeHandlerFactory.register(FrameworkDataTypes.TYPE_TIMESTAMP_SECONDS, () => ({
-			type: FrameworkDataTypes.TYPE_TIMESTAMP_SECONDS,
+		DataTypeHandlerFactory.register(FrameworkTypes.TimestampSeconds, () => ({
+			type: FrameworkTypes.TimestampSeconds,
 			defaultValue: Math.floor(Date.now() / 1000),
-			jsonSchema: async () => ({
-				type: "integer"
-			}),
+			jsonSchema: async () => TimestampSecondsSchema as JSONSchema7,
 			validate: async (propertyName, value, failures, container) =>
 				Validation.timestampSeconds(propertyName, value, failures)
 		}));

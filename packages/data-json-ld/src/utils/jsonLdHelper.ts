@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0.
 import { Is, type IValidationFailure } from "@gtsc/core";
 import { DataTypeHelper, type ValidationMode } from "@gtsc/data-core";
-import type { IJsonLdDocument, INodeObject } from "../models/IJsonLdDocument";
+import type { IJsonLdDocument, IJsonLdNodeObject } from "../models/IJsonLdDocument";
 
 /**
  * Class to help with JSON LD.
@@ -20,17 +20,17 @@ export class JsonLdHelper {
 		validationFailures: IValidationFailure[],
 		validationMode?: ValidationMode
 	): Promise<boolean> {
-		if (Is.array<INodeObject>(document)) {
+		if (Is.array<IJsonLdNodeObject>(document)) {
 			// If the document is an array of nodes, validate each node
 			for (const node of document) {
 				await JsonLdHelper.validate(node, validationFailures, validationMode);
 			}
-		} else if (Is.array<INodeObject>(document["@graph"])) {
+		} else if (Is.array<IJsonLdNodeObject>(document["@graph"])) {
 			// If the graph is an array of nodes, validate each node
 			for (const node of document["@graph"]) {
 				await JsonLdHelper.validate(node, validationFailures, validationMode);
 			}
-		} else if (Is.object<INodeObject>(document)) {
+		} else if (Is.object<IJsonLdNodeObject>(document)) {
 			// If the graph is a single node, then use the validate the node schema
 			const dataType = document["@type"];
 			if (Is.stringValue(dataType)) {

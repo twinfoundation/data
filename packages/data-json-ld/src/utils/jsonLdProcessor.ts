@@ -5,7 +5,7 @@ import { nameof } from "@gtsc/nameof";
 import { FetchHelper, HttpMethod } from "@gtsc/web";
 import jsonLd from "jsonld";
 import type { JsonLd, RemoteDocument, Url } from "jsonld/jsonld-spec";
-import type { IContextDefinition, IJsonLdDocument } from "../models/IJsonLdDocument";
+import type { IJsonLdContextDefinition, IJsonLdDocument } from "../models/IJsonLdDocument";
 
 /**
  * JSON-LD Processor.
@@ -39,7 +39,7 @@ export class JsonLdProcessor {
 	 */
 	public static async compact(
 		document: IJsonLdDocument,
-		context?: IContextDefinition
+		context?: IJsonLdContextDefinition
 	): Promise<IJsonLdDocument> {
 		try {
 			return jsonLd.compact(document, context ?? {}, {

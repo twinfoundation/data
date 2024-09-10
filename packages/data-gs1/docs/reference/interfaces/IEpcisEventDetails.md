@@ -14,7 +14,7 @@ EPCIS Event Details.
 
 ### @context?
 
-> `optional` **@context**: `IContextDefinition`
+> `optional` **@context**: `IJsonLdContextDefinition`
 
 JSON-LD @context.
 

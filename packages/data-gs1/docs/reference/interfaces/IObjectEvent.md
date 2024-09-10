@@ -10,7 +10,7 @@ Defines an EPCIS 2.0 Object Event.
 
 ### @context?
 
-> `optional` **@context**: `IContextDefinition`
+> `optional` **@context**: `IJsonLdContextDefinition`
 
 JSON-LD @context.
 

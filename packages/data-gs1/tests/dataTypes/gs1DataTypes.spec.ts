@@ -1,10 +1,10 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
-import { Gs1DataTypes } from "../../src/dataTypes/gs1DataTypes";
+import { Gs1Is } from "../../src/utils/gs1Is";
 
 describe("Gs1DataTypes", () => {
 	test("Test should successfully validate 24 character Hexadecimal EPCs", async () => {
-		const epc = Gs1DataTypes.isEpcHex("3db918dc38bffda99587fdd1");
+		const epc = Gs1Is.isEpcHex("3db918dc38bffda99587fdd1");
 		expect(epc).toEqual(true);
 	});
 

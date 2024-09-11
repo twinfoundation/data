@@ -1,5 +1,5 @@
 {
-	"baseUrl": "https://schema.gtsc.io/v2/",
+	"baseUrl": "https://schema.gtsc.io/json-ld/",
 	"sources": ["./src/models/**/*.ts"],
 	"types": [
 		"IJsonLdDocument",

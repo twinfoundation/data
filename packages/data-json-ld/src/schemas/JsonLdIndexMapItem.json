@@ -13,16 +13,16 @@
 			"type": "string"
 		},
 		{
-			"$ref": "https://schema.gtsc.io/v2/JsonLdNodeObject"
+			"$ref": "https://schema.gtsc.io/json-ld/JsonLdNodeObject"
 		},
 		{
-			"$ref": "https://schema.gtsc.io/v2/JsonLdValueObject"
+			"$ref": "https://schema.gtsc.io/json-ld/JsonLdValueObject"
 		},
 		{
-			"$ref": "https://schema.gtsc.io/v2/JsonLdListObject"
+			"$ref": "https://schema.gtsc.io/json-ld/JsonLdListObject"
 		},
 		{
-			"$ref": "https://schema.gtsc.io/v2/JsonLdSetObject"
+			"$ref": "https://schema.gtsc.io/json-ld/JsonLdSetObject"
 		}
 	],
 	"description": "The items that can be stored in an index map."

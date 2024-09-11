@@ -9,17 +9,17 @@ export const FrameworkTypes = {
 	/**
 	 * Represents a urn.
 	 */
-	Urn: "https://schema.gtsc.io/v2/URN",
+	Urn: "https://schema.gtsc.io/framework/URN",
 
 	/**
 	 * Represents a timestamp as an integer, milliseconds since 1 Jan 1970.
 	 */
-	TimestampMilliseconds: "https://schema.gtsc.io/v2/TimestampMilliseconds",
+	TimestampMilliseconds: "https://schema.gtsc.io/framework/TimestampMilliseconds",
 
 	/**
 	 * Represents a timestamp as an integer, seconds since 1 Jan 1970.
 	 */
-	TimestampSeconds: "https://schema.gtsc.io/v2/TimestampSeconds"
+	TimestampSeconds: "https://schema.gtsc.io/framework/TimestampSeconds"
 } as const;
 
 /**

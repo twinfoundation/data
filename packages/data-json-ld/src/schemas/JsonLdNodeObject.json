@@ -10,7 +10,7 @@
 					"type": "string"
 				},
 				{
-					"$ref": "https://schema.gtsc.io/v2/JsonLdContextDefinition"
+					"$ref": "https://schema.gtsc.io/json-ld/JsonLdContextDefinition"
 				},
 				{
 					"type": "array",
@@ -23,7 +23,7 @@
 								"type": "string"
 							},
 							{
-								"$ref": "https://schema.gtsc.io/v2/JsonLdContextDefinition"
+								"$ref": "https://schema.gtsc.io/json-ld/JsonLdContextDefinition"
 							}
 						]
 					}
@@ -44,17 +44,17 @@
 			]
 		},
 		"@included": {
-			"$ref": "https://schema.gtsc.io/v2/JsonLdIncludedBlock"
+			"$ref": "https://schema.gtsc.io/json-ld/JsonLdIncludedBlock"
 		},
 		"@graph": {
 			"anyOf": [
 				{
-					"$ref": "https://schema.gtsc.io/v2/JsonLdNodeObject"
+					"$ref": "https://schema.gtsc.io/json-ld/JsonLdNodeObject"
 				},
 				{
 					"type": "array",
 					"items": {
-						"$ref": "https://schema.gtsc.io/v2/JsonLdNodeObject"
+						"$ref": "https://schema.gtsc.io/json-ld/JsonLdNodeObject"
 					}
 				}
 			]
@@ -62,12 +62,12 @@
 		"@nest": {
 			"anyOf": [
 				{
-					"$ref": "https://schema.gtsc.io/v2/JsonLdJsonObject"
+					"$ref": "https://schema.gtsc.io/json-ld/JsonLdJsonObject"
 				},
 				{
 					"type": "array",
 					"items": {
-						"$ref": "https://schema.gtsc.io/v2/JsonLdJsonObject"
+						"$ref": "https://schema.gtsc.io/json-ld/JsonLdJsonObject"
 					}
 				}
 			]
@@ -98,28 +98,28 @@
 	"additionalProperties": {
 		"anyOf": [
 			{
-				"$ref": "https://schema.gtsc.io/v2/JsonLdNodePrimitive"
+				"$ref": "https://schema.gtsc.io/json-ld/JsonLdNodePrimitive"
 			},
 			{
 				"type": "array",
 				"items": {
-					"$ref": "https://schema.gtsc.io/v2/JsonLdNodePrimitive"
+					"$ref": "https://schema.gtsc.io/json-ld/JsonLdNodePrimitive"
 				}
 			},
 			{
-				"$ref": "https://schema.gtsc.io/v2/JsonLdLanguageMap"
+				"$ref": "https://schema.gtsc.io/json-ld/JsonLdLanguageMap"
 			},
 			{
-				"$ref": "https://schema.gtsc.io/v2/JsonLdIndexMap"
+				"$ref": "https://schema.gtsc.io/json-ld/JsonLdIndexMap"
 			},
 			{
-				"$ref": "https://schema.gtsc.io/v2/JsonLdIncludedBlock"
+				"$ref": "https://schema.gtsc.io/json-ld/JsonLdIncludedBlock"
 			},
 			{
-				"$ref": "https://schema.gtsc.io/v2/JsonLdIdMap"
+				"$ref": "https://schema.gtsc.io/json-ld/JsonLdIdMap"
 			},
 			{
-				"$ref": "https://schema.gtsc.io/v2/JsonLdTypeMap"
+				"$ref": "https://schema.gtsc.io/json-ld/JsonLdTypeMap"
 			}
 		]
 	},

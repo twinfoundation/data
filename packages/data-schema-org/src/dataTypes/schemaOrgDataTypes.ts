@@ -1,8 +1,8 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
-import { Url, Validation } from "@gtsc/core";
-import { DataTypeHandlerFactory } from "@gtsc/data-core";
-import { JsonLdProcessor } from "@gtsc/data-json-ld";
+import { Url, Validation } from "@twin.org/core";
+import { DataTypeHandlerFactory } from "@twin.org/data-core";
+import { JsonLdProcessor } from "@twin.org/data-json-ld";
 import type { JSONSchema7 } from "json-schema";
 import { SchemaOrgTypes } from "../models/schemaOrgTypes";
 import GeoCoordinatesSchema from "../schemas/GeoCoordinates.json";

@@ -1,14 +1,10 @@
-# Type alias: IJsonLdKeyword
+# Type Alias: IJsonLdKeyword
 
 > **IJsonLdKeyword**: `object`
 
 A list of keywords and their types.
 Only used for internal reference; not an actual interface.
 Not for export.
-
-## See
-
-https://www.w3.org/TR/json-ld/#keywords
 
 ## Type declaration
 
@@ -103,3 +99,7 @@ https://www.w3.org/TR/json-ld/#keywords
 ### @vocab
 
 > **@vocab**: `string` \| `null`
+
+## See
+
+https://www.w3.org/TR/json-ld/#keywords

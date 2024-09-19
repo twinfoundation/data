@@ -1,4 +1,4 @@
-# Type alias: ActionTypes
+# Type Alias: ActionTypes
 
 > **ActionTypes**: *typeof* [`ActionTypes`](../variables/ActionTypes.md)\[keyof *typeof* [`ActionTypes`](../variables/ActionTypes.md)\]
 

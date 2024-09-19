@@ -1,3 +1,3 @@
-# Type alias: IJsonLdJsonPrimitive
+# Type Alias: IJsonLdJsonPrimitive
 
 > **IJsonLdJsonPrimitive**: `string` \| `number` \| `boolean` \| `null`

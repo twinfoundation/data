@@ -1,5 +1,5 @@
-# @gtsc/data-json-ld - Changelog
+# @twin.org/data-json-ld - Changelog
 
-## v0.0.1
+## v0.0.1-next.3
 
 - Initial Release

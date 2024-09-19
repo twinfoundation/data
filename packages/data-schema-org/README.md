@@ -1,11 +1,11 @@
-# GTSC Schema.org Data
+# TWIN Schema.org Data
 
 Models which define the structure of [Schema.org Standard](https://schema.org/).
 
 ## Installation
 
 ```shell
-npm install @gtsc/data-schema-org
+npm install @twin.org/data-schema-org
 ```
 
 ## Examples
@@ -14,7 +14,7 @@ Usage of the APIs is shown in the examples [docs/examples.md](docs/examples.md)
 
 ## Reference
 
-Detailed reference documentation for the API can be found in [docs/reference/globals.md](docs/reference/globals.md)
+Detailed reference documentation for the API can be found in [docs/reference/index.md](docs/reference/index.md)
 
 ## Changelog
 

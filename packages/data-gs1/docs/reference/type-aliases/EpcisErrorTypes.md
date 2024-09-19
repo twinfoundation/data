@@ -1,4 +1,4 @@
-# Type alias: EpcisErrorTypes
+# Type Alias: EpcisErrorTypes
 
 > **EpcisErrorTypes**: *typeof* [`EpcisErrorTypes`](../variables/EpcisErrorTypes.md)\[keyof *typeof* [`EpcisErrorTypes`](../variables/EpcisErrorTypes.md)\]
 

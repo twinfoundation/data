@@ -1,6 +1,6 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
-import { entity, property } from "@gtsc/entity";
+import { entity, property } from "@twin.org/entity";
 import type { SubSiteAttributes } from "../models/gs1/subSiteAttributes";
 import type { SubSiteTypes } from "../models/gs1/subSiteTypes";
 

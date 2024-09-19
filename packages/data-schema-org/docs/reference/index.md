@@ -1,4 +1,4 @@
-# @gtsc/data-schema-org
+# @twin.org/data-schema-org
 
 ## Classes
 

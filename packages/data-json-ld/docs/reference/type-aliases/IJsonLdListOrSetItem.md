@@ -1,4 +1,4 @@
-# Type alias: IJsonLdListOrSetItem
+# Type Alias: IJsonLdListOrSetItem
 
 > **IJsonLdListOrSetItem**: `null` \| `boolean` \| `number` \| `string` \| [`IJsonLdNodeObject`](../interfaces/IJsonLdNodeObject.md) \| [`IJsonLdValueObject`](IJsonLdValueObject.md)
 

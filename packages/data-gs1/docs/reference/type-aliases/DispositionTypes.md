@@ -1,4 +1,4 @@
-# Type alias: DispositionTypes
+# Type Alias: DispositionTypes
 
 > **DispositionTypes**: *typeof* [`DispositionTypes`](../variables/DispositionTypes.md)\[keyof *typeof* [`DispositionTypes`](../variables/DispositionTypes.md)\]
 

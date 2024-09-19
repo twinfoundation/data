@@ -1,4 +1,4 @@
-# @gtsc/data-json-ld
+# @twin.org/data-json-ld
 
 ## Classes
 

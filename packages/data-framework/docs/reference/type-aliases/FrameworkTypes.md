@@ -1,4 +1,4 @@
-# Type alias: FrameworkTypes
+# Type Alias: FrameworkTypes
 
 > **FrameworkTypes**: *typeof* [`FrameworkTypes`](../variables/FrameworkTypes.md)\[keyof *typeof* [`FrameworkTypes`](../variables/FrameworkTypes.md)\]
 

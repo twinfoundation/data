@@ -1,4 +1,4 @@
-# Type alias: IJsonLdDocument
+# Type Alias: IJsonLdDocument
 
 > **IJsonLdDocument**: [`IJsonLdNodeObject`](../interfaces/IJsonLdNodeObject.md) \| [`IJsonLdNodeObject`](../interfaces/IJsonLdNodeObject.md)[] \| `object`
 

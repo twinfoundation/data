@@ -20,7 +20,7 @@ Class to help with JSON LD.
 
 Validate a JSON-LD document.
 
-#### Type parameters
+#### Type Parameters
 
 • **T** *extends* [`IJsonLdDocument`](../type-aliases/IJsonLdDocument.md) = [`IJsonLdDocument`](../type-aliases/IJsonLdDocument.md)
 

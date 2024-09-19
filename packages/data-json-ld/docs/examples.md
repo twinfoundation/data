@@ -1,1 +1,1 @@
-# @gtsc/data-json-ld - Examples
+# @twin.org/data-json-ld - Examples

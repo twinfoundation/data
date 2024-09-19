@@ -1,1 +1,1 @@
-# @gtsc/data-schema-org - Examples
+# @twin.org/data-schema-org - Examples

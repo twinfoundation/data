@@ -1,4 +1,4 @@
-# Type alias: Gs1Types
+# Type Alias: Gs1Types
 
 > **Gs1Types**: *typeof* [`Gs1Types`](../variables/Gs1Types.md)\[keyof *typeof* [`Gs1Types`](../variables/Gs1Types.md)\]
 

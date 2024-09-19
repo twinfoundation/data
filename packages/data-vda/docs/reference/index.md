@@ -1,4 +1,4 @@
-# @gtsc/data-vda
+# @twin.org/data-vda
 
 ## Classes
 

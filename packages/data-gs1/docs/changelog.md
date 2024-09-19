@@ -1,5 +1,5 @@
-# @gtsc/data-gs1 - Changelog
+# @twin.org/data-gs1 - Changelog
 
-## v0.0.1
+## v0.0.1-next.3
 
 - Initial Release

@@ -1,4 +1,4 @@
-# Type alias: ValidationMode
+# Type Alias: ValidationMode
 
 > **ValidationMode**: *typeof* [`ValidationMode`](../variables/ValidationMode.md)\[keyof *typeof* [`ValidationMode`](../variables/ValidationMode.md)\]
 

@@ -1,4 +1,4 @@
-# @gtsc/data-gs1
+# @twin.org/data-gs1
 
 ## Classes
 

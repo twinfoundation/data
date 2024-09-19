@@ -8,18 +8,18 @@ The types of framework data.
 
 ### Urn
 
-> `readonly` **Urn**: `"https://schema.gtsc.io/framework/URN"` = `"https://schema.gtsc.io/framework/URN"`
+> `readonly` **Urn**: `"https://schema.twindev.org/framework/URN"` = `"https://schema.twindev.org/framework/URN"`
 
 Represents a urn.
 
 ### TimestampMilliseconds
 
-> `readonly` **TimestampMilliseconds**: `"https://schema.gtsc.io/framework/TimestampMilliseconds"` = `"https://schema.gtsc.io/framework/TimestampMilliseconds"`
+> `readonly` **TimestampMilliseconds**: `"https://schema.twindev.org/framework/TimestampMilliseconds"` = `"https://schema.twindev.org/framework/TimestampMilliseconds"`
 
 Represents a timestamp as an integer, milliseconds since 1 Jan 1970.
 
 ### TimestampSeconds
 
-> `readonly` **TimestampSeconds**: `"https://schema.gtsc.io/framework/TimestampSeconds"` = `"https://schema.gtsc.io/framework/TimestampSeconds"`
+> `readonly` **TimestampSeconds**: `"https://schema.twindev.org/framework/TimestampSeconds"` = `"https://schema.twindev.org/framework/TimestampSeconds"`
 
 Represents a timestamp as an integer, seconds since 1 Jan 1970.

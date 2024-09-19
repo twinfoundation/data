@@ -1,4 +1,4 @@
-# Type alias: SchemaOrgTypes
+# Type Alias: SchemaOrgTypes
 
 > **SchemaOrgTypes**: *typeof* [`SchemaOrgTypes`](../variables/SchemaOrgTypes.md)\[keyof *typeof* [`SchemaOrgTypes`](../variables/SchemaOrgTypes.md)\]
 

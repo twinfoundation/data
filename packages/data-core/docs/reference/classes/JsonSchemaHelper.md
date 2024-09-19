@@ -16,7 +16,7 @@ A helper for JSON schemas.
 
 ### SCHEMA\_VERSION
 
-> `static` `readonly` **SCHEMA\_VERSION**: `"https://json-schema.org/draft/2020-12/schema"` = `"https://json-schema.org/draft/2020-12/schema"`
+> `readonly` `static` **SCHEMA\_VERSION**: `"https://json-schema.org/draft/2020-12/schema"` = `"https://json-schema.org/draft/2020-12/schema"`
 
 The schema version.
 
@@ -28,7 +28,7 @@ The schema version.
 
 Validates data against the schema.
 
-#### Type parameters
+#### Type Parameters
 
 • **T** = `unknown`
 

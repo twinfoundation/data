@@ -1,4 +1,4 @@
-# Type alias: BizStepTypes
+# Type Alias: BizStepTypes
 
 > **BizStepTypes**: *typeof* [`BizStepTypes`](../variables/BizStepTypes.md)\[keyof *typeof* [`BizStepTypes`](../variables/BizStepTypes.md)\]
 

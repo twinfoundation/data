@@ -1,4 +1,4 @@
-# Type alias: IJsonLdNodePrimitive
+# Type Alias: IJsonLdNodePrimitive
 
 > **IJsonLdNodePrimitive**: `null` \| `boolean` \| `number` \| `string` \| [`IJsonLdNodeObject`](../interfaces/IJsonLdNodeObject.md) \| [`IJsonLdGraphObject`](../interfaces/IJsonLdGraphObject.md) \| [`IJsonLdValueObject`](IJsonLdValueObject.md) \| [`IJsonLdListObject`](../interfaces/IJsonLdListObject.md) \| [`IJsonLdSetObject`](../interfaces/IJsonLdSetObject.md)
 

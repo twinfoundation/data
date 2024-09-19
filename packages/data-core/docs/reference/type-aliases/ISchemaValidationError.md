@@ -1,4 +1,4 @@
-# Type alias: ISchemaValidationError
+# Type Alias: ISchemaValidationError
 
 > **ISchemaValidationError**: `ErrorObject`[]
 

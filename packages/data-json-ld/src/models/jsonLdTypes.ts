@@ -9,117 +9,117 @@ export const JsonLdTypes = {
 	/**
 	 * Represents JSON-LD Document.
 	 */
-	Document: "https://schema.gtsc.io/json-ld/JsonLdDocument",
+	Document: "https://schema.twindev.org/json-ld/JsonLdDocument",
 
 	/**
 	 * Represents JSON-LD Node Object.
 	 */
-	NodeObject: "https://schema.gtsc.io/json-ld/JsonLdNodeObject",
+	NodeObject: "https://schema.twindev.org/json-ld/JsonLdNodeObject",
 
 	/**
 	 * Represents JSON-LD Node Primitive.
 	 */
-	NodePrimitive: "https://schema.gtsc.io/json-ld/JsonLdNodePrimitive",
+	NodePrimitive: "https://schema.twindev.org/json-ld/JsonLdNodePrimitive",
 
 	/**
 	 * Represents JSON-LD Graph Object.
 	 */
-	GraphObject: "https://schema.gtsc.io/json-ld/JsonLdGraphObject",
+	GraphObject: "https://schema.twindev.org/json-ld/JsonLdGraphObject",
 
 	/**
 	 * Represents JSON-LD Value Object.
 	 */
-	ValueObject: "https://schema.gtsc.io/json-ld/JsonLdValueObject",
+	ValueObject: "https://schema.twindev.org/json-ld/JsonLdValueObject",
 
 	/**
 	 * Represents JSON-LD List Object.
 	 */
-	ListObject: "https://schema.gtsc.io/json-ld/JsonLdListObject",
+	ListObject: "https://schema.twindev.org/json-ld/JsonLdListObject",
 
 	/**
 	 * Represents JSON-LD Set Object.
 	 */
-	SetObject: "https://schema.gtsc.io/json-ld/JsonLdSetObject",
+	SetObject: "https://schema.twindev.org/json-ld/JsonLdSetObject",
 
 	/**
 	 * Represents JSON-LD Language Map.
 	 */
-	LanguageMap: "https://schema.gtsc.io/json-ld/JsonLdLanguageMap",
+	LanguageMap: "https://schema.twindev.org/json-ld/JsonLdLanguageMap",
 
 	/**
 	 * Represents JSON-LD Index Map.
 	 */
-	IndexMap: "https://schema.gtsc.io/json-ld/JsonLdIndexMap",
+	IndexMap: "https://schema.twindev.org/json-ld/JsonLdIndexMap",
 
 	/**
 	 * Represents JSON-LD Index Map Item.
 	 */
-	IndexMapItem: "https://schema.gtsc.io/json-ld/JsonLdIndexMapItem",
+	IndexMapItem: "https://schema.twindev.org/json-ld/JsonLdIndexMapItem",
 
 	/**
 	 * Represents JSON-LD Id Map.
 	 */
-	IdMap: "https://schema.gtsc.io/json-ld/JsonLdIdMap",
+	IdMap: "https://schema.twindev.org/json-ld/JsonLdIdMap",
 
 	/**
 	 * Represents JSON-LD Type Map.
 	 */
-	TypeMap: "https://schema.gtsc.io/json-ld/JsonLdTypeMap",
+	TypeMap: "https://schema.twindev.org/json-ld/JsonLdTypeMap",
 
 	/**
 	 * Represents JSON-LD Included block.
 	 */
-	IncludedBlock: "https://schema.gtsc.io/json-ld/JsonLdIncludedBlock",
+	IncludedBlock: "https://schema.twindev.org/json-ld/JsonLdIncludedBlock",
 
 	/**
 	 * Represents JSON-LD Context Definition.
 	 */
-	ContextDefinition: "https://schema.gtsc.io/json-ld/JsonLdContextDefinition",
+	ContextDefinition: "https://schema.twindev.org/json-ld/JsonLdContextDefinition",
 
 	/**
 	 * Represents JSON-LD Expanded Term Definition.
 	 */
-	ExpandedTermDefinition: "https://schema.gtsc.io/json-ld/JsonLdExpandedTermDefinition",
+	ExpandedTermDefinition: "https://schema.twindev.org/json-ld/JsonLdExpandedTermDefinition",
 
 	/**
 	 * Represents JSON-LD Keyword.
 	 */
-	Keyword: "https://schema.gtsc.io/json-ld/JsonLdKeyword",
+	Keyword: "https://schema.twindev.org/json-ld/JsonLdKeyword",
 
 	/**
 	 * Represents JSON-LD List or Set Item.
 	 */
-	ListOrSetItem: "https://schema.gtsc.io/json-ld/JsonLdListOrSetItem",
+	ListOrSetItem: "https://schema.twindev.org/json-ld/JsonLdListOrSetItem",
 
 	/**
 	 * Represents JSON-LD Container Type.
 	 */
-	ContainerType: "https://schema.gtsc.io/json-ld/JsonLdContainerType",
+	ContainerType: "https://schema.twindev.org/json-ld/JsonLdContainerType",
 
 	/**
 	 * Represents JSON-LD Container Type Array.
 	 */
-	ContainerTypeArray: "https://schema.gtsc.io/json-ld/JsonLdContainerTypeArray",
+	ContainerTypeArray: "https://schema.twindev.org/json-ld/JsonLdContainerTypeArray",
 
 	/**
 	 * Represents JSON-LD JSON Primitive.
 	 */
-	JsonPrimitive: "https://schema.gtsc.io/json-ld/JsonLdJsonPrimitive",
+	JsonPrimitive: "https://schema.twindev.org/json-ld/JsonLdJsonPrimitive",
 
 	/**
 	 * Represents JSON-LD JSON Array.
 	 */
-	JsonArray: "https://schema.gtsc.io/json-ld/JsonLdJsonArray",
+	JsonArray: "https://schema.twindev.org/json-ld/JsonLdJsonArray",
 
 	/**
 	 * Represents JSON-LD JSON Object.
 	 */
-	JsonObject: "https://schema.gtsc.io/json-ld/JsonLdJsonObject",
+	JsonObject: "https://schema.twindev.org/json-ld/JsonLdJsonObject",
 
 	/**
 	 * Represents JSON-LD JSON Value.
 	 */
-	JsonValue: "https://schema.gtsc.io/json-ld/JsonLdJsonValue"
+	JsonValue: "https://schema.twindev.org/json-ld/JsonLdJsonValue"
 } as const;
 
 /**

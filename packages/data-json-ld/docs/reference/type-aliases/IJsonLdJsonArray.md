@@ -1,3 +1,3 @@
-# Type alias: IJsonLdJsonArray
+# Type Alias: IJsonLdJsonArray
 
 > **IJsonLdJsonArray**: [`IJsonLdJsonValue`](IJsonLdJsonValue.md)[]

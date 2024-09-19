@@ -1,11 +1,11 @@
-# GTSC JSON LD Data
+# TWIN JSON LD Data
 
 Models which define the structure of [JSON LD](https://json-ld.org/).
 
 ## Installation
 
 ```shell
-npm install @gtsc/data-json-ld
+npm install @twin.org/data-json-ld
 ```
 
 ## Examples
@@ -14,7 +14,7 @@ Usage of the APIs is shown in the examples [docs/examples.md](docs/examples.md)
 
 ## Reference
 
-Detailed reference documentation for the API can be found in [docs/reference/globals.md](docs/reference/globals.md)
+Detailed reference documentation for the API can be found in [docs/reference/index.md](docs/reference/index.md)
 
 ## Changelog
 

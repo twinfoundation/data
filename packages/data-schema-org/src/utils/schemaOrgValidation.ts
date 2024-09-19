@@ -1,7 +1,7 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
-import { Coerce, Is, Validation, type IValidationFailure } from "@gtsc/core";
-import { nameof } from "@gtsc/nameof";
+import { Coerce, Is, Validation, type IValidationFailure } from "@twin.org/core";
+import { nameof } from "@twin.org/nameof";
 import type { GeoCoordinates } from "schema-dts";
 
 /**

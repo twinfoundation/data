@@ -12,14 +12,6 @@ JSON-LD Processor.
 
 [`JsonLdProcessor`](JsonLdProcessor.md)
 
-## Properties
-
-### \_redirects
-
-> `static` `private` `readonly` **\_redirects**: `object`[] = `[]`
-
-Redirects to use during document resolution.
-
 ## Methods
 
 ### DOCUMENT\_LOADER()

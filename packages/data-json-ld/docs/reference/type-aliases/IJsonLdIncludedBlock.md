@@ -1,4 +1,4 @@
-# Type alias: IJsonLdIncludedBlock
+# Type Alias: IJsonLdIncludedBlock
 
 > **IJsonLdIncludedBlock**: [`IJsonLdNodeObject`](../interfaces/IJsonLdNodeObject.md) \| [`IJsonLdNodeObject`](../interfaces/IJsonLdNodeObject.md)[]
 

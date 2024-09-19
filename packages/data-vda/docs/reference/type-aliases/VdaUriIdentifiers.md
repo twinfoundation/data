@@ -1,4 +1,4 @@
-# Type alias: VdaUriIdentifiers
+# Type Alias: VdaUriIdentifiers
 
 > **VdaUriIdentifiers**: *typeof* [`VdaUriIdentifiers`](../variables/VdaUriIdentifiers.md)\[keyof *typeof* [`VdaUriIdentifiers`](../variables/VdaUriIdentifiers.md)\]
 

@@ -1,1 +1,1 @@
-# @gtsc/data-gs1 - Examples
+# @twin.org/data-gs1 - Examples

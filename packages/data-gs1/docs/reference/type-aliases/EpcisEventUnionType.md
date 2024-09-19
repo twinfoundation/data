@@ -1,4 +1,4 @@
-# Type alias: EpcisEventUnionType
+# Type Alias: EpcisEventUnionType
 
 > **EpcisEventUnionType**: [`IObjectEvent`](../interfaces/IObjectEvent.md) \| [`IAssociationEvent`](../interfaces/IAssociationEvent.md) \| [`IAggregationEvent`](../interfaces/IAggregationEvent.md)
 

@@ -1,5 +1,5 @@
 {
-	"baseUrl": "https://schema.gtsc.io/json-ld/",
+	"baseUrl": "https://schema.twindev.org/json-ld/",
 	"sources": ["./src/models/**/*.ts"],
 	"types": [
 		"IJsonLdDocument",

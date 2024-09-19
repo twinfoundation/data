@@ -1,6 +1,6 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
-import type { IValidationFailure } from "@gtsc/core";
+import type { IValidationFailure } from "@twin.org/core";
 import type { JSONSchema7 } from "json-schema";
 
 /**

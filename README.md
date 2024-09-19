@@ -1,4 +1,4 @@
-# GTSC Data
+# TWIN Data
 
 This mono-repository contains packages defining data standards.
 

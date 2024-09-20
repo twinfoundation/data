@@ -199,6 +199,18 @@ export interface IJsonLdContextDefinition {
 }
 
 /**
+ * A context definition element is used to define the types of a context definition.
+ */
+export type IJsonLdContextDefinitionElement = null | string | IJsonLdContextDefinition;
+
+/**
+ * A context definition root is used to define the root of a context definition.
+ */
+export type IJsonLdContextDefinitionRoot =
+	| IJsonLdContextDefinitionElement
+	| IJsonLdContextDefinitionElement[];
+
+/**
  * An expanded term definition is used to describe the mapping between a term
  * and its expanded identifier, as well as other properties of the value
  * associated with the term when it is used as key in a node object.
@@ -238,11 +250,7 @@ export type IJsonLdKeyword = {
 		| ("@list" | "@set" | IJsonLdContainerType)[]
 		| IJsonLdContainerTypeArray
 		| null;
-	"@context":
-		| null
-		| string
-		| IJsonLdContextDefinition
-		| (null | string | IJsonLdContextDefinition)[];
+	"@context": IJsonLdContextDefinitionRoot;
 	"@direction": "ltr" | "rtl" | null;
 	"@graph": IJsonLdValueObject | IJsonLdNodeObject | (IJsonLdValueObject | IJsonLdNodeObject)[];
 	"@id": string | string[];

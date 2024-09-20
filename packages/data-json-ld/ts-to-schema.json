@@ -16,6 +16,8 @@
 		"IJsonLdTypeMap",
 		"IJsonLdIncludedBlock",
 		"IJsonLdContextDefinition",
+		"IJsonLdContextDefinitionRoot",
+		"IJsonLdContextDefinitionElement",
 		"IJsonLdExpandedTermDefinition",
 		"IJsonLdKeyword",
 		"IJsonLdListOrSetItem",

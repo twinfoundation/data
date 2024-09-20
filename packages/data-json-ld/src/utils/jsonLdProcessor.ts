@@ -1,6 +1,6 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
-import { GeneralError } from "@twin.org/core";
+import { GeneralError, Is } from "@twin.org/core";
 import { nameof } from "@twin.org/nameof";
 import { FetchHelper, HttpMethod, MimeTypes } from "@twin.org/web";
 import jsonLd from "jsonld";
@@ -42,10 +42,22 @@ export class JsonLdProcessor {
 		context?: IJsonLdContextDefinition
 	): Promise<IJsonLdDocument> {
 		try {
-			return jsonLd.compact(document, context ?? {}, {
+			const compacted = await jsonLd.compact(document, context ?? {}, {
 				documentLoader: JsonLdProcessor.DOCUMENT_LOADER
 			});
+			return compacted;
 		} catch (err) {
+			if (
+				Is.object<{ name: string; details?: { url?: string } }>(err) &&
+				err.name === "jsonld.InvalidUrl"
+			) {
+				throw new GeneralError(
+					JsonLdProcessor._CLASS_NAME,
+					"invalidUrl",
+					{ url: err.details?.url },
+					err
+				);
+			}
 			throw new GeneralError(JsonLdProcessor._CLASS_NAME, "compact", undefined, err);
 		}
 	}
@@ -57,10 +69,23 @@ export class JsonLdProcessor {
 	 */
 	public static async expand(compacted: IJsonLdDocument): Promise<IJsonLdDocument> {
 		try {
-			return jsonLd.expand(compacted, {
+			const expanded = await jsonLd.expand(compacted, {
 				documentLoader: JsonLdProcessor.DOCUMENT_LOADER
 			});
+			return expanded;
 		} catch (err) {
+			if (
+				Is.object<{ name: string; details?: { url?: string } }>(err) &&
+				err.name === "jsonld.InvalidUrl"
+			) {
+				throw new GeneralError(
+					JsonLdProcessor._CLASS_NAME,
+					"invalidUrl",
+					{ url: err.details?.url },
+					err
+				);
+			}
+
 			throw new GeneralError(JsonLdProcessor._CLASS_NAME, "expand", undefined, err);
 		}
 	}

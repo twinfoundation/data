@@ -1,6 +1,6 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
-import type { JsonLdDocument } from "jsonld";
+import type { IJsonLdDocument } from "../../src/models/IJsonLdDocument";
 import { JsonLdProcessor } from "../../src/utils/jsonLdProcessor";
 
 describe("JsonLdProcessor", () => {
@@ -12,7 +12,7 @@ describe("JsonLdProcessor", () => {
 	});
 
 	test("Can expand a document", async () => {
-		const doc: JsonLdDocument = {
+		const doc: IJsonLdDocument = {
 			"@context": "http://schema.org/",
 			"@type": "Person",
 			name: "Jane Doe",
@@ -50,7 +50,7 @@ describe("JsonLdProcessor", () => {
 	});
 
 	test("Can compact a document", async () => {
-		const doc: JsonLdDocument = {
+		const doc: IJsonLdDocument = {
 			"@type": ["http://schema.org/Person"],
 			"http://schema.org/jobTitle": [
 				{

@@ -58,6 +58,6 @@ jobs:
       - name: Publish
         run: |
           cd packages/${{ matrix.package }}
-          npm publish --access public
+          npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

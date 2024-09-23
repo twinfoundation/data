@@ -173,3 +173,27 @@ The initial context.
 `undefined` \| [`IJsonLdContextDefinitionRoot`](../type-aliases/IJsonLdContextDefinitionRoot.md)
 
 The combined contexts.
+
+***
+
+### removeContexts()
+
+> `static` **removeContexts**(`context`, `match`?): `undefined` \| [`IJsonLdContextDefinitionRoot`](../type-aliases/IJsonLdContextDefinitionRoot.md)
+
+Remove all the contexts that match the pattern.
+
+#### Parameters
+
+• **context**: `undefined` \| [`IJsonLdContextDefinitionRoot`](../type-aliases/IJsonLdContextDefinitionRoot.md)
+
+The context to remove the entries from.
+
+• **match?**: [`IJsonLdContextDefinitionElement`](../type-aliases/IJsonLdContextDefinitionElement.md)[]
+
+The element to try and match.
+
+#### Returns
+
+`undefined` \| [`IJsonLdContextDefinitionRoot`](../type-aliases/IJsonLdContextDefinitionRoot.md)
+
+The updated contexts.

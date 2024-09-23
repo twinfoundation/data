@@ -7,6 +7,7 @@ import jsonLd from "jsonld";
 import type { JsonLd, RemoteDocument, Url } from "jsonld/jsonld-spec";
 import type {
 	IJsonLdContextDefinition,
+	IJsonLdContextDefinitionElement,
 	IJsonLdContextDefinitionRoot,
 	IJsonLdDocument,
 	IJsonLdNodeObject
@@ -239,6 +240,49 @@ export class JsonLdProcessor {
 		}
 
 		return combinedContexts;
+	}
+
+	/**
+	 * Remove all the contexts that match the pattern.
+	 * @param context The context to remove the entries from.
+	 * @param match The element to try and match.
+	 * @returns The updated contexts.
+	 */
+	public static removeContexts(
+		context: IJsonLdContextDefinitionRoot | undefined,
+		match?: IJsonLdContextDefinitionElement[]
+	): IJsonLdContextDefinitionRoot | undefined {
+		if (!Is.arrayValue(match)) {
+			return context;
+		}
+
+		let finalContext: IJsonLdContextDefinitionRoot | undefined;
+		if (Is.string(context)) {
+			for (const m of match) {
+				if (context === m) {
+					break;
+				}
+			}
+		} else if (Is.array(context)) {
+			for (const item of context) {
+				const hasMatch = match.some(m => ObjectHelper.equal(m, item));
+				if (!hasMatch) {
+					finalContext ??= [];
+					if (Is.array(finalContext)) {
+						finalContext.push(item);
+					}
+				}
+			}
+		} else if (Is.object(context)) {
+			const hasMatch = match.some(m => ObjectHelper.equal(m, context));
+			if (!hasMatch) {
+				finalContext = context;
+			}
+		}
+
+		return Is.arrayValue(finalContext) && finalContext.length === 1
+			? finalContext[0]
+			: finalContext;
 	}
 
 	/**

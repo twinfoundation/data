@@ -221,4 +221,66 @@ describe("JsonLdProcessor", () => {
 			"https://schema.org"
 		]);
 	});
+
+	test("Can remove contexts when they don't exist", async () => {
+		const removed = JsonLdProcessor.removeContexts(
+			["https://schema.twindev.org/framework/types.jsonld", { foo: "https://example.org/" }],
+			["https://aaa"]
+		);
+		expect(removed).toEqual([
+			"https://schema.twindev.org/framework/types.jsonld",
+			{ foo: "https://example.org/" }
+		]);
+	});
+
+	test("Can remove contexts when they exist as string", async () => {
+		const removed = JsonLdProcessor.removeContexts(
+			"https://schema.twindev.org/framework/types.jsonld",
+			["https://schema.twindev.org/framework/types.jsonld"]
+		);
+		expect(removed).toEqual(undefined);
+	});
+
+	test("Can remove contexts when they exist as object", async () => {
+		const removed = JsonLdProcessor.removeContexts(
+			{ foo: "https://example.org/" },
+			[{ foo: "https://example.org/" }]
+		);
+		expect(removed).toEqual(undefined);
+	});
+
+	test("Can remove contexts when they exist as string", async () => {
+		const removed = JsonLdProcessor.removeContexts(
+			["https://schema.twindev.org/framework/types.jsonld"],
+			["https://schema.twindev.org/framework/types.jsonld"]
+		);
+		expect(removed).toEqual(undefined);
+	});
+
+	test("Can remove contexts when they exist as string and leave remaining", async () => {
+		const removed = JsonLdProcessor.removeContexts(
+			[
+				"https://schema.twindev.org/framework/types.jsonld",
+				"https://schema.twindev.org/ais/types.jsonld"
+			],
+			["https://schema.twindev.org/framework/types.jsonld"]
+		);
+		expect(removed).toEqual("https://schema.twindev.org/ais/types.jsonld");
+	});
+
+	test("Can remove contexts when they exist as object", async () => {
+		const removed = JsonLdProcessor.removeContexts(
+			[{ foo: "https://example.org/" }],
+			[{ foo: "https://example.org/" }]
+		);
+		expect(removed).toEqual(undefined);
+	});
+
+	test("Can remove contexts when they exist as object and leave remaining", async () => {
+		const removed = JsonLdProcessor.removeContexts(
+			[{ foo: "https://example.org/" }, "https://schema.twindev.org/ais/types.jsonld"],
+			[{ foo: "https://example.org/" }]
+		);
+		expect(removed).toEqual("https://schema.twindev.org/ais/types.jsonld");
+	});
 });

@@ -9,27 +9,27 @@ export const EventTypes = {
 	/**
 	 * ObjectEvent.
 	 */
-	OBJECT_EVENT: "ObjectEvent",
+	ObjectEvent: "ObjectEvent",
 
 	/**
 	 * Aggregation Event.
 	 */
-	AGGREGATION_EVENT: "AggregationEvent",
+	AggregationEvent: "AggregationEvent",
 
 	/**
 	 * Association Event.
 	 */
-	ASSOCIATION_EVENT: "AssociationEvent",
+	AssociationEvent: "AssociationEvent",
 
 	/**
 	 * Transformation Event.
 	 */
-	TRANSFORMATION_EVENT: "TransformationEvent",
+	TransformationEvent: "TransformationEvent",
 
 	/**
 	 * Transaction Event.
 	 */
-	TRANSACTION_EVENT: "TransactionEvent"
+	TransactionEvent: "TransactionEvent"
 } as const;
 
 /**

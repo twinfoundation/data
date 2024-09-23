@@ -9,71 +9,71 @@
  */
 // eslint-disable-next-line @typescript-eslint/naming-convention
 export const DispositionTypes = {
-	ACTIVE: "active",
+	Active: "active",
 
-	CONTAINER_CLOSED: "container_closed",
+	ContainerClosed: "container_closed",
 
-	DAMAGED: "damaged",
+	Damaged: "damaged",
 
-	DESTROYED: "destroyed",
+	Destroyed: "destroyed",
 
-	DISPENSED: "dispensed",
+	Dispensed: "dispensed",
 
-	DISPOSED: "disposed",
+	Disposed: "disposed",
 
-	ENCODED: "encoded",
+	Encoded: "encoded",
 
-	EXPIRED: "expired",
+	Expired: "expired",
 
-	IN_PROGRESS: "in_progress",
+	InProgress: "in_progress",
 
-	IN_TRANSIT: "in_transit",
+	InTransit: "in_transit",
 
-	INACTIVE: "inactive",
+	Inactive: "inactive",
 
-	NO_PEDIGREE_MATCH: "no_pedigree_match",
+	NoPedigreeMatch: "no_pedigree_match",
 
-	NON_SELLABLE_OTHER: "non_sellable_other",
+	NonSellableOther: "non_sellable_other",
 
-	PARTIALLY_DISPENSED: "partially_dispensed",
+	PartiallyDispensed: "partially_dispensed",
 
-	RECALLED: "recalled",
+	Recalled: "recalled",
 
-	RESERVED: "reserved",
+	Reserved: "reserved",
 
-	RETAIL_SOLD: "retail_sold",
+	RetailSold: "retail_sold",
 
-	RETURNED: "returned",
+	Returned: "returned",
 
-	SELLABLE_ACCESSIBLE: "sellable_accessible",
+	SellableAccessible: "sellable_accessible",
 
-	SELLABLE_NOT_ACCESSIBLE: "sellable_not_accessible",
+	SellableNotAccessible: "sellable_not_accessible",
 
-	STOLEN: "stolen",
+	Stolen: "stolen",
 
-	UNKNOWN: "unknown",
+	Unknown: "unknown",
 
-	AVAILABLE: "available",
+	Available: "available",
 
-	COMPLETENESS_VERIFIED: "completeness_verified",
+	CompletenessVerified: "completeness_verified",
 
-	COMPLETENESS_INFERRED: "completeness_inferred",
+	CompletenessInferred: "completeness_inferred",
 
-	CONFORMANT: "conformant",
+	Conformant: "conformant",
 
-	CONTAINER_OPEN: "container_open",
+	ContainerOpen: "container_open",
 
-	MISMATCH_INSTANCE: "mismatch_instance",
+	MismatchInstance: "mismatch_instance",
 
-	MISMATCH_CLASS: "mismatch_class",
+	MismatchClass: "mismatch_class",
 
-	MISMATCH_QUANTITY: "mismatch_quantity",
+	MismatchQuantity: "mismatch_quantity",
 
-	NEEDS_REPLACEMENT: "needs_replacement",
+	NeedsReplacement: "needs_replacement",
 
-	NON_CONFORMANT: "non_conformant",
+	NonConformant: "non_conformant",
 
-	UNAVAILABLE: "unavailable"
+	Unavailable: "unavailable"
 } as const;
 
 /**

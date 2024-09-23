@@ -7,6 +7,11 @@
 // eslint-disable-next-line @typescript-eslint/naming-convention
 export const UneceTypes = {
 	/**
+	 * Context Root.
+	 */
+	ContextRoot: "https://vocabulary.uncefact.org/",
+
+	/**
 	 * Represents a UN/CEFACT document.
 	 */
 	Document: "https://vocabulary.uncefact.org/Document",

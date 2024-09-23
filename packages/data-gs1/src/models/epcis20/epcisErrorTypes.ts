@@ -6,9 +6,9 @@
  */
 // eslint-disable-next-line @typescript-eslint/naming-convention
 export const EpcisErrorTypes = {
-	VALIDATION_FAILED: "epcisException:ValidationException",
+	ValidationFailed: "epcisException:ValidationException",
 
-	NO_SUCH_RESOURCE: "epcisException:NoSuchResourceException"
+	NoSuchResource: "epcisException:NoSuchResourceException"
 } as const;
 
 /**

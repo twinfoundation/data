@@ -7,6 +7,11 @@
 // eslint-disable-next-line @typescript-eslint/naming-convention
 export const SchemaOrgTypes = {
 	/**
+	 * Context Root.
+	 */
+	ContextRoot: "https://schema.org/",
+
+	/**
 	 * Represents text storage.
 	 */
 	Text: "https://schema.org/Text",

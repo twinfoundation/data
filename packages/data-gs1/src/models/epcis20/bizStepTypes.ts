@@ -8,87 +8,87 @@
  */
 // eslint-disable-next-line @typescript-eslint/naming-convention
 export const BizStepTypes = {
-	ACCEPTING: "accepting",
+	Accepting: "accepting",
 
-	ARRIVING: "arriving",
+	Arriving: "arriving",
 
-	ASSEMBLING: "assembling",
+	Assembling: "assembling",
 
-	COLLECTING: "collecting",
+	Collecting: "collecting",
 
-	COMMISSIONING: "commissioning",
+	Commissioning: "commissioning",
 
-	CONSIGNING: "consigning",
+	Consigning: "consigning",
 
-	CREATING_CLASS_INSTANCE: "creating_class_instance",
+	CreatingClassInstance: "creating_class_instance",
 
-	CYCLE_COUNTING: "cycle_counting",
+	CycleCounting: "cycle_counting",
 
-	DECOMMISSIONING: "decommissioning",
+	Decommissioning: "decommissioning",
 
-	DEPARTING: "departing",
+	Departing: "departing",
 
-	DESTROYING: "destroying",
+	Destroying: "destroying",
 
-	DISASSEMBLING: "disassembling",
+	Disassembling: "disassembling",
 
-	DISPENSING: "dispensing",
+	Dispensing: "dispensing",
 
-	ENCODING: "encoding",
+	Encoding: "encoding",
 
-	ENTERING_EXITING: "entering_exiting",
+	EnteringExiting: "entering_exiting",
 
-	HOLDING: "holding",
+	Holding: "holding",
 
-	INSPECTING: "inspecting",
+	Inspecting: "inspecting",
 
-	INSTALLING: "installing",
+	Installing: "installing",
 
-	KILLING: "killing",
+	Killing: "killing",
 
-	LOADING: "loading",
+	Loading: "loading",
 
-	OTHER: "other",
+	Other: "other",
 
-	PACKING: "packing",
+	Packing: "packing",
 
-	PICKING: "picking",
+	Picking: "picking",
 
-	RECEIVING: "receiving",
+	Receiving: "receiving",
 
-	REMOVING: "removing",
+	Removing: "removing",
 
-	REPACKAGING: "repackaging",
+	Repackaging: "repackaging",
 
-	REPAIRING: "repairing",
+	Repairing: "repairing",
 
-	REPLACING: "replacing",
+	Replacing: "replacing",
 
-	RESERVING: "reserving",
+	Reserving: "reserving",
 
-	RETAIL_SELLING: "retail_selling",
+	RetailSelling: "retail_selling",
 
-	SHIPPING: "shipping",
+	Shipping: "shipping",
 
-	STAGING_OUTBOUND: "staging_outbound",
+	StagingOutbound: "staging_outbound",
 
-	STOCK_TAKING: "stock_taking",
+	StockTaking: "stock_taking",
 
-	STOCKING: "stocking",
+	Stocking: "stocking",
 
-	STORING: "storing",
+	Storing: "storing",
 
-	TRANSPORTING: "transporting",
+	Transporting: "transporting",
 
-	UNLOADING: "unloading",
+	Unloading: "unloading",
 
-	UNPACKING: "unpacking",
+	Unpacking: "unpacking",
 
-	VOID_SHIPPING: "void_shipping",
+	VoidShipping: "void_shipping",
 
-	SENSOR_REPORTING: "sensor_reporting",
+	SensorReporting: "sensor_reporting",
 
-	SAMPLING: "sampling"
+	Sampling: "sampling"
 } as const;
 
 /**

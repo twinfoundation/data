@@ -9,17 +9,17 @@ export const ActionTypes = {
 	/**
 	 * ADD action.
 	 */
-	ADD: "ADD",
+	Add: "ADD",
 
 	/**
 	 * OBSERVE action.
 	 */
-	OBSERVE: "OBSERVE",
+	Observe: "OBSERVE",
 
 	/**
 	 * DELETE action.
 	 */
-	DELETE: "DELETE"
+	Delete: "DELETE"
 } as const;
 
 /**

@@ -15,7 +15,7 @@ export class SchemaOrgDataTypes {
 	/**
 	 * Register the JSON-LD Redirects.
 	 */
-	public static registerJsonLdRedirects(): void {
+	public static registerRedirects(): void {
 		JsonLdProcessor.addRedirect(
 			/https?:\/\/schema.org\/?/,
 			"https://schema.org/docs/jsonldcontext.jsonld"

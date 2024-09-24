@@ -35,5 +35,10 @@
 		"Unece",
 		"VOCAB"
 	],
-	"ignoreRegExpList": ["/from\\s+(['\"]).*\\1/", "/eslint-disable.*/"]
+	"ignoreRegExpList": [
+		"/from\\s+(['\"]).*\\1/",
+		"/eslint-disable.*/",
+		"/^```shell[\\s\\S]*?```$/gm",
+		"/^```json[\\s\\S]*?```$/gm"
+	]
 }

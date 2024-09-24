@@ -242,10 +242,9 @@ describe("JsonLdProcessor", () => {
 	});
 
 	test("Can remove contexts when they exist as object", async () => {
-		const removed = JsonLdProcessor.removeContexts(
-			{ foo: "https://example.org/" },
-			[{ foo: "https://example.org/" }]
-		);
+		const removed = JsonLdProcessor.removeContexts({ foo: "https://example.org/" }, [
+			{ foo: "https://example.org/" }
+		]);
 		expect(removed).toEqual(undefined);
 	});
 

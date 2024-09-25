@@ -18,6 +18,12 @@ Context Root.
 
 Represents JSON-LD Document.
 
+### Object
+
+> `readonly` **Object**: `"https://schema.twindev.org/json-ld/JsonLdObject"` = `"https://schema.twindev.org/json-ld/JsonLdObject"`
+
+Represents JSON-LD Object.
+
 ### NodeObject
 
 > `readonly` **NodeObject**: `"https://schema.twindev.org/json-ld/JsonLdNodeObject"` = `"https://schema.twindev.org/json-ld/JsonLdNodeObject"`

@@ -31,7 +31,7 @@ export type IJsonLdDocument =
  * in the graph serialized by the JSON-LD document.
  * @see https://www.w3.org/TR/json-ld11/#node-objects
  */
-export interface IJsonLdNodeObject {
+export interface IJsonLdNodeObject extends IJsonLdObject {
 	[key: string]:
 		| IJsonLdNodePrimitive
 		| IJsonLdNodePrimitive[]
@@ -41,7 +41,14 @@ export interface IJsonLdNodeObject {
 		| IJsonLdIdMap
 		| IJsonLdTypeMap
 		| IJsonLdNodeObject[keyof IJsonLdNodeObject];
+}
 
+/**
+ * An object represents the pre-defined properties of the node object
+ * in the graph serialized by the JSON-LD document.
+ * @see https://www.w3.org/TR/json-ld11/#node-objects
+ */
+export interface IJsonLdObject {
 	"@context"?: IJsonLdKeyword["@context"] | undefined;
 	"@id"?: IJsonLdKeyword["@id"] | undefined;
 	"@included"?: IJsonLdKeyword["@included"] | undefined;

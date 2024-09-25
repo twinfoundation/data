@@ -23,6 +23,7 @@ import JsonLdListObjectSchema from "../schemas/JsonLdListObject.json";
 import JsonLdListOrSetItemSchema from "../schemas/JsonLdListOrSetItem.json";
 import JsonLdNodeObjectSchema from "../schemas/JsonLdNodeObject.json";
 import JsonLdNodePrimitiveSchema from "../schemas/JsonLdNodePrimitive.json";
+import JsonLdObjectSchema from "../schemas/JsonLdObject.json";
 import JsonLdSetObjectSchema from "../schemas/JsonLdSetObject.json";
 import JsonLdTypeMapSchema from "../schemas/JsonLdTypeMap.json";
 import JsonLdValueObjectSchema from "../schemas/JsonLdValueObject.json";
@@ -39,12 +40,14 @@ export class JsonLdDataTypes {
 			type: JsonLdTypes.Document,
 			jsonSchema: async () => JsonLdDocumentSchema as JSONSchema7
 		}));
-
+		DataTypeHandlerFactory.register(JsonLdTypes.Object, () => ({
+			type: JsonLdTypes.Object,
+			jsonSchema: async () => JsonLdObjectSchema as JSONSchema7
+		}));
 		DataTypeHandlerFactory.register(JsonLdTypes.NodeObject, () => ({
 			type: JsonLdTypes.NodeObject,
 			jsonSchema: async () => JsonLdNodeObjectSchema as JSONSchema7
 		}));
-
 		DataTypeHandlerFactory.register(JsonLdTypes.NodePrimitive, () => ({
 			type: JsonLdTypes.NodePrimitive,
 			jsonSchema: async () => JsonLdNodePrimitiveSchema as JSONSchema7

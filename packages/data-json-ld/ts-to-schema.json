@@ -3,6 +3,7 @@
 	"sources": ["./src/models/**/*.ts"],
 	"types": [
 		"IJsonLdDocument",
+		"IJsonLdObject",
 		"IJsonLdNodeObject",
 		"IJsonLdNodePrimitive",
 		"IJsonLdGraphObject",

@@ -17,6 +17,11 @@ export const JsonLdTypes = {
 	Document: "https://schema.twindev.org/json-ld/JsonLdDocument",
 
 	/**
+	 * Represents JSON-LD Object.
+	 */
+	Object: "https://schema.twindev.org/json-ld/JsonLdObject",
+
+	/**
 	 * Represents JSON-LD Node Object.
 	 */
 	NodeObject: "https://schema.twindev.org/json-ld/JsonLdNodeObject",

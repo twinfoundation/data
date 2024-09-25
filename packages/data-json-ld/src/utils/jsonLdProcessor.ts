@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0.
 import { GeneralError, Is, ObjectHelper } from "@twin.org/core";
 import { nameof } from "@twin.org/nameof";
-import { FetchHelper, HttpMethod, MimeTypes } from "@twin.org/web";
+import { FetchHelper, HeaderTypes, HttpMethod, MimeTypes } from "@twin.org/web";
 import jsonLd from "jsonld";
 import type { JsonLd, RemoteDocument, Url } from "jsonld/jsonld-spec";
 import type {
@@ -283,7 +283,7 @@ export class JsonLdProcessor {
 			{
 				cacheTtlMs: 3600000,
 				headers: {
-					Accept: `${MimeTypes.JsonLd},${MimeTypes.Json}`
+					[HeaderTypes.Accept]: `${MimeTypes.JsonLd},${MimeTypes.Json}`
 				}
 			}
 		);

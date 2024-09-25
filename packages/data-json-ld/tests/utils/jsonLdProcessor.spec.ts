@@ -122,53 +122,6 @@ describe("JsonLdProcessor", () => {
 		});
 	});
 
-	test("Can extract a property from a document and don't remove it", async () => {
-		const doc: IJsonLdDocument = {
-			"@context": "http://schema.org/",
-			"@type": "Person",
-			name: "Jane Doe"
-		};
-
-		const val = JsonLdProcessor.extractProperty(doc, ["@type"], false);
-		expect(val).toEqual("Person");
-		expect(doc).toEqual({
-			"@context": "http://schema.org/",
-			"@type": "Person",
-			name: "Jane Doe"
-		});
-	});
-
-	test("Can extract a property from a document and remove it", async () => {
-		const doc: IJsonLdDocument = {
-			"@context": "http://schema.org/",
-			"@type": "Person",
-			name: "Jane Doe"
-		};
-
-		const val = JsonLdProcessor.extractProperty(doc, ["@type"]);
-		expect(val).toEqual("Person");
-		expect(doc).toEqual({
-			"@context": "http://schema.org/",
-			name: "Jane Doe"
-		});
-	});
-
-	test("Can extract a property from a document and remove it with multiple matching properties", async () => {
-		const doc: IJsonLdDocument = {
-			"@context": "http://schema.org/",
-			"@type": "Person",
-			type: "Person",
-			name: "Jane Doe"
-		};
-
-		const val = JsonLdProcessor.extractProperty(doc, ["@type", "type"]);
-		expect(val).toEqual("Person");
-		expect(doc).toEqual({
-			"@context": "http://schema.org/",
-			name: "Jane Doe"
-		});
-	});
-
 	test("Can combine contexts when they are empty", async () => {
 		const combined = JsonLdProcessor.combineContexts(undefined, undefined);
 		expect(combined).toEqual(null);

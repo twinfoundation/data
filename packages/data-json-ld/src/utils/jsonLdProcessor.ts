@@ -9,8 +9,7 @@ import type {
 	IJsonLdContextDefinition,
 	IJsonLdContextDefinitionElement,
 	IJsonLdContextDefinitionRoot,
-	IJsonLdDocument,
-	IJsonLdNodeObject
+	IJsonLdDocument
 } from "../models/IJsonLdDocument";
 
 /**
@@ -52,15 +51,15 @@ export class JsonLdProcessor {
 			// A context definition can be an array or an object, but the types only allow an object.
 			if (Is.empty(context)) {
 				context = {};
-				if (Is.array<IJsonLdNodeObject>(document)) {
+				if (Is.array(document)) {
 					for (const node of document) {
 						context = JsonLdProcessor.gatherContexts(node, context);
 					}
-				} else if (Is.array<IJsonLdNodeObject>(document["@graph"])) {
+				} else if (Is.array(document["@graph"])) {
 					for (const node of document["@graph"]) {
 						context = JsonLdProcessor.gatherContexts(node, context);
 					}
-				} else if (Is.object<IJsonLdNodeObject>(document)) {
+				} else if (Is.object(document)) {
 					context = JsonLdProcessor.gatherContexts(document, context);
 				}
 			}
@@ -122,30 +121,6 @@ export class JsonLdProcessor {
 		if (!this._redirects.some(r => r.from === from)) {
 			this._redirects.push({ from, to });
 		}
-	}
-
-	/**
-	 * Extract a property from the JSON-LD.
-	 * @param nodeObject The JSON-LD node object to extract from.
-	 * @param propertyNames The possible names for the property.
-	 * @param deleteProperty Delete the property from the object, defaults to true.
-	 * @returns The properties if available.
-	 */
-	public static extractProperty<T>(
-		nodeObject: IJsonLdNodeObject,
-		propertyNames: string[],
-		deleteProperty: boolean = true
-	): T | undefined {
-		let retVal: T | undefined;
-
-		for (const prop of propertyNames) {
-			retVal ??= nodeObject[prop] as T;
-			if (deleteProperty) {
-				delete nodeObject[prop];
-			}
-		}
-
-		return retVal;
 	}
 
 	/**

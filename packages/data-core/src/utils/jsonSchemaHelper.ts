@@ -40,6 +40,9 @@ export class JsonSchemaHelper {
 	): Promise<ISchemaValidationResult> {
 		const ajv = new Ajv({
 			allowUnionTypes: true,
+			// Disable strict tuples as it causes issues with the schema validation when
+			// you have an array with fixed elements e.g. myType: [string, ...string[]]
+			// https://github.com/ajv-validator/ajv/issues/1417
 			strictTuples: false,
 			loadSchema: async uri => {
 				const subTypeHandler = DataTypeHandlerFactory.getIfExists(uri);

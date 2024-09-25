@@ -40,6 +40,7 @@ export class JsonSchemaHelper {
 	): Promise<ISchemaValidationResult> {
 		const ajv = new Ajv({
 			allowUnionTypes: true,
+			strictTuples: false,
 			loadSchema: async uri => {
 				const subTypeHandler = DataTypeHandlerFactory.getIfExists(uri);
 				if (Is.function(subTypeHandler?.jsonSchema)) {

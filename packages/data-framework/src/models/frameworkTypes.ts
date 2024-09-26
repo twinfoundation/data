@@ -14,17 +14,17 @@ export const FrameworkTypes = {
 	/**
 	 * Represents a urn.
 	 */
-	Urn: "https://schema.twindev.org/framework/URN",
+	Urn: "URN",
 
 	/**
 	 * Represents a timestamp as an integer, milliseconds since 1 Jan 1970.
 	 */
-	TimestampMilliseconds: "https://schema.twindev.org/framework/TimestampMilliseconds",
+	TimestampMilliseconds: "TimestampMilliseconds",
 
 	/**
 	 * Represents a timestamp as an integer, seconds since 1 Jan 1970.
 	 */
-	TimestampSeconds: "https://schema.twindev.org/framework/TimestampSeconds"
+	TimestampSeconds: "TimestampSeconds"
 } as const;
 
 /**

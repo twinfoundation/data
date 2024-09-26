@@ -14,57 +14,57 @@ export const SchemaOrgTypes = {
 	/**
 	 * Represents text storage.
 	 */
-	Text: "https://schema.org/Text",
+	Text: "Text",
 
 	/**
 	 * Represents integer number values.
 	 */
-	Integer: "https://schema.org/Integer",
+	Integer: "Integer",
 
 	/**
 	 * Represents floating point numbers.
 	 */
-	Float: "https://schema.org/Float",
+	Float: "Float",
 
 	/**
 	 * Represents a boolean.
 	 */
-	Boolean: "https://schema.org/Boolean",
+	Boolean: "Boolean",
 
 	/**
 	 * Represents a url.
 	 */
-	URL: "https://schema.org/URL",
+	URL: "URL",
 
 	/**
 	 * Represents a date as an ISO format string.
 	 */
-	Date: "https://schema.org/Date",
+	Date: "Date",
 
 	/**
 	 * Represents a date time as an ISO format string.
 	 */
-	DateTime: "https://schema.org/DateTime",
+	DateTime: "DateTime",
 
 	/**
 	 * Represents a time as an ISO format string.
 	 */
-	Time: "https://schema.org/Time",
+	Time: "Time",
 
 	/**
 	 * Represents a url which points to an image.
 	 */
-	Image: "https://schema.org/image",
+	Image: "image",
 
 	/**
 	 * Represents a location.
 	 */
-	GeoCoordinates: "https://schema.org/GeoCoordinates",
+	GeoCoordinates: "GeoCoordinates",
 
 	/**
 	 * Represents a structured value.
 	 */
-	StructuredValue: "https://schema.org/StructuredValue"
+	StructuredValue: "StructuredValue"
 } as const;
 
 /**

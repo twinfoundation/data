@@ -14,12 +14,12 @@ export const UneceTypes = {
 	/**
 	 * Represents a UN/CEFACT document.
 	 */
-	Document: "https://vocabulary.uncefact.org/Document",
+	Document: "Document",
 
 	/**
 	 * Represents a UN/CEFACT consignment.
 	 */
-	Consignment: "https://vocabulary.uncefact.org/Consignment"
+	Consignment: "Consignment"
 } as const;
 
 /**

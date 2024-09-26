@@ -16,7 +16,7 @@ export class FrameworkDataTypes {
 	 * Register all the data types.
 	 */
 	public static registerTypes(): void {
-		DataTypeHandlerFactory.register(FrameworkTypes.Urn, () => ({
+		DataTypeHandlerFactory.register(`${FrameworkTypes.ContextRoot}${FrameworkTypes.Urn}`, () => ({
 			type: FrameworkTypes.Urn,
 			defaultValue: "",
 			jsonSchema: async () => URNSchema as JSONSchema7,
@@ -24,20 +24,26 @@ export class FrameworkDataTypes {
 				Urn.validate(propertyName, value, failures)
 		}));
 
-		DataTypeHandlerFactory.register(FrameworkTypes.TimestampMilliseconds, () => ({
-			type: FrameworkTypes.TimestampMilliseconds,
-			defaultValue: Date.now(),
-			jsonSchema: async () => TimestampMillisecondsSchema as JSONSchema7,
-			validate: async (propertyName, value, failures, container) =>
-				Validation.timestampMilliseconds(propertyName, value, failures)
-		}));
+		DataTypeHandlerFactory.register(
+			`${FrameworkTypes.ContextRoot}${FrameworkTypes.TimestampMilliseconds}`,
+			() => ({
+				type: FrameworkTypes.TimestampMilliseconds,
+				defaultValue: Date.now(),
+				jsonSchema: async () => TimestampMillisecondsSchema as JSONSchema7,
+				validate: async (propertyName, value, failures, container) =>
+					Validation.timestampMilliseconds(propertyName, value, failures)
+			})
+		);
 
-		DataTypeHandlerFactory.register(FrameworkTypes.TimestampSeconds, () => ({
-			type: FrameworkTypes.TimestampSeconds,
-			defaultValue: Math.floor(Date.now() / 1000),
-			jsonSchema: async () => TimestampSecondsSchema as JSONSchema7,
-			validate: async (propertyName, value, failures, container) =>
-				Validation.timestampSeconds(propertyName, value, failures)
-		}));
+		DataTypeHandlerFactory.register(
+			`${FrameworkTypes.ContextRoot}${FrameworkTypes.TimestampSeconds}`,
+			() => ({
+				type: FrameworkTypes.TimestampSeconds,
+				defaultValue: Math.floor(Date.now() / 1000),
+				jsonSchema: async () => TimestampSecondsSchema as JSONSchema7,
+				validate: async (propertyName, value, failures, container) =>
+					Validation.timestampSeconds(propertyName, value, failures)
+			})
+		);
 	}
 }

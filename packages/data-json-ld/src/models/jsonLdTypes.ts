@@ -14,122 +14,122 @@ export const JsonLdTypes = {
 	/**
 	 * Represents JSON-LD Document.
 	 */
-	Document: "https://schema.twindev.org/json-ld/JsonLdDocument",
+	Document: "JsonLdDocument",
 
 	/**
 	 * Represents JSON-LD Object.
 	 */
-	Object: "https://schema.twindev.org/json-ld/JsonLdObject",
+	Object: "JsonLdObject",
 
 	/**
 	 * Represents JSON-LD Node Object.
 	 */
-	NodeObject: "https://schema.twindev.org/json-ld/JsonLdNodeObject",
+	NodeObject: "JsonLdNodeObject",
 
 	/**
 	 * Represents JSON-LD Node Primitive.
 	 */
-	NodePrimitive: "https://schema.twindev.org/json-ld/JsonLdNodePrimitive",
+	NodePrimitive: "JsonLdNodePrimitive",
 
 	/**
 	 * Represents JSON-LD Graph Object.
 	 */
-	GraphObject: "https://schema.twindev.org/json-ld/JsonLdGraphObject",
+	GraphObject: "JsonLdGraphObject",
 
 	/**
 	 * Represents JSON-LD Value Object.
 	 */
-	ValueObject: "https://schema.twindev.org/json-ld/JsonLdValueObject",
+	ValueObject: "JsonLdValueObject",
 
 	/**
 	 * Represents JSON-LD List Object.
 	 */
-	ListObject: "https://schema.twindev.org/json-ld/JsonLdListObject",
+	ListObject: "JsonLdListObject",
 
 	/**
 	 * Represents JSON-LD Set Object.
 	 */
-	SetObject: "https://schema.twindev.org/json-ld/JsonLdSetObject",
+	SetObject: "JsonLdSetObject",
 
 	/**
 	 * Represents JSON-LD Language Map.
 	 */
-	LanguageMap: "https://schema.twindev.org/json-ld/JsonLdLanguageMap",
+	LanguageMap: "JsonLdLanguageMap",
 
 	/**
 	 * Represents JSON-LD Index Map.
 	 */
-	IndexMap: "https://schema.twindev.org/json-ld/JsonLdIndexMap",
+	IndexMap: "JsonLdIndexMap",
 
 	/**
 	 * Represents JSON-LD Index Map Item.
 	 */
-	IndexMapItem: "https://schema.twindev.org/json-ld/JsonLdIndexMapItem",
+	IndexMapItem: "JsonLdIndexMapItem",
 
 	/**
 	 * Represents JSON-LD Id Map.
 	 */
-	IdMap: "https://schema.twindev.org/json-ld/JsonLdIdMap",
+	IdMap: "JsonLdIdMap",
 
 	/**
 	 * Represents JSON-LD Type Map.
 	 */
-	TypeMap: "https://schema.twindev.org/json-ld/JsonLdTypeMap",
+	TypeMap: "JsonLdTypeMap",
 
 	/**
 	 * Represents JSON-LD Included block.
 	 */
-	IncludedBlock: "https://schema.twindev.org/json-ld/JsonLdIncludedBlock",
+	IncludedBlock: "JsonLdIncludedBlock",
 
 	/**
 	 * Represents JSON-LD Context Definition.
 	 */
-	ContextDefinition: "https://schema.twindev.org/json-ld/JsonLdContextDefinition",
+	ContextDefinition: "JsonLdContextDefinition",
 
 	/**
 	 * Represents JSON-LD Expanded Term Definition.
 	 */
-	ExpandedTermDefinition: "https://schema.twindev.org/json-ld/JsonLdExpandedTermDefinition",
+	ExpandedTermDefinition: "JsonLdExpandedTermDefinition",
 
 	/**
 	 * Represents JSON-LD Keyword.
 	 */
-	Keyword: "https://schema.twindev.org/json-ld/JsonLdKeyword",
+	Keyword: "JsonLdKeyword",
 
 	/**
 	 * Represents JSON-LD List or Set Item.
 	 */
-	ListOrSetItem: "https://schema.twindev.org/json-ld/JsonLdListOrSetItem",
+	ListOrSetItem: "JsonLdListOrSetItem",
 
 	/**
 	 * Represents JSON-LD Container Type.
 	 */
-	ContainerType: "https://schema.twindev.org/json-ld/JsonLdContainerType",
+	ContainerType: "JsonLdContainerType",
 
 	/**
 	 * Represents JSON-LD Container Type Array.
 	 */
-	ContainerTypeArray: "https://schema.twindev.org/json-ld/JsonLdContainerTypeArray",
+	ContainerTypeArray: "JsonLdContainerTypeArray",
 
 	/**
 	 * Represents JSON-LD JSON Primitive.
 	 */
-	JsonPrimitive: "https://schema.twindev.org/json-ld/JsonLdJsonPrimitive",
+	JsonPrimitive: "JsonLdJsonPrimitive",
 
 	/**
 	 * Represents JSON-LD JSON Array.
 	 */
-	JsonArray: "https://schema.twindev.org/json-ld/JsonLdJsonArray",
+	JsonArray: "JsonLdJsonArray",
 
 	/**
 	 * Represents JSON-LD JSON Object.
 	 */
-	JsonObject: "https://schema.twindev.org/json-ld/JsonLdJsonObject",
+	JsonObject: "JsonLdJsonObject",
 
 	/**
 	 * Represents JSON-LD JSON Value.
 	 */
-	JsonValue: "https://schema.twindev.org/json-ld/JsonLdJsonValue"
+	JsonValue: "JsonLdJsonValue"
 } as const;
 
 /**

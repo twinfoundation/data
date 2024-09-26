@@ -26,7 +26,7 @@ export class SchemaOrgDataTypes {
 	 * Register all the data types.
 	 */
 	public static registerTypes(): void {
-		DataTypeHandlerFactory.register(SchemaOrgTypes.Text, () => ({
+		DataTypeHandlerFactory.register(`${SchemaOrgTypes.ContextRoot}${SchemaOrgTypes.Text}`, () => ({
 			type: SchemaOrgTypes.Text,
 			defaultValue: "",
 			jsonSchema: async () => ({
@@ -36,17 +36,20 @@ export class SchemaOrgDataTypes {
 				Validation.string(propertyName, value, failures)
 		}));
 
-		DataTypeHandlerFactory.register(SchemaOrgTypes.Integer, () => ({
-			type: SchemaOrgTypes.Integer,
-			defaultValue: 0,
-			jsonSchema: async () => ({
-				type: "integer"
-			}),
-			validate: async (propertyName, value, failures, container) =>
-				Validation.integer(propertyName, value, failures)
-		}));
+		DataTypeHandlerFactory.register(
+			`${SchemaOrgTypes.ContextRoot}${SchemaOrgTypes.Integer}`,
+			() => ({
+				type: SchemaOrgTypes.Integer,
+				defaultValue: 0,
+				jsonSchema: async () => ({
+					type: "integer"
+				}),
+				validate: async (propertyName, value, failures, container) =>
+					Validation.integer(propertyName, value, failures)
+			})
+		);
 
-		DataTypeHandlerFactory.register(SchemaOrgTypes.Float, () => ({
+		DataTypeHandlerFactory.register(`${SchemaOrgTypes.ContextRoot}${SchemaOrgTypes.Float}`, () => ({
 			type: SchemaOrgTypes.Float,
 			defaultValue: 0,
 			jsonSchema: async () => ({
@@ -56,17 +59,20 @@ export class SchemaOrgDataTypes {
 				Validation.number(propertyName, value, failures)
 		}));
 
-		DataTypeHandlerFactory.register(SchemaOrgTypes.Boolean, () => ({
-			type: SchemaOrgTypes.Boolean,
-			defaultValue: true,
-			jsonSchema: async () => ({
-				type: "boolean"
-			}),
-			validate: async (propertyName, value, failures, container) =>
-				Validation.boolean(propertyName, value, failures)
-		}));
+		DataTypeHandlerFactory.register(
+			`${SchemaOrgTypes.ContextRoot}${SchemaOrgTypes.Boolean}`,
+			() => ({
+				type: SchemaOrgTypes.Boolean,
+				defaultValue: true,
+				jsonSchema: async () => ({
+					type: "boolean"
+				}),
+				validate: async (propertyName, value, failures, container) =>
+					Validation.boolean(propertyName, value, failures)
+			})
+		);
 
-		DataTypeHandlerFactory.register(SchemaOrgTypes.URL, () => ({
+		DataTypeHandlerFactory.register(`${SchemaOrgTypes.ContextRoot}${SchemaOrgTypes.URL}`, () => ({
 			type: SchemaOrgTypes.URL,
 			defaultValue: "",
 			jsonSchema: async () => ({
@@ -77,7 +83,7 @@ export class SchemaOrgDataTypes {
 				Url.validate(propertyName, value, failures)
 		}));
 
-		DataTypeHandlerFactory.register(SchemaOrgTypes.Date, () => ({
+		DataTypeHandlerFactory.register(`${SchemaOrgTypes.ContextRoot}${SchemaOrgTypes.Date}`, () => ({
 			type: SchemaOrgTypes.Date,
 			defaultValue: new Date(),
 			jsonSchema: async () => ({
@@ -88,18 +94,21 @@ export class SchemaOrgDataTypes {
 				Validation.dateString(propertyName, value, failures)
 		}));
 
-		DataTypeHandlerFactory.register(SchemaOrgTypes.DateTime, () => ({
-			type: SchemaOrgTypes.DateTime,
-			defaultValue: new Date(),
-			jsonSchema: async () => ({
-				type: "string",
-				format: "date-time"
-			}),
-			validate: async (propertyName, value, failures, container) =>
-				Validation.dateTimeString(propertyName, value, failures)
-		}));
+		DataTypeHandlerFactory.register(
+			`${SchemaOrgTypes.ContextRoot}${SchemaOrgTypes.DateTime}`,
+			() => ({
+				type: SchemaOrgTypes.DateTime,
+				defaultValue: new Date(),
+				jsonSchema: async () => ({
+					type: "string",
+					format: "date-time"
+				}),
+				validate: async (propertyName, value, failures, container) =>
+					Validation.dateTimeString(propertyName, value, failures)
+			})
+		);
 
-		DataTypeHandlerFactory.register(SchemaOrgTypes.Time, () => ({
+		DataTypeHandlerFactory.register(`${SchemaOrgTypes.ContextRoot}${SchemaOrgTypes.Time}`, () => ({
 			type: SchemaOrgTypes.Time,
 			defaultValue: new Date(),
 			jsonSchema: async () => ({
@@ -110,7 +119,7 @@ export class SchemaOrgDataTypes {
 				Validation.timeString(propertyName, value, failures)
 		}));
 
-		DataTypeHandlerFactory.register(SchemaOrgTypes.Image, () => ({
+		DataTypeHandlerFactory.register(`${SchemaOrgTypes.ContextRoot}${SchemaOrgTypes.Image}`, () => ({
 			type: SchemaOrgTypes.Image,
 			defaultValue: "",
 			jsonSchema: async () => ({
@@ -121,12 +130,15 @@ export class SchemaOrgDataTypes {
 				Url.validate(propertyName, value, failures)
 		}));
 
-		DataTypeHandlerFactory.register(SchemaOrgTypes.GeoCoordinates, () => ({
-			type: SchemaOrgTypes.GeoCoordinates,
-			defaultValue: { longitude: 0, latitude: 0 },
-			jsonSchema: async () => GeoCoordinatesSchema as JSONSchema7,
-			validate: async (propertyName, value, failures, container) =>
-				SchemaOrgValidation.geoCoordinates(propertyName, value, failures)
-		}));
+		DataTypeHandlerFactory.register(
+			`${SchemaOrgTypes.ContextRoot}${SchemaOrgTypes.GeoCoordinates}`,
+			() => ({
+				type: SchemaOrgTypes.GeoCoordinates,
+				defaultValue: { longitude: 0, latitude: 0 },
+				jsonSchema: async () => GeoCoordinatesSchema as JSONSchema7,
+				validate: async (propertyName, value, failures, container) =>
+					SchemaOrgValidation.geoCoordinates(propertyName, value, failures)
+			})
+		);
 	}
 }

@@ -11,12 +11,12 @@ export class UneceDataTypes {
 	 * Register all the data types.
 	 */
 	public static registerTypes(): void {
-		DataTypeHandlerFactory.register(UneceTypes.Document, () => ({
+		DataTypeHandlerFactory.register(`${UneceTypes.ContextRoot}${UneceTypes.Document}`, () => ({
 			type: UneceTypes.Document,
 			defaultValue: {}
 		}));
 
-		DataTypeHandlerFactory.register(UneceTypes.Consignment, () => ({
+		DataTypeHandlerFactory.register(`${UneceTypes.ContextRoot}${UneceTypes.Consignment}`, () => ({
 			type: UneceTypes.Consignment,
 			defaultValue: {}
 		}));

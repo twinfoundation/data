@@ -9,7 +9,7 @@ export const SchemaOrgTypes = {
 	/**
 	 * Context Root.
 	 */
-	ContextRoot: "https://schema.org/",
+	ContextRoot: "https://schema.org",
 
 	/**
 	 * Represents text storage.

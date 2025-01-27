@@ -11,10 +11,6 @@ on:
           - 'packages/data-core'
           - 'packages/data-json-ld'
           - 'packages/data-framework'
-          - 'packages/data-gs1'
-          - 'packages/data-schema-org'
-          - 'packages/data-unece'
-          - 'packages/data-vda'
 
 jobs:
   publish:

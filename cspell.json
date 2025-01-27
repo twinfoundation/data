@@ -17,24 +17,7 @@
 		".eslintrc.cjs",
 		"**/wordlists/**"
 	],
-	"words": [
-		"CEFACT",
-		"EPC",
-		"EPCIS",
-		"IEPC",
-		"JAIF",
-		"jsonld",
-		"lgtin",
-		"masterdata",
-		"Multibase",
-		"nameof",
-		"sgln",
-		"sgtin",
-		"Stiftung",
-		"uncefact",
-		"Unece",
-		"VOCAB"
-	],
+	"words": ["jsonld", "nameof", "Stiftung", "vocab"],
 	"ignoreRegExpList": [
 		"/from\\s+(['\"]).*\\1/",
 		"/eslint-disable.*/",

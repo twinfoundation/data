@@ -13,16 +13,7 @@ jobs:
     strategy:
       max-parallel: 1
       matrix:
-        package:
-          [
-            'packages/data-core',
-            'packages/data-json-ld',
-            'packages/data-framework',
-            'packages/data-gs1',
-            'packages/data-schema-org',
-            'packages/data-unece',
-            'packages/data-vda'
-          ]
+        package: ['packages/data-core', 'packages/data-json-ld', 'packages/data-framework']
 
     steps:
       - name: Checkout

@@ -13,7 +13,7 @@ jobs:
     strategy:
       max-parallel: 1
       matrix:
-        package: ['packages/data-core', 'packages/data-json-ld', 'packages/data-framework']
+        package: ['packages/data-core', 'packages/data-framework', 'packages/data-json-ld']
 
     steps:
       - name: Checkout

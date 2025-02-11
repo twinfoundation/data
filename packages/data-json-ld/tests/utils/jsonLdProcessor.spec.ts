@@ -13,7 +13,7 @@ describe("JsonLdProcessor", () => {
 
 	test("Can expand a document", async () => {
 		const doc: IJsonLdDocument = {
-			"@context": "http://schema.org/",
+			"@context": "https://schema.org",
 			"@type": "Person",
 			name: "Jane Doe",
 			jobTitle: "Professor",
@@ -74,10 +74,10 @@ describe("JsonLdProcessor", () => {
 			]
 		};
 		const compacted = await JsonLdProcessor.compact(doc, {
-			"@context": "http://schema.org/"
+			"@context": "https://schema.org"
 		});
 		expect(compacted).toEqual({
-			"@context": "http://schema.org/",
+			"@context": "https://schema.org",
 			type: "Person",
 			jobTitle: "Professor",
 			name: "Jane Doe",
@@ -88,7 +88,7 @@ describe("JsonLdProcessor", () => {
 
 	test("Can compact a document without providing a context", async () => {
 		const doc: IJsonLdDocument = {
-			"@context": "http://schema.org/",
+			"@context": "https://schema.org",
 			"@type": ["http://schema.org/Person"],
 			"http://schema.org/jobTitle": [
 				{
@@ -113,7 +113,7 @@ describe("JsonLdProcessor", () => {
 		};
 		const compacted = await JsonLdProcessor.compact(doc);
 		expect(compacted).toEqual({
-			"@context": "http://schema.org/",
+			"@context": "https://schema.org",
 			type: "Person",
 			jobTitle: "Professor",
 			name: "Jane Doe",

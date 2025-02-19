@@ -2,7 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0.
 import { Is, type IValidationFailure } from "@twin.org/core";
 import { DataTypeHelper, type ValidationMode } from "@twin.org/data-core";
-import type { IJsonLdDocument, IJsonLdNodeObject } from "../models/IJsonLdDocument";
+import type { IJsonLdDocument } from "../models/IJsonLdDocument";
+import type { IJsonLdNodeObject } from "../models/IJsonLdNodeObject";
 
 /**
  * Class to help with JSON LD.

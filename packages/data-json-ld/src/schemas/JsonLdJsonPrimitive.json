@@ -4,5 +4,6 @@
 		"number",
 		"boolean",
 		"null"
-	]
+	],
+	"description": "JSON Primitive."
 }

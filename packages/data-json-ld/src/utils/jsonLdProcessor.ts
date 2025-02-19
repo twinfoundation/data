@@ -5,12 +5,10 @@ import { nameof } from "@twin.org/nameof";
 import { FetchHelper, HeaderTypes, HttpMethod, MimeTypes } from "@twin.org/web";
 import jsonLd from "jsonld";
 import type { JsonLd, RemoteDocument, Url } from "jsonld/jsonld-spec";
-import type {
-	IJsonLdContextDefinition,
-	IJsonLdContextDefinitionElement,
-	IJsonLdContextDefinitionRoot,
-	IJsonLdDocument
-} from "../models/IJsonLdDocument";
+import type { IJsonLdContextDefinition } from "../models/IJsonLdContextDefinition";
+import type { IJsonLdContextDefinitionElement } from "../models/IJsonLdContextDefinitionElement";
+import type { IJsonLdContextDefinitionRoot } from "../models/IJsonLdContextDefinitionRoot";
+import type { IJsonLdDocument } from "../models/IJsonLdDocument";
 
 /**
  * JSON-LD Processor.
@@ -64,9 +62,13 @@ export class JsonLdProcessor {
 				}
 			}
 
-			const compacted = await jsonLd.compact(document, context as IJsonLdContextDefinition, {
-				documentLoader: JsonLdProcessor.DOCUMENT_LOADER
-			});
+			const compacted = await jsonLd.compact(
+				ObjectHelper.removeEmptyProperties(document),
+				context as IJsonLdContextDefinition,
+				{
+					documentLoader: JsonLdProcessor.DOCUMENT_LOADER
+				}
+			);
 			return compacted;
 		} catch (err) {
 			if (
@@ -97,7 +99,7 @@ export class JsonLdProcessor {
 	 */
 	public static async expand(compacted: IJsonLdDocument): Promise<IJsonLdDocument> {
 		try {
-			const expanded = await jsonLd.expand(compacted, {
+			const expanded = await jsonLd.expand(ObjectHelper.removeEmptyProperties(compacted), {
 				documentLoader: JsonLdProcessor.DOCUMENT_LOADER
 			});
 			return expanded;

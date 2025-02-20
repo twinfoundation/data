@@ -8,7 +8,7 @@ import type { JsonLd, RemoteDocument, Url } from "jsonld/jsonld-spec";
 import type { IJsonLdContextDefinition } from "../models/IJsonLdContextDefinition";
 import type { IJsonLdContextDefinitionElement } from "../models/IJsonLdContextDefinitionElement";
 import type { IJsonLdContextDefinitionRoot } from "../models/IJsonLdContextDefinitionRoot";
-import type { IJsonLdDocument } from "../models/IJsonLdDocument";
+import type { IJsonLdNodeObject } from "../models/IJsonLdNodeObject";
 
 /**
  * JSON-LD Processor.
@@ -40,10 +40,10 @@ export class JsonLdProcessor {
 	 * @param context The context to compact the document to, if not provided will try and gather from the object.
 	 * @returns The compacted JSON-LD document.
 	 */
-	public static async compact(
-		document: IJsonLdDocument,
+	public static async compact<T extends IJsonLdNodeObject>(
+		document: T,
 		context?: IJsonLdContextDefinitionRoot
-	): Promise<IJsonLdDocument> {
+	): Promise<T> {
 		try {
 			// There is a cast here because the jsonld types are not correct.
 			// A context definition can be an array or an object, but the types only allow an object.
@@ -51,7 +51,7 @@ export class JsonLdProcessor {
 				context = {};
 				if (Is.array(document)) {
 					for (const node of document) {
-						context = JsonLdProcessor.gatherContexts(node, context);
+						context = JsonLdProcessor.gatherContexts(node as IJsonLdNodeObject, context);
 					}
 				} else if (Is.array(document["@graph"])) {
 					for (const node of document["@graph"]) {
@@ -69,7 +69,7 @@ export class JsonLdProcessor {
 					documentLoader: JsonLdProcessor.DOCUMENT_LOADER
 				}
 			);
-			return compacted;
+			return compacted as T;
 		} catch (err) {
 			if (
 				Is.object<{ name: string; details?: { url?: string } }>(err) &&
@@ -97,7 +97,9 @@ export class JsonLdProcessor {
 	 * @param compacted The compacted JSON-LD document to expand.
 	 * @returns The expanded JSON-LD document.
 	 */
-	public static async expand(compacted: IJsonLdDocument): Promise<IJsonLdDocument> {
+	public static async expand<T extends IJsonLdNodeObject>(
+		compacted: T
+	): Promise<IJsonLdNodeObject[]> {
 		try {
 			const expanded = await jsonLd.expand(ObjectHelper.removeEmptyProperties(compacted), {
 				documentLoader: JsonLdProcessor.DOCUMENT_LOADER
@@ -201,8 +203,8 @@ export class JsonLdProcessor {
 	 * @param initial The initial context.
 	 * @returns The combined contexts.
 	 */
-	public static gatherContexts(
-		element: { [id: string]: unknown },
+	public static gatherContexts<T extends IJsonLdNodeObject>(
+		element: T,
 		initial?: IJsonLdContextDefinitionRoot
 	): IJsonLdContextDefinitionRoot | undefined {
 		let combinedContexts: IJsonLdContextDefinitionRoot | undefined = initial;
@@ -217,11 +219,11 @@ export class JsonLdProcessor {
 		for (const prop of Object.keys(element)) {
 			const value = element[prop];
 			if (Is.object(value)) {
-				combinedContexts = this.gatherContexts(value, combinedContexts);
+				combinedContexts = this.gatherContexts(value as IJsonLdNodeObject, combinedContexts);
 			} else if (Is.array(value)) {
 				for (const item of value) {
 					if (Is.object(item)) {
-						combinedContexts = this.gatherContexts(item, combinedContexts);
+						combinedContexts = this.gatherContexts(item as IJsonLdNodeObject, combinedContexts);
 					}
 				}
 			}

@@ -40,7 +40,7 @@ Compact a document according to a particular context.
 
 #### Type Parameters
 
-• **T** *extends* [`IJsonLdNodeObject`](../interfaces/IJsonLdNodeObject.md)
+• **T**
 
 #### Parameters
 
@@ -152,7 +152,7 @@ Gather all the contexts from the element and it's children.
 
 #### Type Parameters
 
-• **T** *extends* [`IJsonLdNodeObject`](../interfaces/IJsonLdNodeObject.md)
+• **T**
 
 #### Parameters
 

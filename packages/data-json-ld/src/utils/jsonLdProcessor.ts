@@ -40,36 +40,34 @@ export class JsonLdProcessor {
 	 * @param context The context to compact the document to, if not provided will try and gather from the object.
 	 * @returns The compacted JSON-LD document.
 	 */
-	public static async compact<T extends IJsonLdNodeObject>(
-		document: T,
-		context?: IJsonLdContextDefinitionRoot
-	): Promise<T> {
+	public static async compact<T>(document: T, context?: IJsonLdContextDefinitionRoot): Promise<T> {
 		try {
-			// There is a cast here because the jsonld types are not correct.
-			// A context definition can be an array or an object, but the types only allow an object.
-			if (Is.empty(context)) {
-				context = {};
-				if (Is.array(document)) {
-					for (const node of document) {
-						context = JsonLdProcessor.gatherContexts(node as IJsonLdNodeObject, context);
+			if (Is.object<IJsonLdNodeObject>(document)) {
+				if (Is.empty(context)) {
+					context = {};
+					if (Is.array(document)) {
+						for (const node of document) {
+							context = JsonLdProcessor.gatherContexts(node as IJsonLdNodeObject, context);
+						}
+					} else if (Is.array(document["@graph"])) {
+						for (const node of document["@graph"]) {
+							context = JsonLdProcessor.gatherContexts(node, context);
+						}
+					} else if (Is.object(document)) {
+						context = JsonLdProcessor.gatherContexts(document, context);
 					}
-				} else if (Is.array(document["@graph"])) {
-					for (const node of document["@graph"]) {
-						context = JsonLdProcessor.gatherContexts(node, context);
-					}
-				} else if (Is.object(document)) {
-					context = JsonLdProcessor.gatherContexts(document, context);
 				}
-			}
 
-			const compacted = await jsonLd.compact(
-				ObjectHelper.removeEmptyProperties(document),
-				context as IJsonLdContextDefinition,
-				{
-					documentLoader: JsonLdProcessor.DOCUMENT_LOADER
-				}
-			);
-			return compacted as T;
+				const compacted = await jsonLd.compact(
+					ObjectHelper.removeEmptyProperties(document),
+					context as IJsonLdContextDefinition,
+					{
+						documentLoader: JsonLdProcessor.DOCUMENT_LOADER
+					}
+				);
+				return compacted as T;
+			}
+			return document;
 		} catch (err) {
 			if (
 				Is.object<{ name: string; details?: { url?: string } }>(err) &&
@@ -203,27 +201,29 @@ export class JsonLdProcessor {
 	 * @param initial The initial context.
 	 * @returns The combined contexts.
 	 */
-	public static gatherContexts<T extends IJsonLdNodeObject>(
+	public static gatherContexts<T>(
 		element: T,
 		initial?: IJsonLdContextDefinitionRoot
 	): IJsonLdContextDefinitionRoot | undefined {
 		let combinedContexts: IJsonLdContextDefinitionRoot | undefined = initial;
 
-		if (!Is.empty(element["@context"])) {
-			combinedContexts = JsonLdProcessor.combineContexts(
-				initial,
-				element["@context"] as IJsonLdContextDefinitionRoot
-			);
-		}
+		if (Is.object<IJsonLdNodeObject>(element)) {
+			if (!Is.empty(element["@context"])) {
+				combinedContexts = JsonLdProcessor.combineContexts(
+					initial,
+					element["@context"] as IJsonLdContextDefinitionRoot
+				);
+			}
 
-		for (const prop of Object.keys(element)) {
-			const value = element[prop];
-			if (Is.object(value)) {
-				combinedContexts = this.gatherContexts(value as IJsonLdNodeObject, combinedContexts);
-			} else if (Is.array(value)) {
-				for (const item of value) {
-					if (Is.object(item)) {
-						combinedContexts = this.gatherContexts(item as IJsonLdNodeObject, combinedContexts);
+			for (const prop of Object.keys(element)) {
+				const value = element[prop];
+				if (Is.object(value)) {
+					combinedContexts = this.gatherContexts(value as IJsonLdNodeObject, combinedContexts);
+				} else if (Is.array(value)) {
+					for (const item of value) {
+						if (Is.object(item)) {
+							combinedContexts = this.gatherContexts(item as IJsonLdNodeObject, combinedContexts);
+						}
 					}
 				}
 			}

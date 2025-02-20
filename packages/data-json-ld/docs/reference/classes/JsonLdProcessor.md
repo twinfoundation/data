@@ -72,7 +72,7 @@ Expand a document, removing its context.
 
 #### Type Parameters
 
-• **T** *extends* [`IJsonLdNodeObject`](../interfaces/IJsonLdNodeObject.md)
+• **T**
 
 #### Parameters
 

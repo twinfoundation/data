@@ -95,14 +95,15 @@ export class JsonLdProcessor {
 	 * @param compacted The compacted JSON-LD document to expand.
 	 * @returns The expanded JSON-LD document.
 	 */
-	public static async expand<T extends IJsonLdNodeObject>(
-		compacted: T
-	): Promise<IJsonLdNodeObject[]> {
+	public static async expand<T>(compacted: T): Promise<IJsonLdNodeObject[]> {
 		try {
-			const expanded = await jsonLd.expand(ObjectHelper.removeEmptyProperties(compacted), {
-				documentLoader: JsonLdProcessor.DOCUMENT_LOADER
-			});
-			return expanded;
+			if (Is.object<IJsonLdNodeObject>(compacted)) {
+				const expanded = await jsonLd.expand(ObjectHelper.removeEmptyProperties(compacted), {
+					documentLoader: JsonLdProcessor.DOCUMENT_LOADER
+				});
+				return expanded;
+			}
+			return [];
 		} catch (err) {
 			if (
 				Is.object<{ name: string; details?: { url?: string } }>(err) &&

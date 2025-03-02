@@ -245,7 +245,6 @@ describe("JsonLdProcessor", () => {
 			telephone: "(425) 123-4567",
 			url: "http://www.janedoe.com"
 		});
-		console.log(canonized);
 		expect(canonized).toEqual(`_:c14n0 <http://schema.org/jobTitle> "Professor" .
 _:c14n0 <http://schema.org/name> "Jane Doe" .
 _:c14n0 <http://schema.org/telephone> "(425) 123-4567" .

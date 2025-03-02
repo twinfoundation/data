@@ -69,22 +69,7 @@ export class JsonLdProcessor {
 			}
 			return document;
 		} catch (err) {
-			if (
-				Is.object<{ name: string; details?: { url?: string } }>(err) &&
-				err.name === "jsonld.InvalidUrl"
-			) {
-				throw new GeneralError(
-					JsonLdProcessor._CLASS_NAME,
-					"invalidUrl",
-					{ url: err.details?.url },
-					err
-				);
-			} else if (
-				Is.object<{ name: string; details?: { [id: string]: unknown } }>(err) &&
-				err.name.startsWith("jsonld.")
-			) {
-				throw new GeneralError(JsonLdProcessor._CLASS_NAME, "jsonldError", err.details, err);
-			}
+			JsonLdProcessor.handleCommonErrors(err);
 
 			throw new GeneralError(JsonLdProcessor._CLASS_NAME, "compact", undefined, err);
 		}
@@ -105,24 +90,36 @@ export class JsonLdProcessor {
 			}
 			return [];
 		} catch (err) {
-			if (
-				Is.object<{ name: string; details?: { url?: string } }>(err) &&
-				err.name === "jsonld.InvalidUrl"
-			) {
-				throw new GeneralError(
-					JsonLdProcessor._CLASS_NAME,
-					"invalidUrl",
-					{ url: err.details?.url },
-					err
-				);
-			} else if (
-				Is.object<{ name: string; details?: { [id: string]: unknown } }>(err) &&
-				err.name.startsWith("jsonld.")
-			) {
-				throw new GeneralError(JsonLdProcessor._CLASS_NAME, "jsonldError", err.details, err);
-			}
+			JsonLdProcessor.handleCommonErrors(err);
 
 			throw new GeneralError(JsonLdProcessor._CLASS_NAME, "expand", undefined, err);
+		}
+	}
+
+	/**
+	 * Canonize a document.
+	 * @param document The document to canonize.
+	 * @param options The options for canonization.
+	 * @param options.algorithm The algorithm to use for canonization, defaults to URDNA2015.
+	 * @returns The canonized document.
+	 */
+	public static async canonize<T extends IJsonLdNodeObject>(
+		document: T,
+		options?: {
+			algorithm?: "URDNA2015" | "URGNA2012" | undefined;
+		}
+	): Promise<string> {
+		try {
+			const normalized = await jsonLd.canonize(ObjectHelper.removeEmptyProperties(document), {
+				algorithm: options?.algorithm ?? "URDNA2015",
+				format: "application/n-quads",
+				documentLoader: JsonLdProcessor.DOCUMENT_LOADER
+			});
+			return normalized;
+		} catch (err) {
+			JsonLdProcessor.handleCommonErrors(err);
+
+			throw new GeneralError(JsonLdProcessor._CLASS_NAME, "canonize", undefined, err);
 		}
 	}
 
@@ -308,5 +305,29 @@ export class JsonLdProcessor {
 			documentUrl: url,
 			document: response
 		};
+	}
+
+	/**
+	 * Handle common errors.
+	 * @param err The error to handle.
+	 * @internal
+	 */
+	private static handleCommonErrors(err: unknown): void {
+		if (
+			Is.object<{ name: string; details?: { url?: string } }>(err) &&
+			err.name === "jsonld.InvalidUrl"
+		) {
+			throw new GeneralError(
+				JsonLdProcessor._CLASS_NAME,
+				"invalidUrl",
+				{ url: err.details?.url },
+				err
+			);
+		} else if (
+			Is.object<{ name: string; details?: { [id: string]: unknown } }>(err) &&
+			err.name.startsWith("jsonld.")
+		) {
+			throw new GeneralError(JsonLdProcessor._CLASS_NAME, "jsonldError", err.details, err);
+		}
 	}
 }

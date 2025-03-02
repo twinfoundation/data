@@ -235,4 +235,22 @@ describe("JsonLdProcessor", () => {
 		);
 		expect(removed).toEqual("https://schema.twindev.org/ais/types.jsonld");
 	});
+
+	test("Can canonize a document", async () => {
+		const canonized = await JsonLdProcessor.canonize({
+			"@context": "https://schema.org",
+			type: "Person",
+			jobTitle: "Professor",
+			name: "Jane Doe",
+			telephone: "(425) 123-4567",
+			url: "http://www.janedoe.com"
+		});
+		console.log(canonized);
+		expect(canonized).toEqual(`_:c14n0 <http://schema.org/jobTitle> "Professor" .
+_:c14n0 <http://schema.org/name> "Jane Doe" .
+_:c14n0 <http://schema.org/telephone> "(425) 123-4567" .
+_:c14n0 <http://schema.org/url> <http://www.janedoe.com> .
+_:c14n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Person> .
+`);
+	});
 });

@@ -27,6 +27,7 @@ export * from "./models/IJsonLdObject";
 export * from "./models/IJsonLdSetObject";
 export * from "./models/IJsonLdTypeMap";
 export * from "./models/IJsonLdValueObject";
+export * from "./models/jsonLdContexts";
 export * from "./models/jsonLdTypes";
 export * from "./utils/jsonLdHelper";
 export * from "./utils/jsonLdProcessor";

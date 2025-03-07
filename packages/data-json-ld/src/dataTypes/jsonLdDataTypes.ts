@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0.
 import { DataTypeHandlerFactory } from "@twin.org/data-core";
 import type { JSONSchema7 } from "json-schema";
+import { JsonLdContexts } from "../models/jsonLdContexts";
 import { JsonLdTypes } from "../models/jsonLdTypes";
 import JsonLdContainerTypeSchema from "../schemas/JsonLdContainerType.json";
 import JsonLdContainerTypeArraySchema from "../schemas/JsonLdContainerTypeArray.json";
@@ -36,132 +37,162 @@ export class JsonLdDataTypes {
 	 * Register all the data types.
 	 */
 	public static registerTypes(): void {
-		DataTypeHandlerFactory.register(`${JsonLdTypes.ContextRoot}${JsonLdTypes.Document}`, () => ({
+		DataTypeHandlerFactory.register(`${JsonLdContexts.ContextRoot}${JsonLdTypes.Document}`, () => ({
 			type: JsonLdTypes.Document,
 			jsonSchema: async () => JsonLdDocumentSchema as JSONSchema7
 		}));
-		DataTypeHandlerFactory.register(`${JsonLdTypes.ContextRoot}${JsonLdTypes.Object}`, () => ({
+		DataTypeHandlerFactory.register(`${JsonLdContexts.ContextRoot}${JsonLdTypes.Object}`, () => ({
 			type: JsonLdTypes.Object,
 			jsonSchema: async () => JsonLdObjectSchema as JSONSchema7
 		}));
-		DataTypeHandlerFactory.register(`${JsonLdTypes.ContextRoot}${JsonLdTypes.NodeObject}`, () => ({
-			type: JsonLdTypes.NodeObject,
-			jsonSchema: async () => JsonLdNodeObjectSchema as JSONSchema7
-		}));
 		DataTypeHandlerFactory.register(
-			`${JsonLdTypes.ContextRoot}${JsonLdTypes.NodePrimitive}`,
+			`${JsonLdContexts.ContextRoot}${JsonLdTypes.NodeObject}`,
+			() => ({
+				type: JsonLdTypes.NodeObject,
+				jsonSchema: async () => JsonLdNodeObjectSchema as JSONSchema7
+			})
+		);
+		DataTypeHandlerFactory.register(
+			`${JsonLdContexts.ContextRoot}${JsonLdTypes.NodePrimitive}`,
 			() => ({
 				type: JsonLdTypes.NodePrimitive,
 				jsonSchema: async () => JsonLdNodePrimitiveSchema as JSONSchema7
 			})
 		);
-		DataTypeHandlerFactory.register(`${JsonLdTypes.ContextRoot}${JsonLdTypes.GraphObject}`, () => ({
-			type: JsonLdTypes.GraphObject,
-			jsonSchema: async () => JsonLdGraphObjectSchema as JSONSchema7
-		}));
-		DataTypeHandlerFactory.register(`${JsonLdTypes.ContextRoot}${JsonLdTypes.ValueObject}`, () => ({
-			type: JsonLdTypes.ValueObject,
-			jsonSchema: async () => JsonLdValueObjectSchema as unknown as JSONSchema7
-		}));
-		DataTypeHandlerFactory.register(`${JsonLdTypes.ContextRoot}${JsonLdTypes.ListObject}`, () => ({
-			type: JsonLdTypes.ListObject,
-			jsonSchema: async () => JsonLdListObjectSchema as JSONSchema7
-		}));
-		DataTypeHandlerFactory.register(`${JsonLdTypes.ContextRoot}${JsonLdTypes.ListObject}`, () => ({
-			type: JsonLdTypes.ListObject,
-			jsonSchema: async () => JsonLdListObjectSchema as JSONSchema7
-		}));
-		DataTypeHandlerFactory.register(`${JsonLdTypes.ContextRoot}${JsonLdTypes.SetObject}`, () => ({
-			type: JsonLdTypes.SetObject,
-			jsonSchema: async () => JsonLdSetObjectSchema as JSONSchema7
-		}));
-		DataTypeHandlerFactory.register(`${JsonLdTypes.ContextRoot}${JsonLdTypes.LanguageMap}`, () => ({
-			type: JsonLdTypes.LanguageMap,
-			jsonSchema: async () => JsonLdLanguageMapSchema as JSONSchema7
-		}));
-		DataTypeHandlerFactory.register(`${JsonLdTypes.ContextRoot}${JsonLdTypes.IndexMap}`, () => ({
+		DataTypeHandlerFactory.register(
+			`${JsonLdContexts.ContextRoot}${JsonLdTypes.GraphObject}`,
+			() => ({
+				type: JsonLdTypes.GraphObject,
+				jsonSchema: async () => JsonLdGraphObjectSchema as JSONSchema7
+			})
+		);
+		DataTypeHandlerFactory.register(
+			`${JsonLdContexts.ContextRoot}${JsonLdTypes.ValueObject}`,
+			() => ({
+				type: JsonLdTypes.ValueObject,
+				jsonSchema: async () => JsonLdValueObjectSchema as unknown as JSONSchema7
+			})
+		);
+		DataTypeHandlerFactory.register(
+			`${JsonLdContexts.ContextRoot}${JsonLdTypes.ListObject}`,
+			() => ({
+				type: JsonLdTypes.ListObject,
+				jsonSchema: async () => JsonLdListObjectSchema as JSONSchema7
+			})
+		);
+		DataTypeHandlerFactory.register(
+			`${JsonLdContexts.ContextRoot}${JsonLdTypes.ListObject}`,
+			() => ({
+				type: JsonLdTypes.ListObject,
+				jsonSchema: async () => JsonLdListObjectSchema as JSONSchema7
+			})
+		);
+		DataTypeHandlerFactory.register(
+			`${JsonLdContexts.ContextRoot}${JsonLdTypes.SetObject}`,
+			() => ({
+				type: JsonLdTypes.SetObject,
+				jsonSchema: async () => JsonLdSetObjectSchema as JSONSchema7
+			})
+		);
+		DataTypeHandlerFactory.register(
+			`${JsonLdContexts.ContextRoot}${JsonLdTypes.LanguageMap}`,
+			() => ({
+				type: JsonLdTypes.LanguageMap,
+				jsonSchema: async () => JsonLdLanguageMapSchema as JSONSchema7
+			})
+		);
+		DataTypeHandlerFactory.register(`${JsonLdContexts.ContextRoot}${JsonLdTypes.IndexMap}`, () => ({
 			type: JsonLdTypes.IndexMap,
 			jsonSchema: async () => JsonLdIndexMapSchema as JSONSchema7
 		}));
 		DataTypeHandlerFactory.register(
-			`${JsonLdTypes.ContextRoot}${JsonLdTypes.IndexMapItem}`,
+			`${JsonLdContexts.ContextRoot}${JsonLdTypes.IndexMapItem}`,
 			() => ({
 				type: JsonLdTypes.IndexMapItem,
 				jsonSchema: async () => JsonLdIndexMapItemSchema as JSONSchema7
 			})
 		);
-		DataTypeHandlerFactory.register(`${JsonLdTypes.ContextRoot}${JsonLdTypes.IdMap}`, () => ({
+		DataTypeHandlerFactory.register(`${JsonLdContexts.ContextRoot}${JsonLdTypes.IdMap}`, () => ({
 			type: JsonLdTypes.IdMap,
 			jsonSchema: async () => JsonLdIdMapSchema as JSONSchema7
 		}));
-		DataTypeHandlerFactory.register(`${JsonLdTypes.ContextRoot}${JsonLdTypes.TypeMap}`, () => ({
+		DataTypeHandlerFactory.register(`${JsonLdContexts.ContextRoot}${JsonLdTypes.TypeMap}`, () => ({
 			type: JsonLdTypes.TypeMap,
 			jsonSchema: async () => JsonLdTypeMapSchema as JSONSchema7
 		}));
 		DataTypeHandlerFactory.register(
-			`${JsonLdTypes.ContextRoot}${JsonLdTypes.IncludedBlock}`,
+			`${JsonLdContexts.ContextRoot}${JsonLdTypes.IncludedBlock}`,
 			() => ({
 				type: JsonLdTypes.IncludedBlock,
 				jsonSchema: async () => JsonLdIncludedBlockSchema as JSONSchema7
 			})
 		);
 		DataTypeHandlerFactory.register(
-			`${JsonLdTypes.ContextRoot}${JsonLdTypes.ContextDefinition}`,
+			`${JsonLdContexts.ContextRoot}${JsonLdTypes.ContextDefinition}`,
 			() => ({
 				type: JsonLdTypes.ContextDefinition,
 				jsonSchema: async () => JsonLdContextDefinitionSchema as JSONSchema7
 			})
 		);
 		DataTypeHandlerFactory.register(
-			`${JsonLdTypes.ContextRoot}${JsonLdTypes.ExpandedTermDefinition}`,
+			`${JsonLdContexts.ContextRoot}${JsonLdTypes.ExpandedTermDefinition}`,
 			() => ({
 				type: JsonLdTypes.ExpandedTermDefinition,
 				jsonSchema: async () => JsonLdExpandedTermDefinitionSchema as unknown as JSONSchema7
 			})
 		);
-		DataTypeHandlerFactory.register(`${JsonLdTypes.ContextRoot}${JsonLdTypes.Keyword}`, () => ({
+		DataTypeHandlerFactory.register(`${JsonLdContexts.ContextRoot}${JsonLdTypes.Keyword}`, () => ({
 			type: JsonLdTypes.Keyword,
 			jsonSchema: async () => JsonLdKeywordSchema as JSONSchema7
 		}));
 		DataTypeHandlerFactory.register(
-			`${JsonLdTypes.ContextRoot}${JsonLdTypes.ListOrSetItem}`,
+			`${JsonLdContexts.ContextRoot}${JsonLdTypes.ListOrSetItem}`,
 			() => ({
 				type: JsonLdTypes.ListOrSetItem,
 				jsonSchema: async () => JsonLdListOrSetItemSchema as JSONSchema7
 			})
 		);
 		DataTypeHandlerFactory.register(
-			`${JsonLdTypes.ContextRoot}${JsonLdTypes.ContainerType}`,
+			`${JsonLdContexts.ContextRoot}${JsonLdTypes.ContainerType}`,
 			() => ({
 				type: JsonLdTypes.ContainerType,
 				jsonSchema: async () => JsonLdContainerTypeSchema as JSONSchema7
 			})
 		);
 		DataTypeHandlerFactory.register(
-			`${JsonLdTypes.ContextRoot}${JsonLdTypes.ContainerTypeArray}`,
+			`${JsonLdContexts.ContextRoot}${JsonLdTypes.ContainerTypeArray}`,
 			() => ({
 				type: JsonLdTypes.ContainerTypeArray,
 				jsonSchema: async () => JsonLdContainerTypeArraySchema as JSONSchema7
 			})
 		);
 		DataTypeHandlerFactory.register(
-			`${JsonLdTypes.ContextRoot}${JsonLdTypes.JsonPrimitive}`,
+			`${JsonLdContexts.ContextRoot}${JsonLdTypes.JsonPrimitive}`,
 			() => ({
 				type: JsonLdTypes.JsonPrimitive,
 				jsonSchema: async () => JsonLdJsonPrimitiveSchema as JSONSchema7
 			})
 		);
-		DataTypeHandlerFactory.register(`${JsonLdTypes.ContextRoot}${JsonLdTypes.JsonArray}`, () => ({
-			type: JsonLdTypes.JsonArray,
-			jsonSchema: async () => JsonLdJsonArraySchema as JSONSchema7
-		}));
-		DataTypeHandlerFactory.register(`${JsonLdTypes.ContextRoot}${JsonLdTypes.JsonObject}`, () => ({
-			type: JsonLdTypes.JsonObject,
-			jsonSchema: async () => JsonLdJsonObjectSchema as JSONSchema7
-		}));
-		DataTypeHandlerFactory.register(`${JsonLdTypes.ContextRoot}${JsonLdTypes.JsonValue}`, () => ({
-			type: JsonLdTypes.JsonValue,
-			jsonSchema: async () => JsonLdJsonValueSchema as JSONSchema7
-		}));
+		DataTypeHandlerFactory.register(
+			`${JsonLdContexts.ContextRoot}${JsonLdTypes.JsonArray}`,
+			() => ({
+				type: JsonLdTypes.JsonArray,
+				jsonSchema: async () => JsonLdJsonArraySchema as JSONSchema7
+			})
+		);
+		DataTypeHandlerFactory.register(
+			`${JsonLdContexts.ContextRoot}${JsonLdTypes.JsonObject}`,
+			() => ({
+				type: JsonLdTypes.JsonObject,
+				jsonSchema: async () => JsonLdJsonObjectSchema as JSONSchema7
+			})
+		);
+		DataTypeHandlerFactory.register(
+			`${JsonLdContexts.ContextRoot}${JsonLdTypes.JsonValue}`,
+			() => ({
+				type: JsonLdTypes.JsonValue,
+				jsonSchema: async () => JsonLdJsonValueSchema as JSONSchema7
+			})
+		);
 	}
 }

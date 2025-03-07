@@ -7,11 +7,6 @@
 // eslint-disable-next-line @typescript-eslint/naming-convention
 export const FrameworkTypes = {
 	/**
-	 * Context Root.
-	 */
-	ContextRoot: "https://schema.twindev.org/framework/",
-
-	/**
 	 * Represents a urn.
 	 */
 	Urn: "URN",

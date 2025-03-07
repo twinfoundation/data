@@ -112,7 +112,7 @@ The document to canonize.
 
 The options for canonization.
 
-###### algorithm
+###### algorithm?
 
 `"URDNA2015"` \| `"URGNA2012"`
 

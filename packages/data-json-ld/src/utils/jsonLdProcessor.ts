@@ -327,7 +327,7 @@ export class JsonLdProcessor {
 			Is.object<{ name: string; details?: { [id: string]: unknown } }>(err) &&
 			err.name.startsWith("jsonld.")
 		) {
-			throw new GeneralError(JsonLdProcessor._CLASS_NAME, "jsonldError", err.details, err);
+			throw new GeneralError(JsonLdProcessor._CLASS_NAME, "jsonLdError", err.details, err);
 		}
 	}
 }

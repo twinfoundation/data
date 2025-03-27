@@ -237,3 +237,53 @@ The element to try and match.
 `undefined` \| [`IJsonLdContextDefinitionRoot`](../type-aliases/IJsonLdContextDefinitionRoot.md)
 
 The updated contexts.
+
+***
+
+### documentCacheAdd()
+
+> `static` **documentCacheAdd**(`url`, `ldContext`): `Promise`\<`void`\>
+
+Add a context directly to the document loader cache.
+
+#### Parameters
+
+##### url
+
+`string`
+
+The url the ld context is for.
+
+##### ldContext
+
+`unknown`
+
+The context to add.
+
+#### Returns
+
+`Promise`\<`void`\>
+
+Nothing.
+
+***
+
+### documentCacheRemove()
+
+> `static` **documentCacheRemove**(`url`): `Promise`\<`void`\>
+
+Remove a context from the document loader cache.
+
+#### Parameters
+
+##### url
+
+`string`
+
+The url the ld context is for.
+
+#### Returns
+
+`Promise`\<`void`\>
+
+Nothing.

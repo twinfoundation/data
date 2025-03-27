@@ -274,6 +274,25 @@ export class JsonLdProcessor {
 	}
 
 	/**
+	 * Add a context directly to the document loader cache.
+	 * @param url The url the ld context is for.
+	 * @param ldContext The context to add.
+	 * @returns Nothing.
+	 */
+	public static async documentCacheAdd(url: string, ldContext: unknown): Promise<void> {
+		await FetchHelper.setCacheEntry(url, ldContext);
+	}
+
+	/**
+	 * Remove a context from the document loader cache.
+	 * @param url The url the ld context is for.
+	 * @returns Nothing.
+	 */
+	public static async documentCacheRemove(url: string): Promise<void> {
+		await FetchHelper.removeCacheEntry(url);
+	}
+
+	/**
 	 * Document loader which uses a caching mechanism.
 	 * @param url The document url to load.
 	 * @returns The document.

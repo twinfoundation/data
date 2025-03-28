@@ -17,7 +17,7 @@
 		".eslintrc.cjs",
 		"**/wordlists/**"
 	],
-	"words": ["jsonld", "nameof", "Stiftung", "URDNA", "URGNA", "vocab"],
+	"words": ["jsonld", "nameof", "Stiftung", "URDNA", "URGNA", "vocab", "abbrev"],
 	"ignoreRegExpList": [
 		"/from\\s+(['\"]).*\\1/",
 		"/eslint-disable.*/",

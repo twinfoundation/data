@@ -2,21 +2,11 @@
 	"type": "object",
 	"properties": {
 		"@base": {
-			"type": [
-				"string",
-				"null"
-			]
+			"type": ["string", "null"]
 		},
 		"@direction": {
-			"type": [
-				"string",
-				"null"
-			],
-			"enum": [
-				"ltr",
-				"rtl",
-				null
-			]
+			"type": ["string", "null"],
+			"enum": ["ltr", "rtl", null]
 		},
 		"@import": {
 			"type": "string"
@@ -41,9 +31,7 @@
 					"type": "boolean"
 				}
 			},
-			"required": [
-				"@container"
-			],
+			"required": ["@container"],
 			"additionalProperties": false
 		},
 		"@version": {
@@ -51,10 +39,7 @@
 			"const": "1.1"
 		},
 		"@vocab": {
-			"type": [
-				"string",
-				"null"
-			]
+			"type": ["string", "null"]
 		}
 	},
 	"additionalProperties": {

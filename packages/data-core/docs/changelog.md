@@ -1,5 +1,12 @@
 # @twin.org/data-core - Changelog
 
+## [0.0.1-next.30](https://github.com/twinfoundation/data/compare/data-core-v0.0.1-next.29...data-core-v0.0.1-next.30) (2025-04-17)
+
+
+### Features
+
+* use shared store mechanism ([#3](https://github.com/twinfoundation/data/issues/3)) ([33eb221](https://github.com/twinfoundation/data/commit/33eb221ccec2b4a79549c06e9a04225009b93a46))
+
 ## [0.0.1-next.29](https://github.com/twinfoundation/data/compare/data-core-v0.0.1-next.28...data-core-v0.0.1-next.29) (2025-03-28)
 
 

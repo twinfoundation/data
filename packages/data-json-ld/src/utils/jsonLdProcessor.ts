@@ -1,6 +1,6 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
-import { GeneralError, Is, ObjectHelper } from "@twin.org/core";
+import { GeneralError, Is, ObjectHelper, SharedStore } from "@twin.org/core";
 import { nameof } from "@twin.org/nameof";
 import { FetchHelper, HeaderTypes, HttpMethod, MimeTypes } from "@twin.org/web";
 import jsonLd from "jsonld";
@@ -21,18 +21,80 @@ export class JsonLdProcessor {
 	private static readonly _CLASS_NAME = nameof<JsonLdProcessor>();
 
 	/**
-	 * Redirects to use during document resolution.
+	 * The document loader to use.
+	 * @param documentLoader The document loader to use.
 	 */
-	private static readonly _redirects: {
-		from: RegExp;
-		to: string;
-	}[] = [];
+	public static setDocumentLoader(documentLoader: (url: Url) => Promise<RemoteDocument>): void {
+		SharedStore.set("jsonLdDocumentLoader", documentLoader);
+	}
 
 	/**
-	 * The document loader to use.
+	 * The document loader to use for retrieving JSON-LD documents.
+	 * @returns The document loader.
 	 */
-	public static DOCUMENT_LOADER = async (url: Url): Promise<RemoteDocument> =>
-		JsonLdProcessor.documentLoader(url);
+	public static getDocumentLoader(): (url: Url) => Promise<RemoteDocument> {
+		let documentLoader =
+			SharedStore.get<(url: Url) => Promise<RemoteDocument>>("jsonLdDocumentLoader");
+		if (Is.empty(documentLoader)) {
+			documentLoader = async (url: string) => JsonLdProcessor.documentLoader(url);
+		}
+		return documentLoader;
+	}
+
+	/**
+	 * Set the cache time limit for documents.
+	 * @param cacheLimitMs The cache limit in milliseconds.
+	 */
+	public static setCacheLimit(cacheLimitMs: number): void {
+		SharedStore.set("jsonLdDocumentCacheLimit", cacheLimitMs);
+	}
+
+	/**
+	 * Get the cache limit for documents.
+	 * @returns The document loader.
+	 */
+	public static getCacheLimit(): number {
+		let cacheLimitMs = SharedStore.get<number>("jsonLdDocumentCacheLimit");
+		if (Is.empty(cacheLimitMs)) {
+			cacheLimitMs = 3600000;
+			SharedStore.set("jsonLdDocumentCacheLimit", cacheLimitMs);
+		}
+		return cacheLimitMs;
+	}
+
+	/**
+	 * Set the global redirects for JSON-LD, use addRedirect for default handling.
+	 * @param redirects The redirects to use.
+	 */
+	public static setRedirects(
+		redirects: {
+			from: RegExp;
+			to: string;
+		}[]
+	): void {
+		SharedStore.set("jsonLdRedirects", redirects);
+	}
+
+	/**
+	 * Get the global redirects for JSON-LD.
+	 * @returns The registered redirects.
+	 */
+	public static getRedirects(): {
+		from: RegExp;
+		to: string;
+	}[] {
+		let redirects = SharedStore.get<
+			{
+				from: RegExp;
+				to: string;
+			}[]
+		>("jsonLdRedirects");
+		if (Is.empty(redirects)) {
+			redirects = [];
+			SharedStore.set("jsonLdRedirects", redirects);
+		}
+		return redirects;
+	}
 
 	/**
 	 * Compact a document according to a particular context.
@@ -62,7 +124,7 @@ export class JsonLdProcessor {
 					ObjectHelper.removeEmptyProperties(document),
 					context as IJsonLdContextDefinition,
 					{
-						documentLoader: JsonLdProcessor.DOCUMENT_LOADER
+						documentLoader: JsonLdProcessor.getDocumentLoader()
 					}
 				);
 				return compacted as T;
@@ -84,7 +146,7 @@ export class JsonLdProcessor {
 		try {
 			if (Is.object<IJsonLdNodeObject>(compacted)) {
 				const expanded = await jsonLd.expand(ObjectHelper.removeEmptyProperties(compacted), {
-					documentLoader: JsonLdProcessor.DOCUMENT_LOADER
+					documentLoader: JsonLdProcessor.getDocumentLoader()
 				});
 				return expanded;
 			}
@@ -113,7 +175,7 @@ export class JsonLdProcessor {
 			const normalized = await jsonLd.canonize(ObjectHelper.removeEmptyProperties(document), {
 				algorithm: options?.algorithm ?? "URDNA2015",
 				format: "application/n-quads",
-				documentLoader: JsonLdProcessor.DOCUMENT_LOADER
+				documentLoader: JsonLdProcessor.getDocumentLoader()
 			});
 			return normalized;
 		} catch (err) {
@@ -129,8 +191,9 @@ export class JsonLdProcessor {
 	 * @param to The URL to redirect to.
 	 */
 	public static addRedirect(from: RegExp, to: string): void {
-		if (!this._redirects.some(r => r.from === from)) {
-			this._redirects.push({ from, to });
+		const redirects = JsonLdProcessor.getRedirects();
+		if (!redirects.some(r => r.from === from)) {
+			redirects.push({ from, to });
 		}
 	}
 
@@ -299,7 +362,8 @@ export class JsonLdProcessor {
 	 * @internal
 	 */
 	private static async documentLoader(url: Url): Promise<RemoteDocument> {
-		for (const redirect of JsonLdProcessor._redirects) {
+		const redirects = JsonLdProcessor.getRedirects();
+		for (const redirect of redirects) {
 			if (redirect.from.test(url)) {
 				url = redirect.to;
 				break;
@@ -313,7 +377,7 @@ export class JsonLdProcessor {
 			HttpMethod.GET,
 			undefined,
 			{
-				cacheTtlMs: 3600000,
+				cacheTtlMs: JsonLdProcessor.getCacheLimit(),
 				headers: {
 					[HeaderTypes.Accept]: `${MimeTypes.JsonLd},${MimeTypes.Json}`
 				}

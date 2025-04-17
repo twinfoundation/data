@@ -1,4 +1,9 @@
 {
-	"type": ["string", "number", "boolean", "null"],
+	"type": [
+		"string",
+		"number",
+		"boolean",
+		"null"
+	],
 	"description": "JSON Primitive."
 }

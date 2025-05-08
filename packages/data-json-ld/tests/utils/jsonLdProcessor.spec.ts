@@ -122,6 +122,86 @@ describe("JsonLdProcessor", () => {
 		});
 	});
 
+	test("Can compact a document and retain single item array", async () => {
+		const doc: IJsonLdDocument = {
+			"@context": "https://schema.org",
+			type: "ItemList",
+			itemListElement: [
+				{
+					dateCreated: "2025-05-08T07:24:11.757Z",
+					id: "did:iota:testnet:0x1a7bded4d22dc54722435d624e4323e10fcbc570cd57462eabbf3a5ab2ced24f"
+				}
+			]
+		};
+		const compacted = await JsonLdProcessor.compact(doc, doc["@context"]);
+		expect(compacted).toEqual({
+			"@context": "https://schema.org",
+			type: "ItemList",
+			itemListElement: [
+				{
+					dateCreated: "2025-05-08T07:24:11.757Z",
+					id: "did:iota:testnet:0x1a7bded4d22dc54722435d624e4323e10fcbc570cd57462eabbf3a5ab2ced24f"
+				}
+			]
+		});
+	});
+
+	test("Can compact a document and retain multi item array", async () => {
+		const doc: IJsonLdDocument = {
+			"@context": "https://schema.org",
+			type: "ItemList",
+			itemListElement: [
+				{
+					dateCreated: "2025-05-08T07:24:11.757Z",
+					id: "did:iota:testnet:0x1a7bded4d22dc54722435d624e4323e10fcbc570cd57462eabbf3a5ab2ced24f"
+				},
+				{
+					dateCreated: "2025-05-08T07:24:11.757Z",
+					id: "did:iota:testnet:0x1a7bded4d22dc54722435d624e4323e10fcbc570cd57462eabbf3a5ab2ced24f"
+				}
+			]
+		};
+		const compacted = await JsonLdProcessor.compact(doc, doc["@context"]);
+		expect(compacted).toEqual({
+			"@context": "https://schema.org",
+			type: "ItemList",
+			itemListElement: [
+				{
+					dateCreated: "2025-05-08T07:24:11.757Z",
+					id: "did:iota:testnet:0x1a7bded4d22dc54722435d624e4323e10fcbc570cd57462eabbf3a5ab2ced24f"
+				},
+				{
+					dateCreated: "2025-05-08T07:24:11.757Z",
+					id: "did:iota:testnet:0x1a7bded4d22dc54722435d624e4323e10fcbc570cd57462eabbf3a5ab2ced24f"
+				}
+			]
+		});
+	});
+
+	test("Can compact a document and disable single item array override", async () => {
+		const doc: IJsonLdDocument = {
+			"@context": "https://schema.org",
+			type: "ItemList",
+			itemListElement: [
+				{
+					dateCreated: "2025-05-08T07:24:11.757Z",
+					id: "did:iota:testnet:0x1a7bded4d22dc54722435d624e4323e10fcbc570cd57462eabbf3a5ab2ced24f"
+				}
+			]
+		};
+		const compacted = await JsonLdProcessor.compact(doc, doc["@context"], {
+			itemListOverride: false
+		});
+		expect(compacted).toEqual({
+			"@context": "https://schema.org",
+			type: "ItemList",
+			itemListElement: {
+				dateCreated: "2025-05-08T07:24:11.757Z",
+				id: "did:iota:testnet:0x1a7bded4d22dc54722435d624e4323e10fcbc570cd57462eabbf3a5ab2ced24f"
+			}
+		});
+	});
+
 	test("Can combine contexts when they are empty", async () => {
 		const combined = JsonLdProcessor.combineContexts(undefined, undefined);
 		expect(combined).toEqual(null);

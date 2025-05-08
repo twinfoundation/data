@@ -99,24 +99,48 @@ export class JsonLdProcessor {
 	/**
 	 * Compact a document according to a particular context.
 	 * @param document The JSON-LD document to compact.
-	 * @param context The context to compact the document to, if not provided will try and gather from the object.
+	 * @param context The context to compact the document to, if not provided will use the one in the document.
+	 * @param options The options for compacting the document.
+	 * @param options.itemListOverride Whether to override the itemListElement context with a set, defaults to true.
 	 * @returns The compacted JSON-LD document.
 	 */
-	public static async compact<T>(document: T, context?: IJsonLdContextDefinitionRoot): Promise<T> {
+	public static async compact<T>(
+		document: T,
+		context?: IJsonLdContextDefinitionRoot,
+		options?: { itemListOverride: boolean }
+	): Promise<T> {
 		try {
 			if (Is.object<IJsonLdNodeObject>(document)) {
-				if (Is.empty(context)) {
-					context = {};
-					if (Is.array(document)) {
-						for (const node of document) {
-							context = JsonLdProcessor.gatherContexts(node as IJsonLdNodeObject, context);
+				// If the user didn't provide a context, use the one from the document
+				if (Is.empty(context) && !Is.empty(document["@context"])) {
+					context = document["@context"];
+				}
+
+				const overrideListElementOption = options?.itemListOverride ?? true;
+				let overrideContext: IJsonLdContextDefinitionElement | undefined;
+
+				if (overrideListElementOption) {
+					// The compactArrays flag doesn't work with the current version of jsonld.js
+					// For list results we standardise on ItemList and itemListElement
+					// so we modify the schema.org type for itemListElement to be a set which bypasses the issue
+					// https://github.com/digitalbazaar/jsonld.js/issues/247
+					overrideContext = {
+						itemListElement: {
+							"@id": "http://schema.org/itemListElement",
+							"@container": "@set",
+							"@protected": true
 						}
-					} else if (Is.array(document["@graph"])) {
-						for (const node of document["@graph"]) {
-							context = JsonLdProcessor.gatherContexts(node, context);
-						}
-					} else if (Is.object(document)) {
-						context = JsonLdProcessor.gatherContexts(document, context);
+					};
+
+					if (Is.object(context) && "@context" in context) {
+						// If the context is an object, we need to merge it with the override context
+						context = JsonLdProcessor.combineContexts(
+							context["@context"] as IJsonLdContextDefinitionRoot,
+							overrideContext
+						);
+					} else {
+						// If the context is a string or an array, we need to merge it with the override context
+						context = JsonLdProcessor.combineContexts(context, overrideContext);
 					}
 				}
 
@@ -127,6 +151,15 @@ export class JsonLdProcessor {
 						documentLoader: JsonLdProcessor.getDocumentLoader()
 					}
 				);
+
+				if (!Is.empty(overrideContext)) {
+					// Remove the override context from the compacted document
+					compacted["@context"] = JsonLdProcessor.removeContexts(
+						compacted["@context"] as IJsonLdContextDefinitionRoot,
+						[overrideContext]
+					);
+				}
+
 				return compacted as T;
 			}
 			return document;

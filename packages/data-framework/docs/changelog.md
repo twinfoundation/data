@@ -1,5 +1,20 @@
 # @twin.org/data-framework - Changelog
 
+## [0.0.1-next.32](https://github.com/twinfoundation/data/compare/data-framework-v0.0.1-next.31...data-framework-v0.0.1-next.32) (2025-05-28)
+
+
+### Features
+
+* use fully qualified names for data type lookups ([b7b5c74](https://github.com/twinfoundation/data/commit/b7b5c746b0180a87baa976f6a7a76cedd53d8ff7))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @twin.org/data-core bumped from 0.0.1-next.31 to 0.0.1-next.32
+    * @twin.org/data-json-ld bumped from 0.0.1-next.31 to 0.0.1-next.32
+
 ## [0.0.1-next.31](https://github.com/twinfoundation/data/compare/data-framework-v0.0.1-next.30...data-framework-v0.0.1-next.31) (2025-05-08)
 
 

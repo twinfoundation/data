@@ -1,6 +1,6 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
-import { GeneralError, Is, ObjectHelper, SharedStore } from "@twin.org/core";
+import { BaseError, GeneralError, Is, ObjectHelper, SharedStore } from "@twin.org/core";
 import { nameof } from "@twin.org/nameof";
 import { FetchHelper, HeaderTypes, HttpMethod, MimeTypes } from "@twin.org/web";
 import jsonLd from "jsonld";
@@ -403,24 +403,47 @@ export class JsonLdProcessor {
 			}
 		}
 
-		// Cache the results for an hour
-		const response = await FetchHelper.fetchJson<never, JsonLd>(
-			JsonLdProcessor._CLASS_NAME,
-			url,
-			HttpMethod.GET,
-			undefined,
-			{
-				cacheTtlMs: JsonLdProcessor.getCacheLimit(),
-				headers: {
-					[HeaderTypes.Accept]: `${MimeTypes.JsonLd},${MimeTypes.Json}`
+		try {
+			const response = await FetchHelper.fetchJson<never, JsonLd>(
+				JsonLdProcessor._CLASS_NAME,
+				url,
+				HttpMethod.GET,
+				undefined,
+				{
+					cacheTtlMs: JsonLdProcessor.getCacheLimit(),
+					headers: {
+						[HeaderTypes.Accept]: MimeTypes.JsonLd
+					}
 				}
-			}
-		);
+			);
 
-		return {
-			documentUrl: url,
-			document: response
-		};
+			return {
+				documentUrl: url,
+				document: response
+			};
+		} catch (err) {
+			const error = BaseError.fromError(err);
+			if (error.message.includes("is not valid JSON")) {
+				const response = await FetchHelper.fetchJson<never, JsonLd>(
+					JsonLdProcessor._CLASS_NAME,
+					url,
+					HttpMethod.GET,
+					undefined,
+					{
+						cacheTtlMs: JsonLdProcessor.getCacheLimit(),
+						headers: {
+							[HeaderTypes.Accept]: MimeTypes.Json
+						}
+					}
+				);
+
+				return {
+					documentUrl: url,
+					document: response
+				};
+			}
+			throw err;
+		}
 	}
 
 	/**

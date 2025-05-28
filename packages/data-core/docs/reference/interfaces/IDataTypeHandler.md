@@ -4,6 +4,14 @@ Interface describing a type which can handle a specific data type.
 
 ## Properties
 
+### context
+
+> **context**: `string`
+
+The context for the type.
+
+***
+
 ### type
 
 > **type**: `string`
@@ -16,7 +24,7 @@ The type for the item.
 
 > `optional` **defaultValue**: `unknown`
 
-The default value for the item.
+The default value for the item to use when constructing a new object.
 
 ## Methods
 

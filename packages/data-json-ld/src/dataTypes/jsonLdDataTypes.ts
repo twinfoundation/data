@@ -7,6 +7,8 @@ import { JsonLdTypes } from "../models/jsonLdTypes";
 import JsonLdContainerTypeSchema from "../schemas/JsonLdContainerType.json";
 import JsonLdContainerTypeArraySchema from "../schemas/JsonLdContainerTypeArray.json";
 import JsonLdContextDefinitionSchema from "../schemas/JsonLdContextDefinition.json";
+import JsonLdContextDefinitionElementSchema from "../schemas/JsonLdContextDefinitionElement.json";
+import JsonLdContextDefinitionRootSchema from "../schemas/JsonLdContextDefinitionRoot.json";
 import JsonLdDocumentSchema from "../schemas/JsonLdDocument.json";
 import JsonLdExpandedTermDefinitionSchema from "../schemas/JsonLdExpandedTermDefinition.json";
 import JsonLdGraphObjectSchema from "../schemas/JsonLdGraphObject.json";
@@ -38,16 +40,19 @@ export class JsonLdDataTypes {
 	 */
 	public static registerTypes(): void {
 		DataTypeHandlerFactory.register(`${JsonLdContexts.ContextRoot}${JsonLdTypes.Document}`, () => ({
+			context: JsonLdContexts.ContextRoot,
 			type: JsonLdTypes.Document,
 			jsonSchema: async () => JsonLdDocumentSchema as JSONSchema7
 		}));
 		DataTypeHandlerFactory.register(`${JsonLdContexts.ContextRoot}${JsonLdTypes.Object}`, () => ({
+			context: JsonLdContexts.ContextRoot,
 			type: JsonLdTypes.Object,
 			jsonSchema: async () => JsonLdObjectSchema as JSONSchema7
 		}));
 		DataTypeHandlerFactory.register(
 			`${JsonLdContexts.ContextRoot}${JsonLdTypes.NodeObject}`,
 			() => ({
+				context: JsonLdContexts.ContextRoot,
 				type: JsonLdTypes.NodeObject,
 				jsonSchema: async () => JsonLdNodeObjectSchema as JSONSchema7
 			})
@@ -55,6 +60,7 @@ export class JsonLdDataTypes {
 		DataTypeHandlerFactory.register(
 			`${JsonLdContexts.ContextRoot}${JsonLdTypes.NodePrimitive}`,
 			() => ({
+				context: JsonLdContexts.ContextRoot,
 				type: JsonLdTypes.NodePrimitive,
 				jsonSchema: async () => JsonLdNodePrimitiveSchema as JSONSchema7
 			})
@@ -62,6 +68,7 @@ export class JsonLdDataTypes {
 		DataTypeHandlerFactory.register(
 			`${JsonLdContexts.ContextRoot}${JsonLdTypes.GraphObject}`,
 			() => ({
+				context: JsonLdContexts.ContextRoot,
 				type: JsonLdTypes.GraphObject,
 				jsonSchema: async () => JsonLdGraphObjectSchema as JSONSchema7
 			})
@@ -69,6 +76,7 @@ export class JsonLdDataTypes {
 		DataTypeHandlerFactory.register(
 			`${JsonLdContexts.ContextRoot}${JsonLdTypes.ValueObject}`,
 			() => ({
+				context: JsonLdContexts.ContextRoot,
 				type: JsonLdTypes.ValueObject,
 				jsonSchema: async () => JsonLdValueObjectSchema as unknown as JSONSchema7
 			})
@@ -76,6 +84,7 @@ export class JsonLdDataTypes {
 		DataTypeHandlerFactory.register(
 			`${JsonLdContexts.ContextRoot}${JsonLdTypes.ListObject}`,
 			() => ({
+				context: JsonLdContexts.ContextRoot,
 				type: JsonLdTypes.ListObject,
 				jsonSchema: async () => JsonLdListObjectSchema as JSONSchema7
 			})
@@ -83,6 +92,7 @@ export class JsonLdDataTypes {
 		DataTypeHandlerFactory.register(
 			`${JsonLdContexts.ContextRoot}${JsonLdTypes.ListObject}`,
 			() => ({
+				context: JsonLdContexts.ContextRoot,
 				type: JsonLdTypes.ListObject,
 				jsonSchema: async () => JsonLdListObjectSchema as JSONSchema7
 			})
@@ -90,6 +100,7 @@ export class JsonLdDataTypes {
 		DataTypeHandlerFactory.register(
 			`${JsonLdContexts.ContextRoot}${JsonLdTypes.SetObject}`,
 			() => ({
+				context: JsonLdContexts.ContextRoot,
 				type: JsonLdTypes.SetObject,
 				jsonSchema: async () => JsonLdSetObjectSchema as JSONSchema7
 			})
@@ -97,32 +108,38 @@ export class JsonLdDataTypes {
 		DataTypeHandlerFactory.register(
 			`${JsonLdContexts.ContextRoot}${JsonLdTypes.LanguageMap}`,
 			() => ({
+				context: JsonLdContexts.ContextRoot,
 				type: JsonLdTypes.LanguageMap,
 				jsonSchema: async () => JsonLdLanguageMapSchema as JSONSchema7
 			})
 		);
 		DataTypeHandlerFactory.register(`${JsonLdContexts.ContextRoot}${JsonLdTypes.IndexMap}`, () => ({
+			context: JsonLdContexts.ContextRoot,
 			type: JsonLdTypes.IndexMap,
 			jsonSchema: async () => JsonLdIndexMapSchema as JSONSchema7
 		}));
 		DataTypeHandlerFactory.register(
 			`${JsonLdContexts.ContextRoot}${JsonLdTypes.IndexMapItem}`,
 			() => ({
+				context: JsonLdContexts.ContextRoot,
 				type: JsonLdTypes.IndexMapItem,
 				jsonSchema: async () => JsonLdIndexMapItemSchema as JSONSchema7
 			})
 		);
 		DataTypeHandlerFactory.register(`${JsonLdContexts.ContextRoot}${JsonLdTypes.IdMap}`, () => ({
+			context: JsonLdContexts.ContextRoot,
 			type: JsonLdTypes.IdMap,
 			jsonSchema: async () => JsonLdIdMapSchema as JSONSchema7
 		}));
 		DataTypeHandlerFactory.register(`${JsonLdContexts.ContextRoot}${JsonLdTypes.TypeMap}`, () => ({
+			context: JsonLdContexts.ContextRoot,
 			type: JsonLdTypes.TypeMap,
 			jsonSchema: async () => JsonLdTypeMapSchema as JSONSchema7
 		}));
 		DataTypeHandlerFactory.register(
 			`${JsonLdContexts.ContextRoot}${JsonLdTypes.IncludedBlock}`,
 			() => ({
+				context: JsonLdContexts.ContextRoot,
 				type: JsonLdTypes.IncludedBlock,
 				jsonSchema: async () => JsonLdIncludedBlockSchema as JSONSchema7
 			})
@@ -130,24 +147,44 @@ export class JsonLdDataTypes {
 		DataTypeHandlerFactory.register(
 			`${JsonLdContexts.ContextRoot}${JsonLdTypes.ContextDefinition}`,
 			() => ({
+				context: JsonLdContexts.ContextRoot,
 				type: JsonLdTypes.ContextDefinition,
 				jsonSchema: async () => JsonLdContextDefinitionSchema as JSONSchema7
 			})
 		);
 		DataTypeHandlerFactory.register(
+			`${JsonLdContexts.ContextRoot}${JsonLdTypes.ContextDefinitionElement}`,
+			() => ({
+				context: JsonLdContexts.ContextRoot,
+				type: JsonLdTypes.ContextDefinitionElement,
+				jsonSchema: async () => JsonLdContextDefinitionElementSchema as JSONSchema7
+			})
+		);
+		DataTypeHandlerFactory.register(
+			`${JsonLdContexts.ContextRoot}${JsonLdTypes.ContextDefinitionRoot}`,
+			() => ({
+				context: JsonLdContexts.ContextRoot,
+				type: JsonLdTypes.ContextDefinitionRoot,
+				jsonSchema: async () => JsonLdContextDefinitionRootSchema as JSONSchema7
+			})
+		);
+		DataTypeHandlerFactory.register(
 			`${JsonLdContexts.ContextRoot}${JsonLdTypes.ExpandedTermDefinition}`,
 			() => ({
+				context: JsonLdContexts.ContextRoot,
 				type: JsonLdTypes.ExpandedTermDefinition,
 				jsonSchema: async () => JsonLdExpandedTermDefinitionSchema as unknown as JSONSchema7
 			})
 		);
 		DataTypeHandlerFactory.register(`${JsonLdContexts.ContextRoot}${JsonLdTypes.Keyword}`, () => ({
+			context: JsonLdContexts.ContextRoot,
 			type: JsonLdTypes.Keyword,
 			jsonSchema: async () => JsonLdKeywordSchema as JSONSchema7
 		}));
 		DataTypeHandlerFactory.register(
 			`${JsonLdContexts.ContextRoot}${JsonLdTypes.ListOrSetItem}`,
 			() => ({
+				context: JsonLdContexts.ContextRoot,
 				type: JsonLdTypes.ListOrSetItem,
 				jsonSchema: async () => JsonLdListOrSetItemSchema as JSONSchema7
 			})
@@ -155,6 +192,7 @@ export class JsonLdDataTypes {
 		DataTypeHandlerFactory.register(
 			`${JsonLdContexts.ContextRoot}${JsonLdTypes.ContainerType}`,
 			() => ({
+				context: JsonLdContexts.ContextRoot,
 				type: JsonLdTypes.ContainerType,
 				jsonSchema: async () => JsonLdContainerTypeSchema as JSONSchema7
 			})
@@ -162,6 +200,7 @@ export class JsonLdDataTypes {
 		DataTypeHandlerFactory.register(
 			`${JsonLdContexts.ContextRoot}${JsonLdTypes.ContainerTypeArray}`,
 			() => ({
+				context: JsonLdContexts.ContextRoot,
 				type: JsonLdTypes.ContainerTypeArray,
 				jsonSchema: async () => JsonLdContainerTypeArraySchema as JSONSchema7
 			})
@@ -169,6 +208,7 @@ export class JsonLdDataTypes {
 		DataTypeHandlerFactory.register(
 			`${JsonLdContexts.ContextRoot}${JsonLdTypes.JsonPrimitive}`,
 			() => ({
+				context: JsonLdContexts.ContextRoot,
 				type: JsonLdTypes.JsonPrimitive,
 				jsonSchema: async () => JsonLdJsonPrimitiveSchema as JSONSchema7
 			})
@@ -176,6 +216,7 @@ export class JsonLdDataTypes {
 		DataTypeHandlerFactory.register(
 			`${JsonLdContexts.ContextRoot}${JsonLdTypes.JsonArray}`,
 			() => ({
+				context: JsonLdContexts.ContextRoot,
 				type: JsonLdTypes.JsonArray,
 				jsonSchema: async () => JsonLdJsonArraySchema as JSONSchema7
 			})
@@ -183,6 +224,7 @@ export class JsonLdDataTypes {
 		DataTypeHandlerFactory.register(
 			`${JsonLdContexts.ContextRoot}${JsonLdTypes.JsonObject}`,
 			() => ({
+				context: JsonLdContexts.ContextRoot,
 				type: JsonLdTypes.JsonObject,
 				jsonSchema: async () => JsonLdJsonObjectSchema as JSONSchema7
 			})
@@ -190,6 +232,7 @@ export class JsonLdDataTypes {
 		DataTypeHandlerFactory.register(
 			`${JsonLdContexts.ContextRoot}${JsonLdTypes.JsonValue}`,
 			() => ({
+				context: JsonLdContexts.ContextRoot,
 				type: JsonLdTypes.JsonValue,
 				jsonSchema: async () => JsonLdJsonValueSchema as JSONSchema7
 			})

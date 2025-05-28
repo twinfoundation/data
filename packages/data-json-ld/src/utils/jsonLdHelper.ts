@@ -1,7 +1,8 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
-import { Is, type IValidationFailure } from "@twin.org/core";
+import { ArrayHelper, Is, type IValidationFailure } from "@twin.org/core";
 import { DataTypeHelper, type ValidationMode } from "@twin.org/data-core";
+import { JsonLdProcessor } from "./jsonLdProcessor";
 import type { IJsonLdDocument } from "../models/IJsonLdDocument";
 import type { IJsonLdNodeObject } from "../models/IJsonLdNodeObject";
 
@@ -32,12 +33,14 @@ export class JsonLdHelper {
 				await JsonLdHelper.validate(node, validationFailures, validationMode);
 			}
 		} else if (Is.object<IJsonLdNodeObject>(document)) {
-			// If the graph is a single node, then use the validate the node schema
-			const dataType = document["@type"];
-			if (Is.stringValue(dataType)) {
+			// Expand the document to ensure we have the full context for types
+			// As the data types in the factories are not always fully qualified
+			const expandedDoc = await JsonLdProcessor.expand(document);
+			const expandedDataType = ArrayHelper.fromObjectOrArray(expandedDoc[0]["@type"]);
+			if (Is.arrayValue(expandedDataType)) {
 				await DataTypeHelper.validate(
 					"document",
-					dataType,
+					expandedDataType[0],
 					document,
 					validationFailures,
 					validationMode

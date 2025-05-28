@@ -8,12 +8,17 @@ import type { JSONSchema7 } from "json-schema";
  */
 export interface IDataTypeHandler {
 	/**
+	 * The context for the type.
+	 */
+	context: string;
+
+	/**
 	 * The type for the item.
 	 */
 	type: string;
 
 	/**
-	 * The default value for the item.
+	 * The default value for the item to use when constructing a new object.
 	 */
 	defaultValue?: unknown;
 

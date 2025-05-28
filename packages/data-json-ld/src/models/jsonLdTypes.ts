@@ -82,6 +82,16 @@ export const JsonLdTypes = {
 	ContextDefinition: "JsonLdContextDefinition",
 
 	/**
+	 * Represents JSON-LD Context Definition Element.
+	 */
+	ContextDefinitionElement: "JsonLdContextDefinitionElement",
+
+	/**
+	 * Represents JSON-LD Context Definition Root.
+	 */
+	ContextDefinitionRoot: "JsonLdContextDefinitionRoot",
+
+	/**
 	 * Represents JSON-LD Expanded Term Definition.
 	 */
 	ExpandedTermDefinition: "JsonLdExpandedTermDefinition",

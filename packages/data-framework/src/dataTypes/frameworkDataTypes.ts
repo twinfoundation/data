@@ -20,6 +20,7 @@ export class FrameworkDataTypes {
 		DataTypeHandlerFactory.register(
 			`${FrameworkContexts.ContextRoot}${FrameworkTypes.Urn}`,
 			() => ({
+				context: FrameworkContexts.ContextRoot,
 				type: FrameworkTypes.Urn,
 				defaultValue: "",
 				jsonSchema: async () => URNSchema as JSONSchema7,
@@ -31,6 +32,7 @@ export class FrameworkDataTypes {
 		DataTypeHandlerFactory.register(
 			`${FrameworkContexts.ContextRoot}${FrameworkTypes.TimestampMilliseconds}`,
 			() => ({
+				context: FrameworkContexts.ContextRoot,
 				type: FrameworkTypes.TimestampMilliseconds,
 				defaultValue: Date.now(),
 				jsonSchema: async () => TimestampMillisecondsSchema as JSONSchema7,
@@ -42,6 +44,7 @@ export class FrameworkDataTypes {
 		DataTypeHandlerFactory.register(
 			`${FrameworkContexts.ContextRoot}${FrameworkTypes.TimestampSeconds}`,
 			() => ({
+				context: FrameworkContexts.ContextRoot,
 				type: FrameworkTypes.TimestampSeconds,
 				defaultValue: Math.floor(Date.now() / 1000),
 				jsonSchema: async () => TimestampSecondsSchema as JSONSchema7,

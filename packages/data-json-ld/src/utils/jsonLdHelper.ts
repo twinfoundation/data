@@ -39,17 +39,23 @@ export class JsonLdHelper {
 			}
 		} else if (Is.object<IJsonLdNodeObject>(document)) {
 			// Expand the document to ensure we have the full context for types
-			// As the data types in the factories are not always fully qualified
-			const expandedDoc = await JsonLdProcessor.expand(document);
-			const expandedDataType = ArrayHelper.fromObjectOrArray(expandedDoc[0]["@type"]);
-			if (Is.arrayValue(expandedDataType)) {
-				await DataTypeHelper.validate(
-					"document",
-					expandedDataType[0],
-					document,
-					validationFailures,
-					options
-				);
+			// As the data types in the factories are always fully qualified
+			const expandedDocs = await JsonLdProcessor.expand(document);
+			if (Is.arrayValue(expandedDocs)) {
+				for (const expandedDoc of expandedDocs) {
+					const expandedDataTypes = ArrayHelper.fromObjectOrArray(expandedDoc["@type"]);
+					if (Is.arrayValue(expandedDataTypes)) {
+						for (const expandedDataType of expandedDataTypes) {
+							await DataTypeHelper.validate(
+								"document",
+								expandedDataType,
+								document,
+								validationFailures,
+								options
+							);
+						}
+					}
+				}
 			}
 		}
 

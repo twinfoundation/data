@@ -28,7 +28,7 @@ describe("JsonLdHelper", () => {
 		expect(validationFailures).toEqual([]);
 	});
 
-	test("Can validate a document with multiple types", async () => {
+	test("Can validate a document with multiple nested types", async () => {
 		const doc = {
 			"@context": "https://www.w3.org/ns/activitystreams",
 			type: "Add",
@@ -41,6 +41,36 @@ describe("JsonLdHelper", () => {
 				globalId: "24KEP051219453I002610796"
 			},
 			updated: 123
+		};
+
+		const validationFailures: IValidationFailure[] = [];
+		await JsonLdHelper.validate(doc, validationFailures);
+		expect(validationFailures).toEqual([]);
+	});
+
+	test("Can validate a document with multiple types", async () => {
+		const doc = {
+			"@context": ["https://www.w3.org/ns/activitystreams", "https://schema.org"],
+			type: ["Add", "ItemList"],
+			actor: {
+				id: "did:iota:testnet:0x123456"
+			},
+			object: {
+				"@context": "https://vocabulary.uncefact.org/",
+				type: "Document",
+				globalId: "24KEP051219453I002610796"
+			},
+			updated: 123,
+			itemListElement: [
+				{
+					"@context": "https://schema.org",
+					"@type": "Person",
+					name: "Jane Doe",
+					jobTitle: "Professor",
+					telephone: "(425) 123-4567",
+					url: "http://www.janedoe.com"
+				}
+			]
 		};
 
 		const validationFailures: IValidationFailure[] = [];

@@ -16,7 +16,9 @@ export class DataTypeHelper {
 	 * @param dataType The data type to validate.
 	 * @param data The data to validate.
 	 * @param validationFailures The list of validation failures to add to.
-	 * @param validationMode The validation mode to use, defaults to either.
+	 * @param options Optional options for validation.
+	 * @param options.failOnMissingType If true, will fail validation if the data type is missing, defaults to false.
+	 * @param options.validationMode The validation mode to use, defaults to either.
 	 * @returns True if the data was valid.
 	 */
 	public static async validate(
@@ -24,25 +26,36 @@ export class DataTypeHelper {
 		dataType: string | undefined,
 		data: unknown,
 		validationFailures: IValidationFailure[],
-		validationMode?: ValidationMode
+		options?: {
+			validationMode?: ValidationMode;
+			failOnMissingType?: boolean;
+		}
 	): Promise<boolean> {
+		let isValid = true;
+
 		if (Is.stringValue(dataType)) {
 			const handler = DataTypeHandlerFactory.getIfExists(dataType);
 
 			if (handler) {
-				validationMode = validationMode ?? ValidationMode.Either;
+				const validationMode = options?.validationMode ?? ValidationMode.Either;
 
 				// If we have a validate function use that as it is more specific
 				// and will produce better error messages
+				let hasValidated = false;
 				if (
 					(validationMode === ValidationMode.Validate ||
+						validationMode === ValidationMode.Both ||
 						validationMode === ValidationMode.Either) &&
 					Is.function(handler.validate)
 				) {
-					return handler.validate(propertyName, data, validationFailures);
-				} else if (
+					isValid = await handler.validate(propertyName, data, validationFailures);
+					hasValidated = true;
+				}
+
+				if (
 					(validationMode === ValidationMode.JsonSchema ||
-						validationMode === ValidationMode.Either) &&
+						(validationMode === ValidationMode.Either && !hasValidated) ||
+						validationMode === ValidationMode.Both) &&
 					Is.function(handler.jsonSchema)
 				) {
 					// Otherwise use the JSON schema if there is one
@@ -61,13 +74,24 @@ export class DataTypeHelper {
 								}
 							});
 						}
-						return validationResult.result;
+						if (!validationResult.result) {
+							isValid = false;
+						}
 					}
 				}
+			} else if (options?.failOnMissingType ?? false) {
+				// If we don't have a handler for a specific type and we are failing on missing type
+				validationFailures.push({
+					property: propertyName,
+					reason: "validation.schema.missingType",
+					properties: {
+						dataType
+					}
+				});
+				isValid = false;
 			}
 		}
 
-		// Return true by default if no other mechanism for validation is available
-		return true;
+		return isValid;
 	}
 }

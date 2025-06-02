@@ -14,23 +14,28 @@ export class JsonLdHelper {
 	 * Validate a JSON-LD document.
 	 * @param document The JSON-LD document to validate.
 	 * @param validationFailures The list of validation failures to add to.
-	 * @param validationMode The validation mode to use, defaults to either.
+	 * @param options Optional options for validation.
+	 * @param options.failOnMissingType If true, will fail validation if the data type is missing, defaults to false.
+	 * @param options.validationMode The validation mode to use, defaults to either.
 	 * @returns True if the document was valid.
 	 */
 	public static async validate<T extends IJsonLdDocument = IJsonLdDocument>(
 		document: T,
 		validationFailures: IValidationFailure[],
-		validationMode?: ValidationMode
+		options?: {
+			validationMode?: ValidationMode;
+			failOnMissingType?: boolean;
+		}
 	): Promise<boolean> {
 		if (Is.array<IJsonLdNodeObject>(document)) {
 			// If the document is an array of nodes, validate each node
 			for (const node of document) {
-				await JsonLdHelper.validate(node, validationFailures, validationMode);
+				await JsonLdHelper.validate(node, validationFailures, options);
 			}
 		} else if (Is.array<IJsonLdNodeObject>(document["@graph"])) {
 			// If the graph is an array of nodes, validate each node
 			for (const node of document["@graph"]) {
-				await JsonLdHelper.validate(node, validationFailures, validationMode);
+				await JsonLdHelper.validate(node, validationFailures, options);
 			}
 		} else if (Is.object<IJsonLdNodeObject>(document)) {
 			// Expand the document to ensure we have the full context for types
@@ -43,7 +48,7 @@ export class JsonLdHelper {
 					expandedDataType[0],
 					document,
 					validationFailures,
-					validationMode
+					options
 				);
 			}
 		}

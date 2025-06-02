@@ -126,4 +126,46 @@ describe("DataTypeHelper", () => {
 			I18n.formatMessage(`error.${validationFailures[0].reason}`, validationFailures[0].properties)
 		).toEqual("The JSON schema failed validation, must be string");
 	});
+
+	test("Can validate with missing type and no option set", async () => {
+		DataTypeHandlerFactory.register("test", () => ({
+			context: "test",
+			type: "test",
+			jsonSchema: async () => ({
+				type: "string"
+			})
+		}));
+		const validationFailures: IValidationFailure[] = [];
+		const validation = await DataTypeHelper.validate("value", "test222", 123, validationFailures, {
+			failOnMissingType: false
+		});
+
+		expect(validation).toEqual(true);
+		expect(validationFailures).toEqual([]);
+	});
+
+	test("Can fail to validate with missing type and option set", async () => {
+		DataTypeHandlerFactory.register("test", () => ({
+			context: "test",
+			type: "test",
+			jsonSchema: async () => ({
+				type: "string"
+			})
+		}));
+		const validationFailures: IValidationFailure[] = [];
+		const validation = await DataTypeHelper.validate("value", "test222", 123, validationFailures, {
+			failOnMissingType: true
+		});
+
+		expect(validation).toEqual(false);
+		expect(validationFailures).toEqual([
+			{
+				property: "value",
+				reason: "validation.schema.missingType",
+				properties: {
+					dataType: "test222"
+				}
+			}
+		]);
+	});
 });

@@ -19,7 +19,12 @@ export const ValidationMode = {
 	/**
 	 * Use either validation mode.
 	 */
-	Either: "either"
+	Either: "either",
+
+	/**
+	 * Use both validation modes.
+	 */
+	Both: "both"
 } as const;
 
 /**

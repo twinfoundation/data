@@ -1,5 +1,19 @@
 # @twin.org/data-json-ld - Changelog
 
+## [0.0.1-next.34](https://github.com/twinfoundation/data/compare/data-json-ld-v0.0.1-next.33...data-json-ld-v0.0.1-next.34) (2025-06-02)
+
+
+### Features
+
+* support multiple type JSON-LD ([8f0d530](https://github.com/twinfoundation/data/commit/8f0d530f66302ab19413ecf968f170f97456e31e))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @twin.org/data-core bumped from 0.0.1-next.33 to 0.0.1-next.34
+
 ## [0.0.1-next.33](https://github.com/twinfoundation/data/compare/data-json-ld-v0.0.1-next.32...data-json-ld-v0.0.1-next.33) (2025-06-02)
 
 

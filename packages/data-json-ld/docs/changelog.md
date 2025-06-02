@@ -1,5 +1,19 @@
 # @twin.org/data-json-ld - Changelog
 
+## [0.0.1-next.33](https://github.com/twinfoundation/data/compare/data-json-ld-v0.0.1-next.32...data-json-ld-v0.0.1-next.33) (2025-06-02)
+
+
+### Features
+
+* add fail on missing type option and both mode ([e8b9702](https://github.com/twinfoundation/data/commit/e8b97029a04b646497ff0e55b9610291e58ae92a))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @twin.org/data-core bumped from 0.0.1-next.32 to 0.0.1-next.33
+
 ## [0.0.1-next.32](https://github.com/twinfoundation/data/compare/data-json-ld-v0.0.1-next.31...data-json-ld-v0.0.1-next.32) (2025-05-28)
 
 

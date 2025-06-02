@@ -1,5 +1,17 @@
 # @twin.org/data-core - Changelog
 
+## [0.0.1-next.33](https://github.com/twinfoundation/data/compare/data-core-v0.0.1-next.32...data-core-v0.0.1-next.33) (2025-06-02)
+
+
+### Features
+
+* add fail on missing type option and both mode ([e8b9702](https://github.com/twinfoundation/data/commit/e8b97029a04b646497ff0e55b9610291e58ae92a))
+
+
+### Bug Fixes
+
+* tests using context ([577b3bb](https://github.com/twinfoundation/data/commit/577b3bbb661eafbf6d3fd157133c106732e8eb3d))
+
 ## [0.0.1-next.32](https://github.com/twinfoundation/data/compare/data-core-v0.0.1-next.31...data-core-v0.0.1-next.32) (2025-05-28)
 
 

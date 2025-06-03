@@ -1,5 +1,19 @@
 # @twin.org/data-json-ld - Changelog
 
+## [0.0.1-next.35](https://github.com/twinfoundation/data/compare/data-json-ld-v0.0.1-next.34...data-json-ld-v0.0.1-next.35) (2025-06-03)
+
+
+### Features
+
+* update ts-to-schema ([8c3cd91](https://github.com/twinfoundation/data/commit/8c3cd9131113f2d609f6e709562402e5c7766c1a))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @twin.org/data-core bumped from 0.0.1-next.34 to 0.0.1-next.35
+
 ## [0.0.1-next.34](https://github.com/twinfoundation/data/compare/data-json-ld-v0.0.1-next.33...data-json-ld-v0.0.1-next.34) (2025-06-02)
 
 

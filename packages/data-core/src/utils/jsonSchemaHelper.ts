@@ -12,7 +12,6 @@ import { Is, StringHelper } from "@twin.org/core";
 import type { IEntitySchema } from "@twin.org/entity";
 import { nameof } from "@twin.org/nameof";
 import { FetchHelper, HttpMethod } from "@twin.org/web";
-import type { Response as UndiciResponse } from "undici";
 import { DataTypeHandlerFactory } from "../factories/dataTypeHandlerFactory";
 import type { IJsonSchema } from "../models/IJsonSchema";
 import type { ISchemaValidationResult } from "../models/ISchemaValidationResult";
@@ -100,7 +99,8 @@ export class JsonSchemaHelper {
 						"Content-Type": "application/schema+json"
 					}),
 					json: Promise.resolve(loadedSchema)
-				} as unknown as UndiciResponse;
+					// eslint-disable-next-line @typescript-eslint/no-explicit-any
+				} as any;
 			}
 		};
 

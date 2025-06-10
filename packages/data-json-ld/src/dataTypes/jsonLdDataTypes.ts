@@ -1,7 +1,6 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
-import { DataTypeHandlerFactory } from "@twin.org/data-core";
-import type { JSONSchema7 } from "json-schema";
+import { DataTypeHandlerFactory, type IJsonSchema } from "@twin.org/data-core";
 import { JsonLdContexts } from "../models/jsonLdContexts";
 import { JsonLdTypes } from "../models/jsonLdTypes";
 import JsonLdContainerTypeSchema from "../schemas/JsonLdContainerType.json";
@@ -20,7 +19,6 @@ import JsonLdJsonArraySchema from "../schemas/JsonLdJsonArray.json";
 import JsonLdJsonObjectSchema from "../schemas/JsonLdJsonObject.json";
 import JsonLdJsonPrimitiveSchema from "../schemas/JsonLdJsonPrimitive.json";
 import JsonLdJsonValueSchema from "../schemas/JsonLdJsonValue.json";
-import JsonLdKeywordSchema from "../schemas/JsonLdKeyword.json";
 import JsonLdLanguageMapSchema from "../schemas/JsonLdLanguageMap.json";
 import JsonLdListObjectSchema from "../schemas/JsonLdListObject.json";
 import JsonLdListOrSetItemSchema from "../schemas/JsonLdListOrSetItem.json";
@@ -42,19 +40,19 @@ export class JsonLdDataTypes {
 		DataTypeHandlerFactory.register(`${JsonLdContexts.ContextRoot}${JsonLdTypes.Document}`, () => ({
 			context: JsonLdContexts.ContextRoot,
 			type: JsonLdTypes.Document,
-			jsonSchema: async () => JsonLdDocumentSchema as JSONSchema7
+			jsonSchema: async () => JsonLdDocumentSchema as IJsonSchema
 		}));
 		DataTypeHandlerFactory.register(`${JsonLdContexts.ContextRoot}${JsonLdTypes.Object}`, () => ({
 			context: JsonLdContexts.ContextRoot,
 			type: JsonLdTypes.Object,
-			jsonSchema: async () => JsonLdObjectSchema as JSONSchema7
+			jsonSchema: async () => JsonLdObjectSchema as IJsonSchema
 		}));
 		DataTypeHandlerFactory.register(
 			`${JsonLdContexts.ContextRoot}${JsonLdTypes.NodeObject}`,
 			() => ({
 				context: JsonLdContexts.ContextRoot,
 				type: JsonLdTypes.NodeObject,
-				jsonSchema: async () => JsonLdNodeObjectSchema as JSONSchema7
+				jsonSchema: async () => JsonLdNodeObjectSchema as IJsonSchema
 			})
 		);
 		DataTypeHandlerFactory.register(
@@ -62,7 +60,7 @@ export class JsonLdDataTypes {
 			() => ({
 				context: JsonLdContexts.ContextRoot,
 				type: JsonLdTypes.NodePrimitive,
-				jsonSchema: async () => JsonLdNodePrimitiveSchema as JSONSchema7
+				jsonSchema: async () => JsonLdNodePrimitiveSchema as IJsonSchema
 			})
 		);
 		DataTypeHandlerFactory.register(
@@ -70,7 +68,7 @@ export class JsonLdDataTypes {
 			() => ({
 				context: JsonLdContexts.ContextRoot,
 				type: JsonLdTypes.GraphObject,
-				jsonSchema: async () => JsonLdGraphObjectSchema as JSONSchema7
+				jsonSchema: async () => JsonLdGraphObjectSchema as IJsonSchema
 			})
 		);
 		DataTypeHandlerFactory.register(
@@ -78,7 +76,7 @@ export class JsonLdDataTypes {
 			() => ({
 				context: JsonLdContexts.ContextRoot,
 				type: JsonLdTypes.ValueObject,
-				jsonSchema: async () => JsonLdValueObjectSchema as unknown as JSONSchema7
+				jsonSchema: async () => JsonLdValueObjectSchema as unknown as IJsonSchema
 			})
 		);
 		DataTypeHandlerFactory.register(
@@ -86,7 +84,7 @@ export class JsonLdDataTypes {
 			() => ({
 				context: JsonLdContexts.ContextRoot,
 				type: JsonLdTypes.ListObject,
-				jsonSchema: async () => JsonLdListObjectSchema as JSONSchema7
+				jsonSchema: async () => JsonLdListObjectSchema as IJsonSchema
 			})
 		);
 		DataTypeHandlerFactory.register(
@@ -94,7 +92,7 @@ export class JsonLdDataTypes {
 			() => ({
 				context: JsonLdContexts.ContextRoot,
 				type: JsonLdTypes.ListObject,
-				jsonSchema: async () => JsonLdListObjectSchema as JSONSchema7
+				jsonSchema: async () => JsonLdListObjectSchema as IJsonSchema
 			})
 		);
 		DataTypeHandlerFactory.register(
@@ -102,7 +100,7 @@ export class JsonLdDataTypes {
 			() => ({
 				context: JsonLdContexts.ContextRoot,
 				type: JsonLdTypes.SetObject,
-				jsonSchema: async () => JsonLdSetObjectSchema as JSONSchema7
+				jsonSchema: async () => JsonLdSetObjectSchema as IJsonSchema
 			})
 		);
 		DataTypeHandlerFactory.register(
@@ -110,38 +108,38 @@ export class JsonLdDataTypes {
 			() => ({
 				context: JsonLdContexts.ContextRoot,
 				type: JsonLdTypes.LanguageMap,
-				jsonSchema: async () => JsonLdLanguageMapSchema as JSONSchema7
+				jsonSchema: async () => JsonLdLanguageMapSchema as IJsonSchema
 			})
 		);
 		DataTypeHandlerFactory.register(`${JsonLdContexts.ContextRoot}${JsonLdTypes.IndexMap}`, () => ({
 			context: JsonLdContexts.ContextRoot,
 			type: JsonLdTypes.IndexMap,
-			jsonSchema: async () => JsonLdIndexMapSchema as JSONSchema7
+			jsonSchema: async () => JsonLdIndexMapSchema as IJsonSchema
 		}));
 		DataTypeHandlerFactory.register(
 			`${JsonLdContexts.ContextRoot}${JsonLdTypes.IndexMapItem}`,
 			() => ({
 				context: JsonLdContexts.ContextRoot,
 				type: JsonLdTypes.IndexMapItem,
-				jsonSchema: async () => JsonLdIndexMapItemSchema as JSONSchema7
+				jsonSchema: async () => JsonLdIndexMapItemSchema as IJsonSchema
 			})
 		);
 		DataTypeHandlerFactory.register(`${JsonLdContexts.ContextRoot}${JsonLdTypes.IdMap}`, () => ({
 			context: JsonLdContexts.ContextRoot,
 			type: JsonLdTypes.IdMap,
-			jsonSchema: async () => JsonLdIdMapSchema as JSONSchema7
+			jsonSchema: async () => JsonLdIdMapSchema as IJsonSchema
 		}));
 		DataTypeHandlerFactory.register(`${JsonLdContexts.ContextRoot}${JsonLdTypes.TypeMap}`, () => ({
 			context: JsonLdContexts.ContextRoot,
 			type: JsonLdTypes.TypeMap,
-			jsonSchema: async () => JsonLdTypeMapSchema as JSONSchema7
+			jsonSchema: async () => JsonLdTypeMapSchema as IJsonSchema
 		}));
 		DataTypeHandlerFactory.register(
 			`${JsonLdContexts.ContextRoot}${JsonLdTypes.IncludedBlock}`,
 			() => ({
 				context: JsonLdContexts.ContextRoot,
 				type: JsonLdTypes.IncludedBlock,
-				jsonSchema: async () => JsonLdIncludedBlockSchema as JSONSchema7
+				jsonSchema: async () => JsonLdIncludedBlockSchema as IJsonSchema
 			})
 		);
 		DataTypeHandlerFactory.register(
@@ -149,7 +147,7 @@ export class JsonLdDataTypes {
 			() => ({
 				context: JsonLdContexts.ContextRoot,
 				type: JsonLdTypes.ContextDefinition,
-				jsonSchema: async () => JsonLdContextDefinitionSchema as JSONSchema7
+				jsonSchema: async () => JsonLdContextDefinitionSchema as IJsonSchema
 			})
 		);
 		DataTypeHandlerFactory.register(
@@ -157,7 +155,7 @@ export class JsonLdDataTypes {
 			() => ({
 				context: JsonLdContexts.ContextRoot,
 				type: JsonLdTypes.ContextDefinitionElement,
-				jsonSchema: async () => JsonLdContextDefinitionElementSchema as JSONSchema7
+				jsonSchema: async () => JsonLdContextDefinitionElementSchema as IJsonSchema
 			})
 		);
 		DataTypeHandlerFactory.register(
@@ -165,7 +163,7 @@ export class JsonLdDataTypes {
 			() => ({
 				context: JsonLdContexts.ContextRoot,
 				type: JsonLdTypes.ContextDefinitionRoot,
-				jsonSchema: async () => JsonLdContextDefinitionRootSchema as JSONSchema7
+				jsonSchema: async () => JsonLdContextDefinitionRootSchema as IJsonSchema
 			})
 		);
 		DataTypeHandlerFactory.register(
@@ -173,20 +171,15 @@ export class JsonLdDataTypes {
 			() => ({
 				context: JsonLdContexts.ContextRoot,
 				type: JsonLdTypes.ExpandedTermDefinition,
-				jsonSchema: async () => JsonLdExpandedTermDefinitionSchema as unknown as JSONSchema7
+				jsonSchema: async () => JsonLdExpandedTermDefinitionSchema as unknown as IJsonSchema
 			})
 		);
-		DataTypeHandlerFactory.register(`${JsonLdContexts.ContextRoot}${JsonLdTypes.Keyword}`, () => ({
-			context: JsonLdContexts.ContextRoot,
-			type: JsonLdTypes.Keyword,
-			jsonSchema: async () => JsonLdKeywordSchema as JSONSchema7
-		}));
 		DataTypeHandlerFactory.register(
 			`${JsonLdContexts.ContextRoot}${JsonLdTypes.ListOrSetItem}`,
 			() => ({
 				context: JsonLdContexts.ContextRoot,
 				type: JsonLdTypes.ListOrSetItem,
-				jsonSchema: async () => JsonLdListOrSetItemSchema as JSONSchema7
+				jsonSchema: async () => JsonLdListOrSetItemSchema as IJsonSchema
 			})
 		);
 		DataTypeHandlerFactory.register(
@@ -194,7 +187,7 @@ export class JsonLdDataTypes {
 			() => ({
 				context: JsonLdContexts.ContextRoot,
 				type: JsonLdTypes.ContainerType,
-				jsonSchema: async () => JsonLdContainerTypeSchema as JSONSchema7
+				jsonSchema: async () => JsonLdContainerTypeSchema as IJsonSchema
 			})
 		);
 		DataTypeHandlerFactory.register(
@@ -202,7 +195,7 @@ export class JsonLdDataTypes {
 			() => ({
 				context: JsonLdContexts.ContextRoot,
 				type: JsonLdTypes.ContainerTypeArray,
-				jsonSchema: async () => JsonLdContainerTypeArraySchema as JSONSchema7
+				jsonSchema: async () => JsonLdContainerTypeArraySchema as IJsonSchema
 			})
 		);
 		DataTypeHandlerFactory.register(
@@ -210,7 +203,7 @@ export class JsonLdDataTypes {
 			() => ({
 				context: JsonLdContexts.ContextRoot,
 				type: JsonLdTypes.JsonPrimitive,
-				jsonSchema: async () => JsonLdJsonPrimitiveSchema as JSONSchema7
+				jsonSchema: async () => JsonLdJsonPrimitiveSchema as IJsonSchema
 			})
 		);
 		DataTypeHandlerFactory.register(
@@ -218,7 +211,7 @@ export class JsonLdDataTypes {
 			() => ({
 				context: JsonLdContexts.ContextRoot,
 				type: JsonLdTypes.JsonArray,
-				jsonSchema: async () => JsonLdJsonArraySchema as JSONSchema7
+				jsonSchema: async () => JsonLdJsonArraySchema as IJsonSchema
 			})
 		);
 		DataTypeHandlerFactory.register(
@@ -226,7 +219,7 @@ export class JsonLdDataTypes {
 			() => ({
 				context: JsonLdContexts.ContextRoot,
 				type: JsonLdTypes.JsonObject,
-				jsonSchema: async () => JsonLdJsonObjectSchema as JSONSchema7
+				jsonSchema: async () => JsonLdJsonObjectSchema as IJsonSchema
 			})
 		);
 		DataTypeHandlerFactory.register(
@@ -234,7 +227,7 @@ export class JsonLdDataTypes {
 			() => ({
 				context: JsonLdContexts.ContextRoot,
 				type: JsonLdTypes.JsonValue,
-				jsonSchema: async () => JsonLdJsonValueSchema as JSONSchema7
+				jsonSchema: async () => JsonLdJsonValueSchema as IJsonSchema
 			})
 		);
 	}

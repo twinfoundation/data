@@ -12,8 +12,8 @@ The result.
 
 ***
 
-### error?
+### errors?
 
-> `optional` **error**: [`ISchemaValidationError`](../type-aliases/ISchemaValidationError.md)
+> `optional` **errors**: [`ISchemaValidationErrors`](../type-aliases/ISchemaValidationErrors.md)
 
 The error.

@@ -1,8 +1,9 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
 /* eslint-disable jsdoc/require-jsdoc */
+import type { IJsonLdContextDefinitionRoot } from "./IJsonLdContextDefinitionRoot";
+import type { IJsonLdIncludedBlock } from "./IJsonLdIncludedBlock";
 import type { IJsonLdJsonObject } from "./IJsonLdJsonObject";
-import type { IJsonLdKeyword } from "./IJsonLdKeyword";
 import type { IJsonLdNodeObject } from "./IJsonLdNodeObject";
 
 /**
@@ -16,12 +17,12 @@ import type { IJsonLdNodeObject } from "./IJsonLdNodeObject";
  * @see https://www.w3.org/TR/json-ld11/#node-objects
  */
 export interface IJsonLdObject {
-	"@context"?: IJsonLdKeyword["@context"] | undefined;
-	"@id"?: IJsonLdKeyword["@id"] | undefined;
-	"@included"?: IJsonLdKeyword["@included"] | undefined;
+	"@context"?: IJsonLdContextDefinitionRoot | undefined;
+	"@id"?: string | string[] | undefined;
+	"@included"?: IJsonLdIncludedBlock | undefined;
 	"@graph"?: IJsonLdNodeObject | IJsonLdNodeObject[] | undefined;
 	"@nest"?: IJsonLdJsonObject | IJsonLdJsonObject[] | undefined;
-	"@type"?: IJsonLdKeyword["@type"] | IJsonLdKeyword["@type"][] | undefined;
-	"@reverse"?: { [key: string]: IJsonLdKeyword["@reverse"] } | undefined;
-	"@index"?: IJsonLdKeyword["@index"] | undefined;
+	"@type"?: string | string[] | undefined;
+	"@reverse"?: { [key: string]: string } | undefined;
+	"@index"?: string | undefined;
 }

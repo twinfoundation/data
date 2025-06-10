@@ -1,9 +1,9 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
 import { Is, type IValidationFailure } from "@twin.org/core";
-import type { JSONSchema7 } from "json-schema";
 import { JsonSchemaHelper } from "./jsonSchemaHelper";
 import { DataTypeHandlerFactory } from "../factories/dataTypeHandlerFactory";
+import type { IJsonSchema } from "../models/IJsonSchema";
 import { ValidationMode } from "../models/validationMode";
 
 /**
@@ -61,16 +61,16 @@ export class DataTypeHelper {
 					// Otherwise use the JSON schema if there is one
 					const schema = await handler.jsonSchema();
 
-					if (Is.object<JSONSchema7>(schema)) {
+					if (Is.object<IJsonSchema>(schema)) {
 						const validationResult = await JsonSchemaHelper.validate(schema, data);
-						if (Is.arrayValue(validationResult.error)) {
+						if (Is.arrayValue(validationResult.errors)) {
 							validationFailures.push({
 								property: propertyName,
 								reason: "validation.schema.failedValidation",
 								properties: {
 									value: data,
-									schemaErrors: validationResult.error,
-									message: validationResult.error.map(e => e.message).join(", ")
+									schemaErrors: validationResult.errors,
+									message: validationResult.errors.map(e => e.message).join("\n")
 								}
 							});
 						}

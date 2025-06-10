@@ -17,7 +17,6 @@ export * from "./models/IJsonLdJsonArray";
 export * from "./models/IJsonLdJsonObject";
 export * from "./models/IJsonLdJsonPrimitive";
 export * from "./models/IJsonLdJsonValue";
-export * from "./models/IJsonLdKeyword";
 export * from "./models/IJsonLdLanguageMap";
 export * from "./models/IJsonLdListObject";
 export * from "./models/IJsonLdListOrSetItem";

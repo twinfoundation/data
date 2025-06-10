@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0.
 /* eslint-disable jsdoc/require-jsdoc */
 import type { IJsonLdExpandedTermDefinition } from "./IJsonLdExpandedTermDefinition";
-import type { IJsonLdKeyword } from "./IJsonLdKeyword";
 
 /**
  * This is a copy of the types from the npm jsonld package. This is necessary as the JSON schema generators
@@ -20,18 +19,18 @@ export interface IJsonLdContextDefinition {
 		| IJsonLdExpandedTermDefinition
 		| IJsonLdContextDefinition[keyof IJsonLdContextDefinition];
 
-	"@base"?: IJsonLdKeyword["@base"] | undefined;
-	"@direction"?: IJsonLdKeyword["@direction"] | undefined;
-	"@import"?: IJsonLdKeyword["@import"] | undefined;
-	"@language"?: IJsonLdKeyword["@language"] | undefined;
-	"@propagate"?: IJsonLdKeyword["@propagate"] | undefined;
-	"@protected"?: IJsonLdKeyword["@protected"] | undefined;
+	"@base"?: string | null | undefined;
+	"@direction"?: "ltr" | "rtl" | null | undefined;
+	"@import"?: string | undefined;
+	"@language"?: string | undefined;
+	"@propagate"?: boolean | undefined;
+	"@protected"?: boolean | undefined;
 	"@type"?:
 		| {
 				"@container": "@set";
-				"@protected"?: IJsonLdKeyword["@protected"] | undefined;
+				"@protected"?: boolean | undefined;
 		  }
 		| undefined;
-	"@version"?: IJsonLdKeyword["@version"] | undefined;
-	"@vocab"?: IJsonLdKeyword["@vocab"] | undefined;
+	"@version"?: "1.1" | undefined;
+	"@vocab"?: string | null | undefined;
 }

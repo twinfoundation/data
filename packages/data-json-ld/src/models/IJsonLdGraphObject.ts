@@ -1,7 +1,7 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
 /* eslint-disable jsdoc/require-jsdoc */
-import type { IJsonLdKeyword } from "./IJsonLdKeyword";
+import type { IJsonLdContextDefinitionRoot } from "./IJsonLdContextDefinitionRoot";
 import type { IJsonLdNodeObject } from "./IJsonLdNodeObject";
 
 /**
@@ -15,7 +15,7 @@ import type { IJsonLdNodeObject } from "./IJsonLdNodeObject";
  */
 export interface IJsonLdGraphObject {
 	"@graph": IJsonLdNodeObject | IJsonLdNodeObject[];
-	"@index"?: IJsonLdKeyword["@index"] | undefined;
-	"@id"?: IJsonLdKeyword["@id"] | undefined;
-	"@context"?: IJsonLdKeyword["@context"] | undefined;
+	"@index"?: string | undefined;
+	"@id"?: string | string[] | undefined;
+	"@context"?: IJsonLdContextDefinitionRoot | undefined;
 }

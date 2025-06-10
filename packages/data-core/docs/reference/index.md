@@ -13,7 +13,8 @@
 
 ## Type Aliases
 
-- [ISchemaValidationError](type-aliases/ISchemaValidationError.md)
+- [IJsonSchema](type-aliases/IJsonSchema.md)
+- [ISchemaValidationErrors](type-aliases/ISchemaValidationErrors.md)
 - [ValidationMode](type-aliases/ValidationMode.md)
 
 ## Variables

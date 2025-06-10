@@ -1,14 +1,20 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
+import { acceptableMediaTypes, addUriSchemePlugin, type UriSchemePlugin } from "@hyperjump/browser";
+import type { Json } from "@hyperjump/json-pointer";
+import {
+	type OutputUnit,
+	registerSchema,
+	unregisterSchema,
+	validate
+} from "@hyperjump/json-schema/draft-2020-12";
 import { Is, StringHelper } from "@twin.org/core";
 import type { IEntitySchema } from "@twin.org/entity";
 import { nameof } from "@twin.org/nameof";
 import { FetchHelper, HttpMethod } from "@twin.org/web";
-import Ajv from "ajv";
-import addFormats from "ajv-formats";
-import type { JSONSchema7 } from "json-schema";
+import type { Response as UndiciResponse } from "undici";
 import { DataTypeHandlerFactory } from "../factories/dataTypeHandlerFactory";
-import type { ISchemaValidationError } from "../models/ISchemaValidationError";
+import type { IJsonSchema } from "../models/IJsonSchema";
 import type { ISchemaValidationResult } from "../models/ISchemaValidationResult";
 
 /**
@@ -19,6 +25,18 @@ export class JsonSchemaHelper {
 	 * The schema version.
 	 */
 	public static readonly SCHEMA_VERSION = "https://json-schema.org/draft/2020-12/schema";
+
+	/**
+	 * The private prefix for the type.
+	 * @internal
+	 */
+	private static readonly _PRIVATE_PREFIX = "https://twindev.org/private/";
+
+	/**
+	 * The private type.
+	 * @internal
+	 */
+	private static readonly _PRIVATE_TYPE = "https://twindev.org/private/ValidationType";
 
 	/**
 	 * The class name.
@@ -34,66 +52,99 @@ export class JsonSchemaHelper {
 	 * @returns Result containing errors if there are any.
 	 */
 	public static async validate<T = unknown>(
-		schema: JSONSchema7,
+		schema: IJsonSchema,
 		data: T,
-		additionalTypes?: { [id: string]: JSONSchema7 }
+		additionalTypes?: { [id: string]: IJsonSchema }
 	): Promise<ISchemaValidationResult> {
-		const ajv = new Ajv({
-			allowUnionTypes: true,
-			// Disable strict tuples as it causes issues with the schema validation when
-			// you have an array with fixed elements e.g. myType: [string, ...string[]]
-			// https://github.com/ajv-validator/ajv/issues/1417
-			strictTuples: false,
-			loadSchema: async uri => {
+		const httpSchemePlugin: UriSchemePlugin = {
+			retrieve: async uri => {
+				let loadedSchema: IJsonSchema | undefined;
+
 				const subTypeHandler = DataTypeHandlerFactory.getIfExists(uri);
 				if (Is.function(subTypeHandler?.jsonSchema)) {
 					const subSchema = await subTypeHandler.jsonSchema();
-					if (Is.object<JSONSchema7>(subSchema)) {
-						return subSchema;
+					if (Is.object<IJsonSchema>(subSchema)) {
+						loadedSchema = subSchema;
 					}
 				}
 
-				try {
-					// We don't have the type in our local data types, so we try to fetch it from the web
-					return FetchHelper.fetchJson<never, JSONSchema7>(
-						JsonSchemaHelper._CLASS_NAME,
-						uri,
-						HttpMethod.GET,
-						undefined,
-						{
-							// Cache for an hour
-							cacheTtlMs: 3600000
-						}
-					);
-				} catch {
-					// Failed to load remotely so return an empty object
-					// so the schema validation doesn't completely fail
-					return {};
+				if (!Is.object<IJsonSchema>(loadedSchema)) {
+					try {
+						// We don't have the type in our local data types, so we try to fetch it from the web
+						schema = await FetchHelper.fetchJson<never, IJsonSchema>(
+							JsonSchemaHelper._CLASS_NAME,
+							uri,
+							HttpMethod.GET,
+							undefined,
+							{
+								headers: {
+									Accept: acceptableMediaTypes()
+								},
+								// Cache for an hour
+								cacheTtlMs: 3600000
+							}
+						);
+					} catch {}
 				}
-			}
-		});
 
-		addFormats(ajv);
+				// Failed to load remotely so return an empty object
+				// so the schema validation doesn't completely fail
+				loadedSchema ??= {};
+
+				return {
+					status: 200,
+					statusText: "OK",
+					ok: true,
+					url: uri,
+					headers: new Headers({
+						"Content-Type": "application/schema+json"
+					}),
+					json: Promise.resolve(loadedSchema)
+				} as unknown as UndiciResponse;
+			}
+		};
+
+		addUriSchemePlugin("https", httpSchemePlugin);
+		addUriSchemePlugin("http", httpSchemePlugin);
 
 		// Add the additional types provided by the user
 		if (Is.objectValue(additionalTypes)) {
 			for (const key in additionalTypes) {
-				ajv.addSchema(additionalTypes[key], key);
+				additionalTypes[key].$schema =
+					additionalTypes[key].$schema ?? JsonSchemaHelper.SCHEMA_VERSION;
+
+				const additionalType = key.startsWith("http")
+					? key
+					: `${JsonSchemaHelper._PRIVATE_PREFIX}${key}`;
+				registerSchema(additionalTypes[key], additionalType);
 			}
 		}
 
-		const compiled = await ajv.compileAsync(schema);
-		const result = await compiled(data);
+		schema.$schema = schema.$schema ?? JsonSchemaHelper.SCHEMA_VERSION;
 
-		const output: ISchemaValidationResult = {
-			result
-		};
+		registerSchema(schema, JsonSchemaHelper._PRIVATE_TYPE);
 
-		if (!output.result) {
-			output.error = compiled.errors as ISchemaValidationError;
+		const output = await validate(JsonSchemaHelper._PRIVATE_TYPE, data as Json, "DETAILED");
+
+		await this.cleanupOutput(output);
+		await this.formatErrors(output, data);
+
+		unregisterSchema(JsonSchemaHelper._PRIVATE_TYPE);
+
+		// Remove the additional types provided by the user
+		if (Is.objectValue(additionalTypes)) {
+			for (const key in additionalTypes) {
+				const additionalType = key.startsWith("http")
+					? key
+					: `${JsonSchemaHelper._PRIVATE_PREFIX}${key}`;
+				unregisterSchema(additionalType);
+			}
 		}
 
-		return output;
+		return {
+			result: output.valid,
+			errors: output.errors
+		};
 	}
 
 	/**
@@ -102,10 +153,13 @@ export class JsonSchemaHelper {
 	 * @param propertyName The name of the property to get the type for.
 	 * @returns The types of the property.
 	 */
-	public static getPropertyType(schema: JSONSchema7, propertyName: string): string | undefined {
+	public static getPropertyType(schema: IJsonSchema, propertyName: string): string | undefined {
+		if (Is.boolean(schema)) {
+			return undefined;
+		}
 		if (schema.type === "object" && Is.objectValue(schema.properties)) {
 			const propertySchema = schema.properties[propertyName];
-			if (Is.object<JSONSchema7>(propertySchema)) {
+			if (!Is.boolean(propertySchema) && !Is.empty(propertySchema)) {
 				if (Is.stringValue(propertySchema.$ref)) {
 					return propertySchema.$ref;
 				}
@@ -123,21 +177,21 @@ export class JsonSchemaHelper {
 	public static entitySchemaToJsonSchema(
 		entitySchema: IEntitySchema | undefined,
 		baseDomain?: string
-	): JSONSchema7 {
+	): IJsonSchema {
 		let domain = StringHelper.trimTrailingSlashes(baseDomain ?? "");
 		if (domain.length > 0) {
 			domain += "/";
 		}
 
 		const properties: {
-			[key: string]: JSONSchema7;
+			[key: string]: IJsonSchema;
 		} = {};
 
 		const required: string[] = [];
 
 		if (Is.arrayValue(entitySchema?.properties)) {
 			for (const propertySchema of entitySchema.properties) {
-				const jsonPropertySchema: JSONSchema7 = {
+				const jsonPropertySchema: IJsonSchema = {
 					type: propertySchema.type,
 					description: propertySchema.description,
 					// eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -181,5 +235,49 @@ export class JsonSchemaHelper {
 			properties,
 			additionalProperties: false
 		};
+	}
+
+	/**
+	 * Cleanup the errors from the schema validation.
+	 * @param outputUnit The errors to format.
+	 * @param data The data that was validated.
+	 * @returns The formatted errors.
+	 */
+	public static async formatErrors<T>(
+		outputUnit: OutputUnit & { message?: string },
+		data: T
+	): Promise<void> {
+		if (outputUnit.keyword === "https://json-schema.org/keyword/required") {
+			outputUnit.message = `The property '${outputUnit.instanceLocation}' is required but was not found.`;
+		} else {
+			outputUnit.message = `"${outputUnit.instanceLocation}" fails schema constraint ${outputUnit.absoluteKeywordLocation}`;
+		}
+
+		if (Is.arrayValue(outputUnit.errors)) {
+			for (const subError of outputUnit.errors) {
+				await this.formatErrors(subError, data);
+			}
+		}
+	}
+
+	/**
+	 * Cleanup the errors from the schema validation.
+	 * @param outputUnit The errors to format.
+	 * @returns The formatted errors.
+	 * @internal
+	 */
+	private static async cleanupOutput(outputUnit: OutputUnit & { message?: string }): Promise<void> {
+		if (outputUnit.absoluteKeywordLocation?.startsWith(JsonSchemaHelper._PRIVATE_TYPE)) {
+			outputUnit.absoluteKeywordLocation = outputUnit.absoluteKeywordLocation.replace(
+				JsonSchemaHelper._PRIVATE_TYPE,
+				""
+			);
+		}
+
+		if (Is.arrayValue(outputUnit.errors)) {
+			for (const subError of outputUnit.errors) {
+				await this.cleanupOutput(subError);
+			}
+		}
 	}
 }

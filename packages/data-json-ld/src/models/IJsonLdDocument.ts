@@ -1,7 +1,8 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
-import type { IJsonLdKeyword } from "./IJsonLdKeyword";
+import type { IJsonLdContextDefinitionRoot } from "./IJsonLdContextDefinitionRoot";
 import type { IJsonLdNodeObject } from "./IJsonLdNodeObject";
+import type { IJsonLdValueObject } from "./IJsonLdValueObject";
 
 /**
  * This is a copy of the types from the npm jsonld package. This is necessary as the JSON schema generators
@@ -23,6 +24,10 @@ export type IJsonLdDocument =
 	| IJsonLdNodeObject
 	| IJsonLdNodeObject[]
 	| {
-			"@context"?: IJsonLdKeyword["@context"] | undefined;
-			"@graph"?: IJsonLdKeyword["@graph"] | undefined;
+			"@context"?: IJsonLdContextDefinitionRoot | undefined;
+			"@graph"?:
+				| IJsonLdValueObject
+				| IJsonLdNodeObject
+				| (IJsonLdValueObject | IJsonLdNodeObject)[]
+				| undefined;
 	  };

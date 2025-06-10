@@ -1,8 +1,8 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
+import type { IJsonLdContextDefinitionRoot } from "./IJsonLdContextDefinitionRoot";
 import type { IJsonLdJsonArray } from "./IJsonLdJsonArray";
 import type { IJsonLdJsonObject } from "./IJsonLdJsonObject";
-import type { IJsonLdKeyword } from "./IJsonLdKeyword";
 
 /**
  * This is a copy of the types from the npm jsonld package. This is necessary as the JSON schema generators
@@ -15,20 +15,20 @@ import type { IJsonLdKeyword } from "./IJsonLdKeyword";
  * @see https://www.w3.org/TR/json-ld11/#value-objects
  */
 export type IJsonLdValueObject = {
-	"@index"?: IJsonLdKeyword["@index"] | undefined;
-	"@context"?: IJsonLdKeyword["@context"] | undefined;
+	"@index"?: string | undefined;
+	"@context"?: IJsonLdContextDefinitionRoot | undefined;
 } & (
 	| {
-			"@value": IJsonLdKeyword["@value"];
-			"@language"?: IJsonLdKeyword["@language"] | undefined;
-			"@direction"?: IJsonLdKeyword["@direction"] | undefined;
+			"@value": null | boolean | number | string;
+			"@language"?: string | undefined;
+			"@direction"?: "ltr" | "rtl" | null | undefined;
 	  }
 	| {
-			"@value": IJsonLdKeyword["@value"];
-			"@type": IJsonLdKeyword["@type"];
+			"@value": null | boolean | number | string;
+			"@type": string;
 	  }
 	| {
-			"@value": IJsonLdKeyword["@value"] | IJsonLdJsonObject | IJsonLdJsonArray;
+			"@value": null | boolean | number | string | IJsonLdJsonObject | IJsonLdJsonArray;
 			"@type": "@json";
 	  }
 );

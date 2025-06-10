@@ -19,7 +19,6 @@
 		"./src/models/IJsonLdContextDefinitionRoot.ts",
 		"./src/models/IJsonLdContextDefinitionElement.ts",
 		"./src/models/IJsonLdExpandedTermDefinition.ts",
-		"./src/models/IJsonLdKeyword.ts",
 		"./src/models/IJsonLdListOrSetItem.ts",
 		"./src/models/IJsonLdContainerType.ts",
 		"./src/models/IJsonLdContainerTypeArray.ts",

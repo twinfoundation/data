@@ -1,7 +1,8 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
+import type { IJsonLdContainerType } from "./IJsonLdContainerType";
+import type { IJsonLdContainerTypeArray } from "./IJsonLdContainerTypeArray";
 import type { IJsonLdContextDefinition } from "./IJsonLdContextDefinition";
-import type { IJsonLdKeyword } from "./IJsonLdKeyword";
 
 /**
  * This is a copy of the types from the npm jsonld package. This is necessary as the JSON schema generators
@@ -16,20 +17,25 @@ import type { IJsonLdKeyword } from "./IJsonLdKeyword";
  */
 export type IJsonLdExpandedTermDefinition = {
 	"@type"?: "@id" | "@json" | "@none" | "@vocab" | string | undefined;
-	"@language"?: IJsonLdKeyword["@language"] | undefined;
-	"@index"?: IJsonLdKeyword["@index"] | undefined;
+	"@language"?: string | undefined;
+	"@index"?: string | undefined;
 	"@context"?: IJsonLdContextDefinition | undefined;
-	"@prefix"?: IJsonLdKeyword["@prefix"] | undefined;
-	"@propagate"?: IJsonLdKeyword["@propagate"] | undefined;
-	"@protected"?: IJsonLdKeyword["@protected"] | undefined;
+	"@prefix"?: boolean | undefined;
+	"@propagate"?: boolean | undefined;
+	"@protected"?: boolean | undefined;
 } & (
 	| {
-			"@id"?: IJsonLdKeyword["@id"] | null | undefined;
+			"@id"?: string | string[] | null | undefined;
 			"@nest"?: "@nest" | string | undefined;
-			"@container"?: IJsonLdKeyword["@container"] | undefined;
+			"@container"?:
+				| ("@list" | "@set" | IJsonLdContainerType)
+				| ("@list" | "@set" | IJsonLdContainerType)[]
+				| IJsonLdContainerTypeArray
+				| null
+				| undefined;
 	  }
 	| {
-			"@reverse": IJsonLdKeyword["@reverse"];
+			"@reverse": string;
 			"@container"?: "@set" | "@index" | null | undefined;
 	  }
 );

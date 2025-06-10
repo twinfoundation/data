@@ -1,7 +1,7 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
 /* eslint-disable jsdoc/require-jsdoc */
-import type { IJsonLdKeyword } from "./IJsonLdKeyword";
+import type { IJsonLdListOrSetItem } from "./IJsonLdListOrSetItem";
 
 /**
  * This is a copy of the types from the npm jsonld package. This is necessary as the JSON schema generators
@@ -13,6 +13,6 @@ import type { IJsonLdKeyword } from "./IJsonLdKeyword";
  * @see https://www.w3.org/TR/json-ld11/#lists-and-sets
  */
 export interface IJsonLdSetObject {
-	"@set": IJsonLdKeyword["@set"];
-	"@index"?: IJsonLdKeyword["@index"] | undefined;
+	"@set": IJsonLdListOrSetItem | IJsonLdListOrSetItem[];
+	"@index"?: string | undefined;
 }

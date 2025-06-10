@@ -1,7 +1,7 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
-import { entity, EntitySchemaHelper, property, SortDirection } from "@twin.org/entity";
-import type { JSONSchema7 } from "json-schema";
+import { entity, property, EntitySchemaHelper, SortDirection } from "@twin.org/entity";
+import type { IJsonSchema } from "../../src/models/IJsonSchema";
 import { JsonSchemaHelper } from "../../src/utils/jsonSchemaHelper";
 
 /**
@@ -49,7 +49,7 @@ export class TestEntity {
 
 describe("JsonSchemaHelper", () => {
 	test("Can fail to validate a string when value is not string", async () => {
-		const schema: JSONSchema7 = {
+		const schema: IJsonSchema = {
 			type: "string"
 		};
 
@@ -58,21 +58,18 @@ describe("JsonSchemaHelper", () => {
 		const validation = await JsonSchemaHelper.validate(schema, data);
 
 		expect(validation.result).toEqual(false);
-		expect(validation.error).toEqual([
+		expect(validation.errors).toEqual([
 			{
-				instancePath: "",
-				schemaPath: "#/type",
-				keyword: "type",
-				params: {
-					type: "string"
-				},
-				message: "must be string"
+				absoluteKeywordLocation: "#/type",
+				instanceLocation: "#",
+				keyword: "https://json-schema.org/keyword/type",
+				message: '"#" fails schema constraint #/type'
 			}
 		]);
 	});
 
 	test("Can validate a string", async () => {
-		const schema: JSONSchema7 = {
+		const schema: IJsonSchema = {
 			type: "string"
 		};
 
@@ -81,11 +78,11 @@ describe("JsonSchemaHelper", () => {
 		const validation = await JsonSchemaHelper.validate(schema, data);
 
 		expect(validation.result).toEqual(true);
-		expect(validation.error).toBeUndefined();
+		expect(validation.errors).toBeUndefined();
 	});
 
 	test("Can fail to validate a number when value is not number", async () => {
-		const schema: JSONSchema7 = {
+		const schema: IJsonSchema = {
 			type: "number"
 		};
 
@@ -94,21 +91,18 @@ describe("JsonSchemaHelper", () => {
 		const validation = await JsonSchemaHelper.validate(schema, data);
 
 		expect(validation.result).toEqual(false);
-		expect(validation.error).toEqual([
+		expect(validation.errors).toEqual([
 			{
-				instancePath: "",
-				schemaPath: "#/type",
-				keyword: "type",
-				params: {
-					type: "number"
-				},
-				message: "must be number"
+				absoluteKeywordLocation: "#/type",
+				instanceLocation: "#",
+				keyword: "https://json-schema.org/keyword/type",
+				message: '"#" fails schema constraint #/type'
 			}
 		]);
 	});
 
 	test("Can validate a number", async () => {
-		const schema: JSONSchema7 = {
+		const schema: IJsonSchema = {
 			type: "number"
 		};
 
@@ -117,11 +111,11 @@ describe("JsonSchemaHelper", () => {
 		const validation = await JsonSchemaHelper.validate(schema, data);
 
 		expect(validation.result).toEqual(true);
-		expect(validation.error).toBeUndefined();
+		expect(validation.errors).toBeUndefined();
 	});
 
 	test("Can fail to validate a property", async () => {
-		const schema: JSONSchema7 = {
+		const schema: IJsonSchema = {
 			type: "object",
 			properties: {
 				key: {
@@ -140,21 +134,18 @@ describe("JsonSchemaHelper", () => {
 		const validation = await JsonSchemaHelper.validate(schema, data);
 
 		expect(validation.result).toEqual(false);
-		expect(validation.error).toEqual([
+		expect(validation.errors).toEqual([
 			{
-				instancePath: "",
-				schemaPath: "#/type",
-				keyword: "type",
-				params: {
-					type: "object"
-				},
-				message: "must be object"
+				absoluteKeywordLocation: "#/type",
+				instanceLocation: "#",
+				keyword: "https://json-schema.org/keyword/type",
+				message: '"#" fails schema constraint #/type'
 			}
 		]);
 	});
 
 	test("Can validate a property", async () => {
-		const schema: JSONSchema7 = {
+		const schema: IJsonSchema = {
 			type: "object",
 			properties: {
 				key: {
@@ -177,18 +168,18 @@ describe("JsonSchemaHelper", () => {
 		const validation = await JsonSchemaHelper.validate(schema, data);
 
 		expect(validation.result).toEqual(true);
-		expect(validation.error).toBeUndefined();
+		expect(validation.errors).toBeUndefined();
 	});
 
 	test("Can fail to validate a property list", async () => {
-		const schema: JSONSchema7 = {
+		const schema: IJsonSchema = {
 			type: "array",
 			items: {
 				$ref: "Property"
 			}
 		};
 
-		const schemaProperty: JSONSchema7 = {
+		const schemaProperty: IJsonSchema = {
 			type: "object",
 			properties: {
 				key: {
@@ -207,28 +198,25 @@ describe("JsonSchemaHelper", () => {
 		const validation = await JsonSchemaHelper.validate(schema, data, { Property: schemaProperty });
 
 		expect(validation.result).toEqual(false);
-		expect(validation.error).toEqual([
+		expect(validation.errors).toEqual([
 			{
-				instancePath: "",
-				schemaPath: "#/type",
-				keyword: "type",
-				params: {
-					type: "array"
-				},
-				message: "must be array"
+				absoluteKeywordLocation: "#/type",
+				instanceLocation: "#",
+				keyword: "https://json-schema.org/keyword/type",
+				message: '"#" fails schema constraint #/type'
 			}
 		]);
 	});
 
 	test("Can validate a property list", async () => {
-		const schema: JSONSchema7 = {
+		const schema: IJsonSchema = {
 			type: "array",
 			items: {
 				$ref: "Property"
 			}
 		};
 
-		const schemaProperty: JSONSchema7 = {
+		const schemaProperty: IJsonSchema = {
 			type: "object",
 			properties: {
 				key: {
@@ -253,7 +241,7 @@ describe("JsonSchemaHelper", () => {
 		const validation = await JsonSchemaHelper.validate(schema, data, { Property: schemaProperty });
 
 		expect(validation.result).toEqual(true);
-		expect(validation.error).toBeUndefined();
+		expect(validation.errors).toBeUndefined();
 	});
 
 	test("Can fail to get the type for a property when the property does not exist", async () => {

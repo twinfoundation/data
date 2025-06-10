@@ -1,5 +1,19 @@
 # @twin.org/data-json-ld - Changelog
 
+## [0.0.1-next.36](https://github.com/twinfoundation/data/compare/data-json-ld-v0.0.1-next.35...data-json-ld-v0.0.1-next.36) (2025-06-10)
+
+
+### Features
+
+* expand Json LD Keyword ([70632d1](https://github.com/twinfoundation/data/commit/70632d1e11ad85cf3c57e118476b125a673f1681))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @twin.org/data-core bumped from 0.0.1-next.35 to 0.0.1-next.36
+
 ## [0.0.1-next.35](https://github.com/twinfoundation/data/compare/data-json-ld-v0.0.1-next.34...data-json-ld-v0.0.1-next.35) (2025-06-03)
 
 

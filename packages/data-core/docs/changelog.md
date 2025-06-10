@@ -1,5 +1,12 @@
 # @twin.org/data-core - Changelog
 
+## [0.0.1-next.36](https://github.com/twinfoundation/data/compare/data-core-v0.0.1-next.35...data-core-v0.0.1-next.36) (2025-06-10)
+
+
+### Features
+
+* expand Json LD Keyword ([70632d1](https://github.com/twinfoundation/data/commit/70632d1e11ad85cf3c57e118476b125a673f1681))
+
 ## [0.0.1-next.35](https://github.com/twinfoundation/data/compare/data-core-v0.0.1-next.34...data-core-v0.0.1-next.35) (2025-06-03)
 
 

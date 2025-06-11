@@ -1,6 +1,6 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
-import type { ISchemaValidationErrors } from "./ISchemaValidationErrors";
+import type { ISchemaValidationError } from "./ISchemaValidationError";
 
 /**
  * Validation result.
@@ -14,5 +14,5 @@ export interface ISchemaValidationResult {
 	/**
 	 * The error.
 	 */
-	errors?: ISchemaValidationErrors;
+	error?: ISchemaValidationError;
 }

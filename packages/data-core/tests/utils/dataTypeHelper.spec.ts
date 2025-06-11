@@ -111,19 +111,22 @@ describe("DataTypeHelper", () => {
 					value: 123,
 					schemaErrors: [
 						{
-							absoluteKeywordLocation: "#/type",
-							instanceLocation: "#",
-							keyword: "https://json-schema.org/keyword/type",
-							message: '"#" fails schema constraint #/type'
+							instancePath: "",
+							keyword: "type",
+							message: "must be string",
+							params: {
+								type: "string"
+							},
+							schemaPath: "#/type"
 						}
 					],
-					message: '"#" fails schema constraint #/type'
+					message: "must be string"
 				}
 			}
 		]);
 		expect(
 			I18n.formatMessage(`error.${validationFailures[0].reason}`, validationFailures[0].properties)
-		).toEqual('The JSON schema failed validation, "#" fails schema constraint #/type');
+		).toEqual("The JSON schema failed validation, must be string");
 	});
 
 	test("Can validate with missing type and no option set", async () => {

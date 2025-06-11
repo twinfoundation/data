@@ -30,12 +30,12 @@
 		"prepare": "ts-patch install -s"
 	},
 	"dependencies": {
-		"@hyperjump/browser": "1.3.0",
-		"@hyperjump/json-schema": "1.15.0",
 		"@twin.org/core": "next",
 		"@twin.org/entity": "next",
 		"@twin.org/nameof": "next",
-		"@twin.org/web": "next"
+		"@twin.org/web": "next",
+		"ajv": "8.17.1",
+		"ajv-formats": "3.0.1"
 	},
 	"devDependencies": {
 		"@twin.org/nameof-transformer": "next",

@@ -1,5 +1,5 @@
 # Type Alias: IJsonSchema
 
-> **IJsonSchema** = `JsonSchemaDraft202012Object`
+> **IJsonSchema** = `SchemaObject`
 
 Default schema type.

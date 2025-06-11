@@ -7,6 +7,6 @@
  */
 
 /**
- * Helper Types
+ * JSON-LD container types.
  */
 export type IJsonLdContainerType = "@language" | "@index" | "@id" | "@graph" | "@type";

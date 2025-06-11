@@ -38,7 +38,7 @@ Validates data against the schema.
 
 ##### schema
 
-`JsonSchemaDraft202012Object`
+`JSONSchema7`
 
 The schema to validate the data with.
 
@@ -70,7 +70,7 @@ Get the property type from a schema.
 
 ##### schema
 
-`JsonSchemaDraft202012Object`
+`JSONSchema7`
 
 The schema to extract the types from.
 
@@ -90,7 +90,7 @@ The types of the property.
 
 ### entitySchemaToJsonSchema()
 
-> `static` **entitySchemaToJsonSchema**(`entitySchema`, `baseDomain?`): `JsonSchemaDraft202012Object`
+> `static` **entitySchemaToJsonSchema**(`entitySchema`, `baseDomain?`): `JSONSchema7`
 
 Convert an entity schema to JSON schema e.g https://example.com/schemas/.
 
@@ -110,40 +110,6 @@ The base domain for local schemas e.g. https://example.com/
 
 #### Returns
 
-`JsonSchemaDraft202012Object`
+`JSONSchema7`
 
 The JSON schema for the entity.
-
-***
-
-### formatErrors()
-
-> `static` **formatErrors**\<`T`\>(`outputUnit`, `data`): `Promise`\<`void`\>
-
-Cleanup the errors from the schema validation.
-
-#### Type Parameters
-
-##### T
-
-`T`
-
-#### Parameters
-
-##### outputUnit
-
-`OutputUnit` & `object`
-
-The errors to format.
-
-##### data
-
-`T`
-
-The data that was validated.
-
-#### Returns
-
-`Promise`\<`void`\>
-
-The formatted errors.

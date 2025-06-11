@@ -5,7 +5,7 @@ export * from "./factories/identifierHandlerFactory";
 export * from "./models/IDataTypeHandler";
 export * from "./models/IIdentifierHandler";
 export * from "./models/IJsonSchema";
-export * from "./models/ISchemaValidationErrors";
+export * from "./models/ISchemaValidationError";
 export * from "./models/ISchemaValidationResult";
 export * from "./models/validationMode";
 export * from "./utils/dataTypeHelper";

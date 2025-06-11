@@ -8,7 +8,7 @@ import type { IJsonLdContainerType } from "./IJsonLdContainerType";
  */
 
 /**
- * Helper Types.
+ * JSON-LD container type array.
  */
 export type IJsonLdContainerTypeArray =
 	| ["@graph", "@id"]

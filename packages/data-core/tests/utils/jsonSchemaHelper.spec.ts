@@ -58,12 +58,15 @@ describe("JsonSchemaHelper", () => {
 		const validation = await JsonSchemaHelper.validate(schema, data);
 
 		expect(validation.result).toEqual(false);
-		expect(validation.errors).toEqual([
+		expect(validation.error).toEqual([
 			{
-				absoluteKeywordLocation: "#/type",
-				instanceLocation: "#",
-				keyword: "https://json-schema.org/keyword/type",
-				message: '"#" fails schema constraint #/type'
+				instancePath: "",
+				keyword: "type",
+				message: "must be string",
+				params: {
+					type: "string"
+				},
+				schemaPath: "#/type"
 			}
 		]);
 	});
@@ -78,7 +81,7 @@ describe("JsonSchemaHelper", () => {
 		const validation = await JsonSchemaHelper.validate(schema, data);
 
 		expect(validation.result).toEqual(true);
-		expect(validation.errors).toBeUndefined();
+		expect(validation.error).toBeUndefined();
 	});
 
 	test("Can fail to validate a number when value is not number", async () => {
@@ -91,12 +94,15 @@ describe("JsonSchemaHelper", () => {
 		const validation = await JsonSchemaHelper.validate(schema, data);
 
 		expect(validation.result).toEqual(false);
-		expect(validation.errors).toEqual([
+		expect(validation.error).toEqual([
 			{
-				absoluteKeywordLocation: "#/type",
-				instanceLocation: "#",
-				keyword: "https://json-schema.org/keyword/type",
-				message: '"#" fails schema constraint #/type'
+				instancePath: "",
+				keyword: "type",
+				message: "must be number",
+				params: {
+					type: "number"
+				},
+				schemaPath: "#/type"
 			}
 		]);
 	});
@@ -111,7 +117,7 @@ describe("JsonSchemaHelper", () => {
 		const validation = await JsonSchemaHelper.validate(schema, data);
 
 		expect(validation.result).toEqual(true);
-		expect(validation.errors).toBeUndefined();
+		expect(validation.error).toBeUndefined();
 	});
 
 	test("Can fail to validate a property", async () => {
@@ -134,12 +140,15 @@ describe("JsonSchemaHelper", () => {
 		const validation = await JsonSchemaHelper.validate(schema, data);
 
 		expect(validation.result).toEqual(false);
-		expect(validation.errors).toEqual([
+		expect(validation.error).toEqual([
 			{
-				absoluteKeywordLocation: "#/type",
-				instanceLocation: "#",
-				keyword: "https://json-schema.org/keyword/type",
-				message: '"#" fails schema constraint #/type'
+				instancePath: "",
+				keyword: "type",
+				message: "must be object",
+				params: {
+					type: "object"
+				},
+				schemaPath: "#/type"
 			}
 		]);
 	});
@@ -168,7 +177,7 @@ describe("JsonSchemaHelper", () => {
 		const validation = await JsonSchemaHelper.validate(schema, data);
 
 		expect(validation.result).toEqual(true);
-		expect(validation.errors).toBeUndefined();
+		expect(validation.error).toBeUndefined();
 	});
 
 	test("Can fail to validate a property list", async () => {
@@ -198,12 +207,15 @@ describe("JsonSchemaHelper", () => {
 		const validation = await JsonSchemaHelper.validate(schema, data, { Property: schemaProperty });
 
 		expect(validation.result).toEqual(false);
-		expect(validation.errors).toEqual([
+		expect(validation.error).toEqual([
 			{
-				absoluteKeywordLocation: "#/type",
-				instanceLocation: "#",
-				keyword: "https://json-schema.org/keyword/type",
-				message: '"#" fails schema constraint #/type'
+				instancePath: "",
+				keyword: "type",
+				message: "must be array",
+				params: {
+					type: "array"
+				},
+				schemaPath: "#/type"
 			}
 		]);
 	});
@@ -241,7 +253,7 @@ describe("JsonSchemaHelper", () => {
 		const validation = await JsonSchemaHelper.validate(schema, data, { Property: schemaProperty });
 
 		expect(validation.result).toEqual(true);
-		expect(validation.errors).toBeUndefined();
+		expect(validation.error).toBeUndefined();
 	});
 
 	test("Can fail to get the type for a property when the property does not exist", async () => {
@@ -369,5 +381,86 @@ describe("JsonSchemaHelper", () => {
 			$ref: "Book"
 		});
 		expect(jsonSchema.additionalProperties).toEqual(false);
+	});
+
+	it("should be able to validate context variants", async () => {
+		const testCases = [
+			{
+				data: "https://www.w3.org/ns/odrl/2/",
+				expect: true
+			},
+			{
+				data: "https://foo",
+				expect: false
+			},
+			{
+				data: ["https://www.w3.org/ns/odrl/2/"],
+				expect: false
+			},
+			{
+				data: ["https://foo"],
+				expect: false
+			},
+			{
+				data: ["https://www.w3.org/ns/odrl/2/", "https://www.w3.org/ns/odrl/2/"],
+				expect: false
+			},
+			{
+				data: ["https://foo", "https://foo"],
+				expect: false
+			},
+			{
+				data: ["https://foo", "https://foo2"],
+				expect: false
+			},
+			{
+				data: ["https://foo", "https://www.w3.org/ns/odrl/2/"],
+				expect: true
+			},
+			{
+				data: ["https://foo", "https://foo", "https://www.w3.org/ns/odrl/2/"],
+				expect: false
+			},
+			{
+				data: ["https://foo", "https://www.w3.org/ns/odrl/2/", "https://foo"],
+				expect: false
+			},
+			{
+				data: ["https://foo", "https://www.w3.org/ns/odrl/2/", "https://foo2"],
+				expect: true
+			}
+		];
+
+		const schema: IJsonSchema = {
+			type: "object",
+			properties: {
+				"@context": {
+					anyOf: [
+						{
+							type: "string",
+							const: "https://www.w3.org/ns/odrl/2/"
+						},
+						{
+							type: "array",
+							minItems: 2,
+							items: {
+								$ref: "https://schema.twindev.org/json-ld/JsonLdContextDefinitionElement"
+							},
+							minContains: 1,
+							maxContains: 1,
+							contains: {
+								const: "https://www.w3.org/ns/odrl/2/"
+							},
+							uniqueItems: true
+						}
+					]
+				}
+			}
+		};
+
+		for (const testCase of testCases) {
+			const result = await JsonSchemaHelper.validate(schema, { "@context": testCase.data });
+			expect(result.result).toBe(testCase.expect);
+		}
 	});
 });

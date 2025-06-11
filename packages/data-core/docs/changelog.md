@@ -1,5 +1,17 @@
 # @twin.org/data-core - Changelog
 
+## [0.0.1-next.37](https://github.com/twinfoundation/data/compare/data-core-v0.0.1-next.36...data-core-v0.0.1-next.37) (2025-06-11)
+
+
+### Features
+
+* use updated JSON schema specs ([465223a](https://github.com/twinfoundation/data/commit/465223a9e9c24af546480ef084327a78fa366eaa))
+
+
+### Bug Fixes
+
+* remove undici reference ([d77721e](https://github.com/twinfoundation/data/commit/d77721e21d23c7a6750c2f5cac8104851dfaa6d7))
+
 ## [0.0.1-next.36](https://github.com/twinfoundation/data/compare/data-core-v0.0.1-next.35...data-core-v0.0.1-next.36) (2025-06-10)
 
 

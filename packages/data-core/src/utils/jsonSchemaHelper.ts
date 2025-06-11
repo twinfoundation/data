@@ -6,8 +6,8 @@ import { nameof } from "@twin.org/nameof";
 import { FetchHelper, HttpMethod } from "@twin.org/web";
 import Ajv from "ajv/dist/2020.js";
 import addFormats from "ajv-formats";
-import type { JSONSchema7 } from "json-schema";
 import { DataTypeHandlerFactory } from "../factories/dataTypeHandlerFactory";
+import type { IJsonSchema } from "../models/IJsonSchema";
 import type { ISchemaValidationError } from "../models/ISchemaValidationError";
 import type { ISchemaValidationResult } from "../models/ISchemaValidationResult";
 
@@ -34,9 +34,9 @@ export class JsonSchemaHelper {
 	 * @returns Result containing errors if there are any.
 	 */
 	public static async validate<T = unknown>(
-		schema: JSONSchema7,
+		schema: IJsonSchema,
 		data: T,
-		additionalTypes?: { [id: string]: JSONSchema7 }
+		additionalTypes?: { [id: string]: IJsonSchema }
 	): Promise<ISchemaValidationResult> {
 		const ajv = new Ajv({
 			allowUnionTypes: true,
@@ -48,14 +48,14 @@ export class JsonSchemaHelper {
 				const subTypeHandler = DataTypeHandlerFactory.getIfExists(uri);
 				if (Is.function(subTypeHandler?.jsonSchema)) {
 					const subSchema = await subTypeHandler.jsonSchema();
-					if (Is.object<JSONSchema7>(subSchema)) {
+					if (Is.object<IJsonSchema>(subSchema)) {
 						return subSchema;
 					}
 				}
 
 				try {
 					// We don't have the type in our local data types, so we try to fetch it from the web
-					return FetchHelper.fetchJson<never, JSONSchema7>(
+					return FetchHelper.fetchJson<never, IJsonSchema>(
 						JsonSchemaHelper._CLASS_NAME,
 						uri,
 						HttpMethod.GET,
@@ -102,10 +102,10 @@ export class JsonSchemaHelper {
 	 * @param propertyName The name of the property to get the type for.
 	 * @returns The types of the property.
 	 */
-	public static getPropertyType(schema: JSONSchema7, propertyName: string): string | undefined {
+	public static getPropertyType(schema: IJsonSchema, propertyName: string): string | undefined {
 		if (schema.type === "object" && Is.objectValue(schema.properties)) {
 			const propertySchema = schema.properties[propertyName];
-			if (Is.object<JSONSchema7>(propertySchema)) {
+			if (Is.object<IJsonSchema>(propertySchema)) {
 				if (Is.stringValue(propertySchema.$ref)) {
 					return propertySchema.$ref;
 				}
@@ -123,21 +123,21 @@ export class JsonSchemaHelper {
 	public static entitySchemaToJsonSchema(
 		entitySchema: IEntitySchema | undefined,
 		baseDomain?: string
-	): JSONSchema7 {
+	): IJsonSchema {
 		let domain = StringHelper.trimTrailingSlashes(baseDomain ?? "");
 		if (domain.length > 0) {
 			domain += "/";
 		}
 
 		const properties: {
-			[key: string]: JSONSchema7;
+			[key: string]: IJsonSchema;
 		} = {};
 
 		const required: string[] = [];
 
 		if (Is.arrayValue(entitySchema?.properties)) {
 			for (const propertySchema of entitySchema.properties) {
-				const jsonPropertySchema: JSONSchema7 = {
+				const jsonPropertySchema: IJsonSchema = {
 					type: propertySchema.type,
 					description: propertySchema.description,
 					// eslint-disable-next-line @typescript-eslint/no-explicit-any

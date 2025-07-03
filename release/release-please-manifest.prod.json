@@ -1,5 +1,5 @@
 {
-	"packages/data-core": "0.0.1",
-	"packages/data-json-ld": "0.0.1",
-	"packages/data-framework": "0.0.1"
+	"packages/data-core": "0.0.0",
+	"packages/data-json-ld": "0.0.0",
+	"packages/data-framework": "0.0.0"
 }

@@ -11,23 +11,17 @@
 		"packages/data-core": {
 			"package-name": "data-core",
 			"changelog-path": "docs/changelog.md",
-			"extra-files": [
-				"src/index.ts"
-			]
+			"extra-files": ["src/index.ts"]
 		},
 		"packages/data-json-ld": {
 			"package-name": "data-json-ld",
 			"changelog-path": "docs/changelog.md",
-			"extra-files": [
-				"src/index.ts"
-			]
+			"extra-files": ["src/index.ts"]
 		},
 		"packages/data-framework": {
 			"package-name": "data-framework",
 			"changelog-path": "docs/changelog.md",
-			"extra-files": [
-				"src/index.ts"
-			]
+			"extra-files": ["src/index.ts"]
 		}
 	},
 	"plugins": [
@@ -35,11 +29,7 @@
 		{
 			"type": "linked-versions",
 			"groupName": "repo",
-			"components": [
-				"data-core",
-				"data-json-ld",
-				"data-framework"
-			]
+			"components": ["data-core", "data-json-ld", "data-framework"]
 		}
 	]
 }

@@ -73,12 +73,11 @@ jobs:
       # This step ensures that release-please runs even if there are no conventional commits
       - name: Force release by adding commit
         if: github.ref == 'refs/heads/main' # Only run this step if we are creating a production release
-        run: |
-          # Create a commit to ensure release-please runs even if there are no conventional commits
-          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git config --global user.name "github-actions[bot]"
-          git commit --allow-empty -m "feat: release to production"
-          git push
+        uses: flex-development/gh-commit@1.0.0
+        with:
+          message: 'feat: release to production'
+          token: ${{ secrets.GITHUB_TOKEN }}
+          ref: 'main' # Ensure we are committing to the main branch 
 
       # Run release-please to:
       # 1. Analyze commits since last release
